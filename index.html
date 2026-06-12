@@ -24,7 +24,7 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .splash-inner{position:relative;z-index:1;max-width:460px;width:100%}
 .drop-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);border:1.5px solid var(--tan);padding:.25rem .85rem;margin-bottom:1.5rem;opacity:.85}
 .splash-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,16vw,9rem);line-height:.88;letter-spacing:2px;color:white;margin-bottom:.5rem}
-.splash-inner h1 em{color:var(--tan);font-style:italic}
+.splash-inner h1 em{font-style:italic}
 .tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(1rem,3.5vw,1.4rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.5rem;white-space:nowrap}
 .countdown{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem}
 .cd-block{text-align:center;min-width:3.2rem}
@@ -222,7 +222,7 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -1.5rem;padding:0 1.5rem}
 .orders-table{width:100%;border-collapse:collapse;background:white;font-size:.82rem;min-width:600px}
 .orders-table th{background:var(--charcoal);color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem .85rem;text-align:left;white-space:nowrap}
-.orders-table td{padding:.65rem .85rem;border-bottom:1px solid #f0e8d8;font-family:'Barlow Condensed',sans-serif;font-weight:500;vertical-align:top}
+.orders-table td{padding:.65rem .85rem;border-bottom:1px solid #f0e8d8;font-family:'Barlow Condensed',sans-serif;font-weight:500;vertical-align:top;color:var(--charcoal)}
 .orders-table tr:hover td{background:#fdf6ec}
 .ord-num{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--red)}
 .paid-btn{display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid;transition:all .15s;white-space:nowrap}
@@ -243,9 +243,8 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 <div class="splash-inner">
   <div id="form-state">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,7vw,3rem);letter-spacing:6px;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
-    <h1>PIZZA<br><em>DROP</em></h1>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,2rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.2rem">SUNDAY, JULY 5TH</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(.85rem,3vw,1rem);letter-spacing:.15em;color:rgba(255,255,255,.45);margin-bottom:1.75rem;text-transform:uppercase">10:40 AM – 8:20 PM</div>
+    <h1><em>PIZZA</em><br><em style="color:var(--tan)">DROP</em></h1>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:1.5rem">SUNDAY, JULY 5TH</div>
 
     <div class="countdown">
       <div class="cd-block"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
@@ -257,12 +256,13 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
       <div class="cd-block"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Secs</span></div>
     </div>
 
-    <div class="event-date">Pre-Order Only</div>
-
+    <div class="event-date" style="margin-bottom:1.5rem">Pre-Order Only</div>
     <button class="reserve-btn" onclick="enterOrdering()">RESERVE MY PIZZA</button>
 
     <div class="divider"></div>
-    <div class="optin-note">Get notified for future drops</div>
+
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,1.8rem);letter-spacing:4px;color:var(--tan);margin-bottom:.3rem">JOIN THE DROP LIST</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.06em;margin-bottom:1.25rem;line-height:1.5">Get drop alerts before anyone else<br>+ early access to pre-orders</div>
 
     <div class="signup-form">
       <div class="form-row">
@@ -284,18 +284,18 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
       </div>
       <label class="consent">
         <input type="checkbox" id="consent">
-        <span class="consent-text">I agree to receive <strong>text message updates</strong> about upcoming Pizza Night pop-ups. Reply STOP to unsubscribe.</span>
+        <span class="consent-text">I agree to receive <strong>text message updates</strong> about upcoming BrocatoEatz drops. Reply STOP to unsubscribe.</span>
       </label>
       <span class="field-err" id="err-consent">Please check the box to opt in</span>
-      <button class="notify-submit" id="notify-btn" onclick="handleSignup()">NOTIFY ME</button>
+      <button class="notify-submit" id="notify-btn" onclick="handleSignup()">JOIN THE LIST</button>
     </div>
-    <div class="fine-print">Your info is only used to send Pizza Night updates. No spam, ever.</div>
+    <div class="fine-print">Your info is only used to send BrocatoEatz updates. No spam, ever.</div>
   </div>
 
   <div class="notify-success" id="success-state">
     <div class="notify-success-icon">🍕</div>
-    <h3>YOU'RE ON THE LIST</h3>
-    <p>We'll text you when the next drop goes live.</p>
+    <h3>YOU'RE ON THE DROP LIST</h3>
+    <p>You'll get alerts before anyone else + early access to pre-orders.</p>
     <button class="reserve-btn" onclick="enterOrdering()">RESERVE MY PIZZA</button>
   </div>
 </div>
@@ -826,6 +826,22 @@ function submitOrder(){
   orders.push(order);
   saveOrders(orders);
 
+  // Send confirmation SMS via Netlify function
+  fetch('/.netlify/functions/send-sms', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      fname: order.fname,
+      phone: order.phone,
+      pizzas: order.pizzas,
+      brownie: order.brownie,
+      freeBrownie: order.freeBrownie,
+      total: order.total,
+      slot: order.slot,
+      slotDisplay: order.slotDisplay
+    })
+  }).catch(function(e){ console.log('SMS error:', e); });
+
   // Send to Google Sheets
   fetch('https://script.google.com/macros/s/AKfycbyFGQRNyhKaU23v-qlA6wjVXtwqnxG3TE6di0yyx6akIH2pevqw_Za9OP7r9XTzVQ_6Ow/exec', {
     method: 'POST',
@@ -936,7 +952,6 @@ function renderAdmin(){
     '<div class="stat-card"><div class="stat-label">Orders</div><div class="stat-value">' + orders.length + '</div><div class="stat-sub">total</div></div>' +
     '<div class="stat-card"><div class="stat-label">Pizzas</div><div class="stat-value">' + totalPizzas + '</div><div class="stat-sub">ordered</div></div>' +
     '<div class="stat-card"><div class="stat-label">Revenue</div><div class="stat-value">$' + totalRev + '</div><div class="stat-sub">total</div></div>' +
-    '<div class="stat-card"><div class="stat-label">Paid</div><div class="stat-value">' + paid + '</div><div class="stat-sub">of ' + orders.length + '</div></div>' +
     '<div class="stat-card"><div class="stat-label">Notify List</div><div class="stat-value">' + subs.length + '</div><div class="stat-sub">subscribers</div></div>' +
     '</div>';
 
@@ -960,7 +975,7 @@ function renderAdmin(){
     tableHtml += '<div class="no-orders">No orders yet</div>';
   } else {
     tableHtml += '<div class="tbl-wrap"><table class="orders-table"><thead><tr>' +
-      '<th>#</th><th>Name</th><th>Phone</th><th>Slot</th><th>Pizzas</th><th>Brownie</th><th>Total</th><th>Paid</th><th>Notes</th></tr></thead><tbody>';
+      '<th>#</th><th>Name</th><th>Phone</th><th>Slot</th><th>Pizzas</th><th>Brownie</th><th>Total</th><th>Notes</th></tr></thead><tbody>';
     orders.slice().reverse().forEach(function(o){
       var pz = (o.pizzas||[]).map(function(p){ return p.name + ' x' + p.qty; }).join(', ');
       tableHtml += '<tr>' +
@@ -971,7 +986,6 @@ function renderAdmin(){
         '<td>' + pz + '</td>' +
         '<td>' + (o.brownie||0) + (o.freeBrownie?' (1 free)':'') + '</td>' +
         '<td>$' + o.total + '</td>' +
-        '<td><span class="paid-btn ' + (o.paid?'paid':'unpaid') + '" onclick="togglePaid(' + o.id + ')">' + (o.paid?'PAID':'UNPAID') + '</span></td>' +
         '<td>' + (o.notes||'-') + '</td>' +
         '</tr>';
     });
@@ -1092,6 +1106,28 @@ for(var i=0; i<14; i++){
   var el = document.getElementById(id);
   if(el) el.addEventListener('input', updateSummary);
 });
+
+// notify button color change when ready
+function updateNotifyBtn(){
+  var fname = document.getElementById('n-fname').value.trim();
+  var lname = document.getElementById('n-lname').value.trim();
+  var phone = document.getElementById('n-phone').value.trim();
+  var consent = document.getElementById('consent').checked;
+  var btn = document.getElementById('notify-btn');
+  if(fname && lname && phone && consent){
+    btn.style.background = 'var(--red)';
+    btn.style.color = 'white';
+    btn.style.borderColor = 'var(--red)';
+  } else {
+    btn.style.background = 'rgba(255,255,255,.08)';
+    btn.style.color = 'rgba(255,255,255,.7)';
+    btn.style.borderColor = 'rgba(255,255,255,.15)';
+  }
+}
+['n-fname','n-lname','n-phone'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', updateNotifyBtn);
+});
+document.getElementById('consent').addEventListener('change', updateNotifyBtn);
 
 checkRoute();
 updateCountdown();
