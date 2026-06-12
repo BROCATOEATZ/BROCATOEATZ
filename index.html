@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrocatoEatz</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FFFDF8;--red:#8B1A0E;--red-light:#B52A1A;
+  --charcoal:#111;--tan:#D4A97A;--warm:#F0E8D8;--green:#2e9e4f;
+}
+
+/* ══════════════════
+   SPLASH / NOTIFY PAGE
+══════════════════ */
+html,body{height:100%}
+body{background:var(--charcoal);color:white;font-family:'Barlow',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:3rem 1.5rem;text-align:center;position:relative;overflow-x:hidden;overflow-y:auto}
+body::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,#8B1A0E18 0%,transparent 55%),radial-gradient(ellipse at 80% 30%,#D4A97A10 0%,transparent 50%);pointer-events:none}
+.bg-pizza{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bg-pizza span{position:absolute;font-size:2rem;opacity:.04;animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(110vh) rotate(0deg)}to{transform:translateY(-10vh) rotate(360deg)}}
+.splash-inner{position:relative;z-index:1;max-width:460px;width:100%}
+.drop-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);border:1.5px solid var(--tan);padding:.25rem .85rem;margin-bottom:1.5rem;opacity:.85}
+.splash-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,16vw,9rem);line-height:.88;letter-spacing:2px;color:white;margin-bottom:.5rem}
+.splash-inner h1 em{color:var(--tan);font-style:italic}
+.tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(1rem,3.5vw,1.4rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.5rem;white-space:nowrap}
+.countdown{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem}
+.cd-block{text-align:center;min-width:3.2rem}
+.cd-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,8vw,3rem);line-height:1;color:var(--tan);letter-spacing:2px;display:block}
+.cd-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.15rem;display:block}
+.cd-sep{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--tan);opacity:.3;align-self:flex-start;padding-top:.1rem;line-height:1}
+.event-date{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);padding:.6rem 1.35rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.divider{width:3rem;height:1.5px;background:var(--tan);opacity:.25;margin:0 auto 1.75rem}
+.optin-note{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.25rem}
+.signup-form{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:440px){.form-row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:.3rem;text-align:left}
+.field label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.field input{padding:.8rem 1rem;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:white;font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;border-radius:0;transition:border-color .2s;-webkit-appearance:none}
+.field input::placeholder{color:rgba(255,255,255,.2)}
+.field input:focus{border-color:var(--tan)}
+.consent{display:flex;align-items:flex-start;gap:.65rem;text-align:left;cursor:pointer}
+.consent input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:.15rem;accent-color:var(--red);cursor:pointer}
+.consent-text{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.45);line-height:1.5;letter-spacing:.02em}
+.consent-text strong{color:rgba(255,255,255,.7)}
+.reserve-btn{width:100%;padding:1rem;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-bottom:1rem}
+.reserve-btn:hover{background:var(--red-light);transform:translateY(-1px);box-shadow:0 4px 20px #8B1A0E55}
+.notify-submit{width:100%;padding:1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.15);font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-top:.25rem}
+.notify-submit:hover:not(:disabled){background:rgba(255,255,255,.12);color:white}
+.notify-submit:disabled{opacity:.35;cursor:not-allowed}
+.fine-print{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2);letter-spacing:.04em;line-height:1.5;margin-top:.75rem}
+.notify-success{display:none;padding:1rem 0}
+.notify-success.visible{display:block}
+.notify-success-icon{font-size:2rem;margin-bottom:.5rem}
+.notify-success h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem}
+.notify-success p{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.field-err{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:#e57;letter-spacing:.04em;display:none;margin-top:.2rem}
+.field-err.visible{display:block}
+.splash-page{display:block}
+.splash-page.hidden{display:none}
+
+/* ══════════════════
+   ORDERING PAGE
+══════════════════ */
+.order-page{display:none;background:var(--cream);min-height:100vh;color:var(--charcoal)}
+.order-page.visible{display:block}
+.order-page body{background:var(--cream)}
+
+/* soldout */
+.soldout-banner{background:var(--red);color:white;text-align:center;padding:.75rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;display:none}
+.soldout-banner.visible{display:block}
+
+/* header */
+.order-header{background:var(--charcoal);color:white;text-align:center;padding:1.5rem 1rem 1.25rem}
+.order-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,4rem);letter-spacing:4px;line-height:1}
+.order-header p{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-top:.35rem}
+
+/* steps nav */
+.steps{display:flex;background:white;border-bottom:2px solid var(--warm)}
+.step{flex:1;padding:.75rem .5rem;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;color:#bbb;border-bottom:3px solid transparent;cursor:default;transition:all .2s}
+.step.active{color:var(--red);border-bottom-color:var(--red)}
+.step.done{color:var(--charcoal)}
+.step-num{display:inline-block;width:1.2rem;height:1.2rem;border-radius:50%;background:#e0d8cc;color:var(--charcoal);font-size:.7rem;line-height:1.2rem;text-align:center;margin-right:.25rem;font-family:'Barlow Condensed',sans-serif;font-weight:700}
+.step.active .step-num{background:var(--red);color:white}
+.step.done .step-num{background:var(--charcoal);color:white}
+
+/* main */
+.order-main{max-width:540px;margin:0 auto;padding:1.5rem 1rem 4rem}
+
+/* section headers */
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:4px;color:var(--red);border-bottom:2px dashed var(--red);padding-bottom:.35rem;margin-bottom:1.25rem}
+
+/* pizza cards */
+.pizza-grid{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem}
+.pizza-card{border:2px solid #e0d8cc;background:white;padding:1rem 1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.pizza-card:hover{border-color:#c0b8a8}
+.pizza-card.selected{border-color:var(--red);background:#FFF5F2}
+.badge{display:none;position:absolute;top:.5rem;right:.5rem;background:var(--red);color:white;font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:1.5px;padding:.15rem .5rem}
+.pizza-card.selected .badge{display:block}
+.pizza-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
+.pizza-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px}
+.pizza-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--red)}
+.pizza-desc{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:#888;letter-spacing:.04em;text-transform:uppercase;line-height:1.4;margin-bottom:.6rem}
+.qty-control{display:none;align-items:center;gap:.6rem;margin-top:.4rem}
+.pizza-card.selected .qty-control{display:flex}
+.qty-btn{width:1.6rem;height:1.6rem;border:1.5px solid var(--charcoal);background:none;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Barlow',sans-serif;transition:all .15s}
+.qty-btn:hover{background:var(--charcoal);color:white}
+.qty-num{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;min-width:1.2rem;text-align:center}
+.qty-label{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:600;color:#aaa;letter-spacing:.05em}
+
+/* brownie */
+.brownie-promo-bar{display:none;background:var(--tan);color:var(--charcoal);font-family:'Bebas Neue',sans-serif;font-size:.78rem;letter-spacing:2px;padding:.35rem 1.25rem;text-align:center}
+.brownie-promo-bar.visible{display:block}
+.brownie-card{background:var(--charcoal);color:white;border:2px solid var(--charcoal);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .2s;margin-bottom:2.5rem;position:relative}
+.brownie-card.selected{border-color:var(--tan)}
+.brownie-card.free-mode{border-color:var(--tan);background:#3a2500}
+.brownie-left .brownie-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px}
+.brownie-left .brownie-sub{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:500;opacity:.6;margin-top:.15rem}
+.brownie-right{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.brownie-price{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan)}
+.brownie-badge{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:1.5px;color:var(--tan);display:none}
+.brownie-card.selected .brownie-badge{display:block}
+.brownie-qty{display:none;align-items:center;gap:.5rem}
+.brownie-card.selected .brownie-qty{display:flex}
+
+/* divider */
+.section-divider{border:none;border-top:2px dashed #e0d8cc;margin:2.5rem 0}
+
+/* slots */
+.slot-rule{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin-bottom:.85rem;line-height:1.5}
+.slot-rule strong{color:var(--charcoal)}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+@media(min-width:400px){.slot-grid{grid-template-columns:repeat(4,1fr)}}
+.slot-btn{padding:.7rem .3rem;border:2px solid #e0d8cc;background:white;cursor:pointer;text-align:center;transition:all .2s;position:relative}
+.slot-btn:hover:not(:disabled){border-color:var(--red)}
+.slot-btn.selected{border-color:var(--red);background:#FFF5F2}
+.slot-btn:disabled{opacity:.28;cursor:not-allowed;background:#fafafa}
+.slot-time{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;display:block}
+.slot-avail{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;color:#bbb;margin-top:.2rem;display:block;text-transform:uppercase;letter-spacing:.05em}
+.slot-btn.selected .slot-avail{color:var(--red)}
+.avail-4{color:#2e9e4f!important}
+.avail-3{color:#e07b20!important}
+.avail-2{color:#c9a800!important}
+.avail-1{color:#d63030!important}
+.cap-warning{background:var(--red);color:white;padding:.6rem 1rem;margin-bottom:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;display:none}
+.cap-warning.visible{display:block}
+.slot-error{background:var(--red);color:white;padding:.8rem 1rem;margin-bottom:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;display:none}
+.slot-error.visible{display:block}
+
+/* contact */
+.contact-grid{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem}
+.o-field{display:flex;flex-direction:column;gap:.3rem}
+.o-field label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#aaa}
+.o-field input,.o-field textarea{padding:.75rem 1rem;border:2px solid #e0d8cc;font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;border-radius:0;background:white;transition:border .2s}
+.o-field input:focus,.o-field textarea:focus{border-color:var(--red)}
+.o-field textarea{resize:vertical;min-height:70px}
+.name-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+
+/* payment */
+.payment-notice{display:flex;align-items:center;gap:.75rem;background:var(--charcoal);color:white;padding:1rem 1.25rem;margin-bottom:2rem}
+.payment-icon{font-size:1.4rem;flex-shrink:0}
+.payment-notice-title{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;margin-bottom:.15rem}
+.payment-notice-body{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;opacity:.6}
+
+/* summary */
+.order-summary{border:2px solid #e0d8cc;padding:1.25rem 1.5rem;margin-bottom:1.5rem;background:white}
+.summary-empty{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#ccc;text-align:center;padding:.5rem 0}
+.summary-row{display:flex;justify-content:space-between;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.88rem;padding:.3rem 0;border-bottom:1px solid #f0e8d8}
+.summary-row:last-child{border-bottom:none}
+.summary-row.highlight{color:var(--red);font-weight:700}
+.summary-row.total{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding-top:.5rem;margin-top:.25rem;border-top:2px solid var(--charcoal);border-bottom:none}
+
+/* submit */
+.sms-consent{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:#aaa;letter-spacing:.03em;line-height:1.5;margin-bottom:.75rem;text-align:center}
+.submit-btn-order{width:100%;padding:1.1rem;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:4px;cursor:pointer;transition:all .2s}
+.submit-btn-order:hover:not(:disabled){background:var(--red-light)}
+.submit-btn-order:disabled{opacity:.35;cursor:not-allowed}
+
+/* success */
+.success-screen{display:none;text-align:center;padding:3rem 1.5rem}
+.success-screen.visible{display:block}
+.success-screen h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:var(--green);margin-bottom:.5rem}
+.success-details{background:white;border:2px solid #e0d8cc;padding:1.25rem 1.5rem;max-width:420px;margin:0 auto 1rem;text-align:left}
+.success-details h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--red);margin-bottom:.75rem}
+.detail-row{font-size:.85rem;margin-bottom:.3rem;font-family:'Barlow Condensed',sans-serif;font-weight:500}
+.detail-row span{font-weight:700}
+.restart-btn{background:none;border:2px solid var(--red);color:var(--red);padding:.6rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;cursor:pointer;transition:all .2s;margin-top:1rem}
+.restart-btn:hover{background:var(--red);color:white}
+
+/* admin */
+#admin-view{display:none;background:var(--cream);min-height:100vh}
+.admin-login{max-width:380px;margin:5rem auto;text-align:center;padding:2rem}
+.admin-login h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--red);margin-bottom:1.5rem}
+.admin-login input{width:100%;padding:.75rem 1rem;border:2px solid #e0d8cc;font-family:'Barlow',sans-serif;font-size:1rem;outline:none;margin-bottom:.75rem}
+.admin-login input:focus{border-color:var(--red)}
+.admin-login button{width:100%;padding:.9rem;background:var(--charcoal);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;cursor:pointer}
+.admin-login button:hover{background:var(--red)}
+.admin-err{color:var(--red);font-family:'Barlow Condensed',sans-serif;font-size:.85rem;margin-top:.5rem;display:none}
+.admin-bar{background:var(--charcoal);color:white;padding:1.1rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.admin-bar h1{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px}
+.admin-bar-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.admin-btn{background:none;border:1.5px solid rgba(255,255,255,.3);color:white;padding:.4rem 1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.admin-btn:hover{border-color:white}
+.admin-btn.danger:hover{border-color:#e55;color:#e55}
+.admin-body{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:white;border:2px solid #e0d8cc;padding:1rem 1.2rem}
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:.25rem}
+.stat-value{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:2px;color:var(--red);line-height:1}
+.stat-sub{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:#bbb;margin-top:.15rem}
+.admin-section-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--red);border-bottom:2px dashed var(--red);padding-bottom:.35rem;margin:2rem 0 1rem}
+.slot-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;margin-bottom:1rem}
+.slot-admin-card{background:white;border:2px solid #e0d8cc;padding:.85rem 1rem}
+.slot-admin-card.full{opacity:.5}
+.slot-admin-time{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px}
+.slot-admin-bar{height:5px;background:#f0e8d8;border-radius:3px;margin:.35rem 0;overflow:hidden}
+.slot-admin-fill{height:100%;background:var(--red);border-radius:3px}
+.slot-admin-info{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#999}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -1.5rem;padding:0 1.5rem}
+.orders-table{width:100%;border-collapse:collapse;background:white;font-size:.82rem;min-width:600px}
+.orders-table th{background:var(--charcoal);color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem .85rem;text-align:left;white-space:nowrap}
+.orders-table td{padding:.65rem .85rem;border-bottom:1px solid #f0e8d8;font-family:'Barlow Condensed',sans-serif;font-weight:500;vertical-align:top}
+.orders-table tr:hover td{background:#fdf6ec}
+.ord-num{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--red)}
+.paid-btn{display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid;transition:all .15s;white-space:nowrap}
+.paid-btn.unpaid{border-color:#ddd;color:#bbb}
+.paid-btn.paid{border-color:var(--green);color:var(--green);background:#f0fff0}
+.no-orders{text-align:center;padding:3rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#ccc}
+</style>
+</head>
+<body>
+
+<!-- floating bg pizzas -->
+<div class="bg-pizza" id="bg-pizza"></div>
+
+<!-- ══════════════════════════
+     SPLASH / NOTIFY PAGE
+══════════════════════════ -->
+<div class="splash-page" id="splash-page">
+<div class="splash-inner">
+  <div id="form-state">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,7vw,3rem);letter-spacing:6px;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
+    <h1>PIZZA<br><em>DROP</em></h1>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,2rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.2rem">SUNDAY, JULY 5TH</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(.85rem,3vw,1rem);letter-spacing:.15em;color:rgba(255,255,255,.45);margin-bottom:1.75rem;text-transform:uppercase">10:40 AM – 8:20 PM</div>
+
+    <div class="countdown">
+      <div class="cd-block"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">Hours</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">Mins</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Secs</span></div>
+    </div>
+
+    <div class="event-date">Pre-Order Only</div>
+
+    <button class="reserve-btn" onclick="enterOrdering()">RESERVE MY PIZZA</button>
+
+    <div class="divider"></div>
+    <div class="optin-note">Get notified for future drops</div>
+
+    <div class="signup-form">
+      <div class="form-row">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" id="n-fname" placeholder="First name" autocomplete="given-name">
+          <span class="field-err" id="err-fname">Required</span>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" id="n-lname" placeholder="Last name" autocomplete="family-name">
+          <span class="field-err" id="err-lname">Required</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="n-phone" placeholder="555-012-3456" autocomplete="tel">
+        <span class="field-err" id="err-phone">Enter a valid phone number</span>
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="consent">
+        <span class="consent-text">I agree to receive <strong>text message updates</strong> about upcoming Pizza Night pop-ups. Reply STOP to unsubscribe.</span>
+      </label>
+      <span class="field-err" id="err-consent">Please check the box to opt in</span>
+      <button class="notify-submit" id="notify-btn" onclick="handleSignup()">NOTIFY ME</button>
+    </div>
+    <div class="fine-print">Your info is only used to send Pizza Night updates. No spam, ever.</div>
+  </div>
+
+  <div class="notify-success" id="success-state">
+    <div class="notify-success-icon">🍕</div>
+    <h3>YOU'RE ON THE LIST</h3>
+    <p>We'll text you when the next drop goes live.</p>
+    <button class="reserve-btn" onclick="enterOrdering()">RESERVE MY PIZZA</button>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════
+     ORDERING PAGE
+══════════════════════════ -->
+<div class="order-page" id="order-page">
+  <div class="soldout-banner" id="soldout-banner">ALL SLOTS FULL — SEE YOU NEXT DROP!</div>
+
+  <div class="order-header">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
+    <h1>PIZZA DROP</h1>
+    <p>Sunday, July 5th &nbsp;·&nbsp; 10:40 AM – 8:20 PM</p>
+  </div>
+
+  <nav class="steps">
+    <div class="step active" id="step1"><span class="step-num">1</span> Menu</div>
+    <div class="step" id="step2"><span class="step-num">2</span> Time</div>
+    <div class="step" id="step3"><span class="step-num">3</span> Info</div>
+  </nav>
+
+  <div class="order-main">
+    <div id="order-form">
+
+      <!-- PIZZAS -->
+      <div class="section-title">CHOOSE YOUR PIZZA</div>
+      <div class="pizza-grid" id="pizza-grid"></div>
+
+      <!-- BROWNIE -->
+      <div class="brownie-promo-bar" id="brownie-promo-bar">ADD 1 MORE PIZZA — GET A FREE BROWNIE</div>
+      <div class="brownie-card" id="brownie-card" onclick="toggleBrownie()">
+        <div class="brownie-left">
+          <div class="brownie-name">DUBAI BROWNIE</div>
+          <div class="brownie-sub" id="brownie-sub">Add-on dessert · $5</div>
+        </div>
+        <div class="brownie-right">
+          <div class="brownie-qty">
+            <button class="qty-btn" style="border-color:white;color:white" onclick="event.stopPropagation();changeBrownieQty(-1)">-</button>
+            <span class="qty-num" id="brownie-qty-num" style="color:white">1</span>
+            <button class="qty-btn" style="border-color:white;color:white" onclick="event.stopPropagation();changeBrownieQty(1)">+</button>
+          </div>
+          <div class="brownie-price" id="brownie-price">$5</div>
+          <div class="brownie-badge" id="brownie-badge">ADDED</div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- TIME SLOTS -->
+      <div class="section-title">PICK A TIME</div>
+      <div class="slot-rule"><strong>4 pizzas per slot.</strong> Large orders will span the next slot.</div>
+      <div class="slot-error" id="slot-error"></div>
+      <div class="slot-grid" id="slot-grid"></div>
+      <div class="cap-warning" id="cap-warning"></div>
+
+      <hr class="section-divider">
+
+      <!-- CONTACT -->
+      <div class="section-title">YOUR INFO</div>
+      <div class="contact-grid">
+        <div class="name-row">
+          <div class="o-field">
+            <label>First Name</label>
+            <input type="text" id="fname" placeholder="First" autocomplete="given-name">
+          </div>
+          <div class="o-field">
+            <label>Last Name</label>
+            <input type="text" id="lname" placeholder="Last" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="o-field">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="(905) 555-0100" autocomplete="tel">
+        </div>
+        <div class="o-field">
+          <label>Notes (optional)</label>
+          <textarea id="notes" placeholder="Allergies, special requests..."></textarea>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="payment-notice">
+        <div class="payment-icon">💵</div>
+        <div>
+          <div class="payment-notice-title">PAYMENT AT PICKUP</div>
+          <div class="payment-notice-body">Cash preferred · E-transfer available</div>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="section-title">ORDER SUMMARY</div>
+      <div class="order-summary">
+        <div id="summary-content"><p class="summary-empty">SELECT PIZZAS AND A TIME SLOT ABOVE</p></div>
+      </div>
+      <div class="sms-consent">By placing an order you'll receive a confirmation and pickup reminder via text. Reply STOP to opt out.</div>
+      <button class="submit-btn-order" id="submit-btn" onclick="submitOrder()" disabled>PLACE ORDER</button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success-screen">
+      <div style="font-size:3.5rem;margin-bottom:1rem">🍕</div>
+      <h2>ORDER PLACED!</h2>
+      <p style="font-family:'Barlow Condensed',sans-serif;color:#666;margin-bottom:1.5rem">See you July 5th at the Pizza Drop!</p>
+      <div class="success-details" id="success-details"></div>
+      <button class="restart-btn" onclick="restartOrder()">PLACE ANOTHER ORDER</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     ADMIN
+══════════════════════════ -->
+<div id="admin-view">
+  <div id="admin-login-screen" class="admin-login">
+    <h2>ADMIN</h2>
+    <input type="password" id="admin-pw" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()">
+    <button onclick="adminLogin()">LOGIN</button>
+    <div class="admin-err" id="admin-err">Wrong password</div>
+  </div>
+  <div id="admin-dashboard" style="display:none">
+    <div class="admin-bar">
+      <h1>BROCATO ADMIN</h1>
+      <div class="admin-bar-actions">
+        <button class="admin-btn" onclick="renderAdmin()">REFRESH</button>
+        <button class="admin-btn" onclick="exportCSV()">EXPORT CSV</button>
+        <button class="admin-btn" onclick="exportSubscribers()">NOTIFY LIST</button>
+        <button class="admin-btn danger" onclick="clearOrders()">CLEAR ORDERS</button>
+      </div>
+    </div>
+    <div class="admin-body" id="admin-body"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════
+var ADMIN_PASSWORD = 'pizza6';
+var DROP_DATE = new Date('2026-07-05T10:40:00');
+
+var PIZZAS = [
+  {id:'margherita', name:'MARGHERITA',  price:20, desc:'ORGANIC BIANCA DI NAPOLI, PARMIGIANO REGGIANO, FIOR DI LATTE, BASIL, EVOO'},
+  {id:'cupchar',    name:'CUP & CHAR',  price:25, desc:'ORGANIC BIANCO DI NAPOLI, FIOR DI LATTE, MOZZARELLA, LOTS OF CUP & CHAR PEPS'},
+  {id:'funguy',     name:'FUNGUY',      price:25, desc:'GARLIC EVOO, FIOR DI LATTE, MOZZARELLA, MIXED MUSHROOMS, SHALLOT, TRUFFLE CHIMICHURRI'}
+];
+
+var SLOT_PIZZA_CAP = 4;
+var SLOT_LABELS = [
+  '10:40 AM',
+  '11:00 AM','11:20 AM','11:40 AM',
+  '12:00 PM','12:20 PM','12:40 PM',
+  '1:00 PM','1:20 PM','1:40 PM',
+  '2:00 PM','2:20 PM','2:40 PM',
+  '3:00 PM','3:20 PM','3:40 PM',
+  '4:00 PM','4:20 PM','4:40 PM',
+  '5:00 PM','5:20 PM','5:40 PM',
+  '6:00 PM','6:20 PM','6:40 PM',
+  '7:00 PM','7:20 PM','7:40 PM',
+  '8:00 PM','8:20 PM'
+];
+
+// ══════════════════════════════════════
+// STORAGE
+// ══════════════════════════════════════
+function loadOrders(){
+  try { return JSON.parse(localStorage.getItem('brocato_orders') || '[]'); }
+  catch(e){ return []; }
+}
+function saveOrders(o){ localStorage.setItem('brocato_orders', JSON.stringify(o)); }
+function loadSubscribers(){
+  try { return JSON.parse(localStorage.getItem('brocato_subs') || '[]'); }
+  catch(e){ return []; }
+}
+function saveSubscribers(s){ localStorage.setItem('brocato_subs', JSON.stringify(s)); }
+
+// ══════════════════════════════════════
+// SLOT HELPERS
+// ══════════════════════════════════════
+function pizzasSoldInSlot(label){
+  var orders = loadOrders();
+  var count = 0;
+  orders.forEach(function(o){
+    if(o.slots){
+      var entry = o.slots.filter(function(s){ return s.slot === label; })[0];
+      if(entry) count += entry.qty;
+    } else if(o.slot === label){
+      count += o.pizzaCount;
+    }
+  });
+  return count;
+}
+function slotPizzasLeft(label){ return Math.max(0, SLOT_PIZZA_CAP - pizzasSoldInSlot(label)); }
+function isSlotFull(label){ return slotPizzasLeft(label) <= 0; }
+function allSlotsFull(){ return SLOT_LABELS.every(function(l){ return isSlotFull(l); }); }
+
+function allocateSlots(startIdx, needed){
+  var alloc = [];
+  var remaining = needed;
+  for(var i = startIdx; i < SLOT_LABELS.length && remaining > 0; i++){
+    var label = SLOT_LABELS[i];
+    var avail = slotPizzasLeft(label);
+    if(avail <= 0) break;
+    var take = Math.min(avail, remaining);
+    if(pizzasSoldInSlot(label) + take > SLOT_PIZZA_CAP) break;
+    alloc.push({slot: label, qty: take});
+    remaining -= take;
+  }
+  return remaining > 0 ? null : alloc;
+}
+
+// ══════════════════════════════════════
+// CART STATE
+// ══════════════════════════════════════
+var cart = {};
+var brownieQty = 0;
+var freeBrownie = false;
+var brownieAutoAdded = false;
+var selectedSlot = null;
+var selectedSlotIdx = null;
+
+function cartCount(){
+  return Object.values(cart).reduce(function(s,q){ return s+q; }, 0);
+}
+function calcBrownieTotal(){
+  if(brownieQty === 0) return 0;
+  if(freeBrownie) return Math.max(0, brownieQty - 1) * 5;
+  return brownieQty * 5;
+}
+function calcTotal(){
+  var t = 0;
+  Object.keys(cart).forEach(function(id){
+    var p = PIZZAS.filter(function(x){ return x.id === id; })[0];
+    t += p.price * cart[id];
+  });
+  t += calcBrownieTotal();
+  return t;
+}
+
+// ══════════════════════════════════════
+// RENDER PIZZAS
+// ══════════════════════════════════════
+function renderPizzas(){
+  var html = '';
+  PIZZAS.forEach(function(p){
+    html += '<div class="pizza-card" id="card-' + p.id + '" onclick="togglePizza(\'' + p.id + '\')">';
+    html += '<div class="badge">ADDED</div>';
+    html += '<div class="pizza-header"><div class="pizza-name">' + p.name + '</div><div class="pizza-price">$' + p.price + '</div></div>';
+    html += '<div class="pizza-desc">' + p.desc + '</div>';
+    html += '<div class="qty-control">';
+    html += '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + p.id + '\',-1)">-</button>';
+    html += '<span class="qty-num" id="qty-' + p.id + '">1</span>';
+    html += '<span class="qty-label" id="lbl-' + p.id + '">pie</span>';
+    html += '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + p.id + '\',1)">+</button>';
+    html += '</div></div>';
+  });
+  document.getElementById('pizza-grid').innerHTML = html;
+}
+
+function togglePizza(id){
+  if(cart[id]){
+    delete cart[id];
+    document.getElementById('card-' + id).classList.remove('selected');
+  } else {
+    cart[id] = 1;
+    document.getElementById('card-' + id).classList.add('selected');
+    document.getElementById('qty-' + id).textContent = 1;
+    document.getElementById('lbl-' + id).textContent = 'pie';
+  }
+  updateBrowniePromo();
+  updateSummary();
+  updateSteps();
+  updateCapWarning();
+  renderSlots();
+}
+
+function changeQty(id, delta){
+  if(!cart[id]) return;
+  var nq = cart[id] + delta;
+  if(nq < 1){ togglePizza(id); return; }
+  cart[id] = Math.max(1, nq);
+  document.getElementById('qty-' + id).textContent = cart[id];
+  document.getElementById('lbl-' + id).textContent = cart[id] > 1 ? 'pies' : 'pie';
+  updateBrowniePromo();
+  updateSummary();
+  updateCapWarning();
+  renderSlots();
+}
+
+// ══════════════════════════════════════
+// BROWNIE
+// ══════════════════════════════════════
+function updateBrowniePromo(){
+  var count = cartCount();
+  var card = document.getElementById('brownie-card');
+  var bar = document.getElementById('brownie-promo-bar');
+  var priceEl = document.getElementById('brownie-price');
+  var subEl = document.getElementById('brownie-sub');
+  var badgeEl = document.getElementById('brownie-badge');
+
+  if(count >= 2){
+    freeBrownie = true;
+    bar.classList.remove('visible');
+    priceEl.innerHTML = '<span style="color:var(--tan);font-family:\'Bebas Neue\',sans-serif;letter-spacing:1px">FREE</span>';
+    subEl.textContent = 'On us — you earned it';
+    card.classList.add('free-mode');
+    badgeEl.textContent = 'ADDED';
+    if(brownieQty === 0){
+      brownieQty = 1;
+      brownieAutoAdded = true;
+      card.classList.add('selected');
+      document.getElementById('brownie-qty-num').textContent = 1;
+    }
+  } else {
+    var wasFree = freeBrownie;
+    freeBrownie = false;
+    priceEl.textContent = '$5';
+    subEl.textContent = 'Add-on dessert · $5';
+    card.classList.remove('free-mode');
+    badgeEl.textContent = 'ADDED';
+    if(count === 1){
+      bar.classList.add('visible');
+      if(wasFree && brownieAutoAdded){
+        brownieQty = 0;
+        brownieAutoAdded = false;
+        card.classList.remove('selected');
+      }
+    } else {
+      bar.classList.remove('visible');
+      brownieQty = 0;
+      brownieAutoAdded = false;
+      card.classList.remove('selected');
+    }
+  }
+}
+
+function toggleBrownie(){
+  if(freeBrownie) return;
+  var card = document.getElementById('brownie-card');
+  if(brownieQty > 0){
+    brownieQty = 0;
+    brownieAutoAdded = false;
+    card.classList.remove('selected');
+  } else {
+    brownieQty = 1;
+    brownieAutoAdded = false;
+    card.classList.add('selected');
+    document.getElementById('brownie-qty-num').textContent = 1;
+  }
+  updateSummary();
+  updateSteps();
+}
+
+function changeBrownieQty(delta){
+  var min = freeBrownie ? 1 : 1;
+  brownieQty = Math.max(min, Math.min(10, brownieQty + delta));
+  document.getElementById('brownie-qty-num').textContent = brownieQty;
+  updateSummary();
+}
+
+// ══════════════════════════════════════
+// SLOTS
+// ══════════════════════════════════════
+function renderSlots(){
+  var needed = cartCount() || 1;
+  var html = '';
+  SLOT_LABELS.forEach(function(label, idx){
+    var pLeft = slotPizzasLeft(label);
+    var full = isSlotFull(label);
+    var canStart = !full && allocateSlots(idx, needed) !== null;
+    var isSelected = selectedSlot === label;
+    var availText = full ? 'FULL' : (pLeft + ' LEFT');
+    var availClass = full ? '' : ('avail-' + pLeft);
+    var disabled = (!canStart && !isSelected) ? 'disabled' : '';
+    html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + '" id="slot-' + idx + '" ' + disabled + ' onclick="selectSlot(\'' + label.replace(/'/g, "\\'") + '\',' + idx + ')">';
+    html += '<span class="slot-time">' + label + '</span>';
+    html += '<span class="slot-avail ' + availClass + '">' + availText + '</span>';
+    html += '</button>';
+  });
+  document.getElementById('slot-grid').innerHTML = html;
+}
+
+function selectSlot(label, idx){
+  selectedSlot = label;
+  selectedSlotIdx = idx;
+  document.getElementById('slot-error').classList.remove('visible');
+  updateSummary();
+  updateSteps();
+  updateCapWarning();
+  renderSlots();
+}
+
+function updateCapWarning(){
+  var el = document.getElementById('cap-warning');
+  if(!selectedSlot){ el.classList.remove('visible'); return; }
+  var needed = cartCount();
+  var alloc = needed > 0 ? allocateSlots(selectedSlotIdx, needed) : null;
+  if(needed > 0 && !alloc){
+    el.textContent = 'NOT ENOUGH CONSECUTIVE SPACE — try an earlier slot or reduce your order';
+    el.classList.add('visible');
+  } else if(isSlotFull(selectedSlot)){
+    el.textContent = 'THIS SLOT IS FULL — please choose another time';
+    el.classList.add('visible');
+  } else {
+    el.classList.remove('visible');
+  }
+}
+
+// ══════════════════════════════════════
+// STEPS
+// ══════════════════════════════════════
+function updateSteps(){
+  var s1 = document.getElementById('step1');
+  var s2 = document.getElementById('step2');
+  var s3 = document.getElementById('step3');
+  var hasCart = cartCount() > 0 || brownieQty > 0;
+  if(hasCart && selectedSlot){
+    s1.className = 'step done'; s2.className = 'step done'; s3.className = 'step active';
+  } else if(hasCart){
+    s1.className = 'step done'; s2.className = 'step active'; s3.className = 'step';
+  } else {
+    s1.className = 'step active'; s2.className = 'step'; s3.className = 'step';
+  }
+}
+
+// ══════════════════════════════════════
+// SUMMARY
+// ══════════════════════════════════════
+function updateSummary(){
+  var items = Object.keys(cart);
+  var el = document.getElementById('summary-content');
+  var hasItems = items.length > 0 || brownieQty > 0;
+  var needed = cartCount();
+  var alloc = selectedSlot ? allocateSlots(selectedSlotIdx, needed) : null;
+
+  if(!hasItems && !selectedSlot){
+    el.innerHTML = '<p class="summary-empty">SELECT PIZZAS AND A TIME SLOT ABOVE</p>';
+    document.getElementById('submit-btn').disabled = true;
+    return;
+  }
+
+  var html = '';
+  items.forEach(function(id){
+    var p = PIZZAS.filter(function(x){ return x.id === id; })[0];
+    html += '<div class="summary-row"><span>' + p.name + ' x' + cart[id] + '</span><span>$' + (p.price * cart[id]) + '</span></div>';
+  });
+
+  if(brownieQty > 0){
+    if(freeBrownie){
+      html += '<div class="summary-row"><span>DUBAI BROWNIE x1</span><span style="color:var(--green);font-weight:700">FREE</span></div>';
+      if(brownieQty > 1){
+        var ex = brownieQty - 1;
+        html += '<div class="summary-row"><span>DUBAI BROWNIE x' + ex + ' (extra)</span><span>$' + (ex*5) + '</span></div>';
+      }
+    } else {
+      html += '<div class="summary-row"><span>DUBAI BROWNIE x' + brownieQty + '</span><span>$' + (brownieQty*5) + '</span></div>';
+    }
+  }
+
+  if(selectedSlot && alloc){
+    if(alloc.length === 1){
+      html += '<div class="summary-row highlight"><span>PICKUP</span><span>' + alloc[0].slot + '</span></div>';
+    } else {
+      var parts = alloc.map(function(a){ return a.slot + ' (' + a.qty + ')'; }).join(' + ');
+      html += '<div class="summary-row highlight"><span>SPLIT PICKUP</span><span style="font-size:.8em;text-align:right">' + parts + '</span></div>';
+    }
+  } else if(selectedSlot && !alloc){
+    html += '<div class="summary-row highlight" style="color:#e55"><span>SLOT ISSUE</span><span>pick another</span></div>';
+  }
+
+  var savings = '';
+  if(hasItems) html += '<div class="summary-row total"><span>TOTAL — DUE AT PICKUP</span><span>$' + calcTotal() + '</span></div>';
+
+  el.innerHTML = html;
+
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var validSlot = selectedSlot && alloc !== null;
+  document.getElementById('submit-btn').disabled = !(hasItems && validSlot && fname && lname && phone);
+}
+
+// ══════════════════════════════════════
+// SUBMIT ORDER
+// ══════════════════════════════════════
+function submitOrder(){
+  var fnameEl = document.getElementById('fname');
+  var lnameEl = document.getElementById('lname');
+  var phoneEl = document.getElementById('phone');
+  var notesEl = document.getElementById('notes');
+  var fname = fnameEl ? fnameEl.value.trim() : '';
+  var lname = lnameEl ? lnameEl.value.trim() : '';
+  var phone = phoneEl ? phoneEl.value.trim() : '';
+  var notes = notesEl ? notesEl.value.trim() : '';
+  console.log('Submitting order:', fname, lname, phone, 'slot:', selectedSlot, 'cart:', JSON.stringify(cart));
+  if(!fname || !lname || !phone){ alert('Please fill in your name and phone number.'); return; }
+
+  var needed = cartCount();
+  var alloc = allocateSlots(selectedSlotIdx, needed);
+  if(!alloc){
+    var errEl = document.getElementById('slot-error');
+    errEl.textContent = 'One or more slots just filled up — please pick a new start time.';
+    errEl.classList.add('visible');
+    renderSlots(); selectedSlot = null; selectedSlotIdx = null; updateSummary();
+    errEl.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  document.getElementById('slot-error').classList.remove('visible');
+
+  var pizzaItems = Object.keys(cart).map(function(id){
+    var p = PIZZAS.filter(function(x){ return x.id === id; })[0];
+    return {id:id, name:p.name, qty:cart[id], price:p.price};
+  });
+
+  var primarySlot = alloc[0].slot;
+  var slotDisplay = alloc.length === 1 ? primarySlot : alloc.map(function(a){ return a.slot + '(' + a.qty + ')'; }).join('+');
+
+  var orders = loadOrders();
+  var order = {
+    id: Date.now(), orderNum: orders.length + 1,
+    fname:fname, lname:lname, phone:phone, notes:notes,
+    slot: primarySlot, slots: alloc, slotDisplay: slotDisplay,
+    pizzas: pizzaItems, brownie: brownieQty, freeBrownie: freeBrownie,
+    pizzaCount: needed, total: calcTotal(),
+    paid: false, ts: new Date().toISOString()
+  };
+  orders.push(order);
+  saveOrders(orders);
+
+  // Send to Google Sheets
+  fetch('https://script.google.com/macros/s/AKfycbyFGQRNyhKaU23v-qlA6wjVXtwqnxG3TE6di0yyx6akIH2pevqw_Za9OP7r9XTzVQ_6Ow/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'order',
+      orderNum: order.orderNum,
+      fname: order.fname,
+      lname: order.lname,
+      phone: order.phone,
+      slot: order.slot,
+      slotDisplay: order.slotDisplay,
+      pizzas: order.pizzas,
+      pizzaCount: order.pizzaCount,
+      brownie: order.brownie,
+      freeBrownie: order.freeBrownie,
+      total: order.total,
+      notes: order.notes,
+      ts: order.ts
+    })
+  }).catch(function(e){ console.log('Sheet sync error:', e); });
+
+  var pLines = pizzaItems.map(function(p){ return '<div class="detail-row">' + p.name + ' <span>x' + p.qty + ' — $' + (p.price*p.qty) + '</span></div>'; }).join('');
+  var bLine = brownieQty > 0 ? '<div class="detail-row">DUBAI BROWNIE <span>x' + brownieQty + ' — ' + (freeBrownie && brownieQty===1 ? 'FREE' : '$'+calcBrownieTotal()) + '</span></div>' : '';
+  var slotLine = alloc.length === 1
+    ? '<div class="detail-row">PICKUP <span>' + primarySlot + '</span></div>'
+    : '<div class="detail-row">SPLIT PICKUP <span>' + alloc.map(function(a){ return a.slot + ' (' + a.qty + ' pie' + (a.qty>1?'s':'') + ')'; }).join(' + ') + '</span></div>';
+
+  document.getElementById('success-details').innerHTML =
+    '<h3>ORDER #' + order.orderNum + '</h3>' +
+    '<div class="detail-row">NAME <span>' + fname + ' ' + lname + '</span></div>' +
+    '<div class="detail-row">PHONE <span>' + phone + '</span></div>' +
+    slotLine + pLines + bLine +
+    '<div class="detail-row" style="margin-top:.5rem;font-weight:700">TOTAL DUE AT PICKUP <span>$' + calcTotal() + '</span></div>' +
+    (notes ? '<div class="detail-row">NOTES <span>' + notes + '</span></div>' : '');
+
+  document.getElementById('order-form').style.display = 'none';
+  document.getElementById('success-screen').classList.add('visible');
+  document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
+  if(allSlotsFull()) document.getElementById('soldout-banner').classList.add('visible');
+}
+
+function restartOrder(){
+  cart = {}; brownieQty = 0; freeBrownie = false; brownieAutoAdded = false;
+  selectedSlot = null; selectedSlotIdx = null;
+  document.getElementById('order-form').style.display = 'block';
+  document.getElementById('success-screen').classList.remove('visible');
+  ['fname','lname','phone','notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+  renderPizzas(); renderSlots(); updateSummary(); updateSteps();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ══════════════════════════════════════
+// ROUTING
+// ══════════════════════════════════════
+function enterOrdering(){
+  document.getElementById('splash-page').classList.add('hidden');
+  document.getElementById('order-page').classList.add('visible');
+  document.body.style.overflow = 'visible';
+  document.body.style.display = 'block';
+  document.body.style.background = 'var(--cream)';
+  document.body.style.color = 'var(--charcoal)';
+  document.body.style.minHeight = '100vh';
+  document.body.style.alignItems = 'unset';
+  document.body.style.justifyContent = 'unset';
+  document.body.style.padding = '0';
+  document.body.style.textAlign = 'left';
+  renderPizzas(); renderSlots(); updateSummary(); updateSteps();
+  if(allSlotsFull()) document.getElementById('soldout-banner').classList.add('visible');
+  window.scrollTo(0,0);
+}
+
+function checkRoute(){
+  if(window.location.search.includes('admin')){
+    document.getElementById('splash-page').classList.add('hidden');
+    document.getElementById('admin-view').style.display = 'block';
+    document.body.style.background = 'var(--cream)';
+    document.body.style.alignItems = 'unset';
+    document.body.style.justifyContent = 'unset';
+    document.body.style.padding = '0';
+    document.body.style.textAlign = 'left';
+  }
+}
+
+// ══════════════════════════════════════
+// ADMIN
+// ══════════════════════════════════════
+function adminLogin(){
+  if(document.getElementById('admin-pw').value === ADMIN_PASSWORD){
+    document.getElementById('admin-login-screen').style.display = 'none';
+    document.getElementById('admin-dashboard').style.display = 'block';
+    renderAdmin();
+  } else {
+    document.getElementById('admin-err').style.display = 'block';
+  }
+}
+
+function renderAdmin(){
+  var orders = loadOrders();
+  console.log('Orders in storage:', JSON.stringify(orders));
+  var subs = loadSubscribers();
+  var totalPizzas = orders.reduce(function(s,o){ return s + (o.pizzaCount||0); }, 0);
+  var totalRev = orders.reduce(function(s,o){ return s + (o.total||0); }, 0);
+  var paid = orders.filter(function(o){ return o.paid; }).length;
+
+  var statsHtml = '<div class="admin-stats">' +
+    '<div class="stat-card"><div class="stat-label">Orders</div><div class="stat-value">' + orders.length + '</div><div class="stat-sub">total</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Pizzas</div><div class="stat-value">' + totalPizzas + '</div><div class="stat-sub">ordered</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Revenue</div><div class="stat-value">$' + totalRev + '</div><div class="stat-sub">total</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Paid</div><div class="stat-value">' + paid + '</div><div class="stat-sub">of ' + orders.length + '</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Notify List</div><div class="stat-value">' + subs.length + '</div><div class="stat-sub">subscribers</div></div>' +
+    '</div>';
+
+  // Slots grid
+  var slotsHtml = '<div class="admin-section-title">SLOTS</div><div class="slot-grid-admin">';
+  SLOT_LABELS.forEach(function(label){
+    var sold = pizzasSoldInSlot(label);
+    var pct = Math.min(100, (sold/SLOT_PIZZA_CAP)*100);
+    var full = isSlotFull(label);
+    slotsHtml += '<div class="slot-admin-card' + (full?' full':'') + '">';
+    slotsHtml += '<div class="slot-admin-time">' + label + '</div>';
+    slotsHtml += '<div class="slot-admin-bar"><div class="slot-admin-fill" style="width:' + pct + '%"></div></div>';
+    slotsHtml += '<div class="slot-admin-info">' + sold + '/' + SLOT_PIZZA_CAP + (full?' · FULL':'') + '</div>';
+    slotsHtml += '</div>';
+  });
+  slotsHtml += '</div>';
+
+  // Orders table
+  var tableHtml = '<div class="admin-section-title">ORDERS</div>';
+  if(!orders.length){
+    tableHtml += '<div class="no-orders">No orders yet</div>';
+  } else {
+    tableHtml += '<div class="tbl-wrap"><table class="orders-table"><thead><tr>' +
+      '<th>#</th><th>Name</th><th>Phone</th><th>Slot</th><th>Pizzas</th><th>Brownie</th><th>Total</th><th>Paid</th><th>Notes</th></tr></thead><tbody>';
+    orders.slice().reverse().forEach(function(o){
+      var pz = (o.pizzas||[]).map(function(p){ return p.name + ' x' + p.qty; }).join(', ');
+      tableHtml += '<tr>' +
+        '<td><span class="ord-num">#' + o.orderNum + '</span></td>' +
+        '<td>' + o.fname + ' ' + o.lname + '</td>' +
+        '<td>' + o.phone + '</td>' +
+        '<td style="white-space:nowrap;font-weight:600">' + (o.slotDisplay||o.slot) + '</td>' +
+        '<td>' + pz + '</td>' +
+        '<td>' + (o.brownie||0) + (o.freeBrownie?' (1 free)':'') + '</td>' +
+        '<td>$' + o.total + '</td>' +
+        '<td><span class="paid-btn ' + (o.paid?'paid':'unpaid') + '" onclick="togglePaid(' + o.id + ')">' + (o.paid?'PAID':'UNPAID') + '</span></td>' +
+        '<td>' + (o.notes||'-') + '</td>' +
+        '</tr>';
+    });
+    tableHtml += '</tbody></table></div>';
+  }
+
+  document.getElementById('admin-body').innerHTML = statsHtml + slotsHtml + tableHtml;
+}
+
+function togglePaid(id){
+  var orders = loadOrders();
+  orders = orders.map(function(o){ if(o.id===id){ o.paid = !o.paid; } return o; });
+  saveOrders(orders);
+  renderAdmin();
+}
+
+function clearOrders(){
+  if(confirm('Delete ALL orders? This cannot be undone.')){ localStorage.removeItem('brocato_orders'); renderAdmin(); }
+}
+
+function exportCSV(){
+  var orders = loadOrders();
+  if(!orders.length){ alert('No orders to export.'); return; }
+  var rows = [['#','First','Last','Phone','Slot','Pizzas','Brownie','Total','Paid','Notes','Timestamp']];
+  orders.forEach(function(o){
+    var ps = (o.pizzas||[]).map(function(p){ return p.name+'x'+p.qty; }).join(' | ');
+    rows.push([o.orderNum,o.fname,o.lname,o.phone,o.slotDisplay||o.slot,ps,o.brownie||0,'$'+o.total,o.paid?'Yes':'No',o.notes||'',o.ts]);
+  });
+  var csv = rows.map(function(r){ return r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'brocato-orders.csv'; a.click();
+}
+
+function exportSubscribers(){
+  var subs = loadSubscribers();
+  if(!subs.length){ alert('No subscribers yet.'); return; }
+  var rows = [['First','Last','Phone','Signed Up']];
+  subs.forEach(function(s){ rows.push([s.fname,s.lname,s.phone,s.ts]); });
+  var csv = rows.map(function(r){ return r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'brocato-notify-list.csv'; a.click();
+}
+
+// ══════════════════════════════════════
+// NOTIFY SIGNUP
+// ══════════════════════════════════════
+function handleSignup(){
+  var valid = true;
+  var fname = document.getElementById('n-fname').value.trim();
+  var lname = document.getElementById('n-lname').value.trim();
+  var phone = document.getElementById('n-phone').value.trim();
+  var consent = document.getElementById('consent').checked;
+  ['fname','lname','phone','consent'].forEach(function(id){ document.getElementById('err-'+id).classList.remove('visible'); });
+  if(!fname){ document.getElementById('err-fname').classList.add('visible'); valid=false; }
+  if(!lname){ document.getElementById('err-lname').classList.add('visible'); valid=false; }
+  if(!phone || phone.replace(/\D/g,'').length < 10){ document.getElementById('err-phone').classList.add('visible'); valid=false; }
+  if(!consent){ document.getElementById('err-consent').classList.add('visible'); valid=false; }
+  if(!valid) return;
+
+  var btn = document.getElementById('notify-btn');
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+
+  fetch('https://script.google.com/macros/s/AKfycbyFGQRNyhKaU23v-qlA6wjVXtwqnxG3TE6di0yyx6akIH2pevqw_Za9OP7r9XTzVQ_6Ow/exec', {
+    method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({fname:fname, lname:lname, phone:phone})
+  }).then(function(){
+    document.getElementById('form-state').style.display='none';
+    document.getElementById('success-state').classList.add('visible');
+  }).catch(function(){
+    document.getElementById('form-state').style.display='none';
+    document.getElementById('success-state').classList.add('visible');
+  });
+
+  // Also save locally
+  var subs = loadSubscribers();
+  if(!subs.filter(function(s){ return s.phone===phone; }).length){
+    subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
+    saveSubscribers(subs);
+  }
+}
+
+// ══════════════════════════════════════
+// COUNTDOWN
+// ══════════════════════════════════════
+function updateCountdown(){
+  var diff = DROP_DATE - new Date();
+  var pad = function(n){ return String(Math.floor(n)).padStart(2,'0'); };
+  if(diff <= 0){
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(function(id){ document.getElementById(id).textContent='00'; });
+    return;
+  }
+  document.getElementById('cd-days').textContent  = pad(diff/86400000);
+  document.getElementById('cd-hours').textContent = pad((diff%86400000)/3600000);
+  document.getElementById('cd-mins').textContent  = pad((diff%3600000)/60000);
+  document.getElementById('cd-secs').textContent  = pad((diff%60000)/1000);
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+// floating bg pizzas
+var bg = document.getElementById('bg-pizza');
+for(var i=0; i<14; i++){
+  var s = document.createElement('span');
+  s.textContent = '🍕';
+  s.style.left = Math.random()*100+'%';
+  s.style.animationDuration = (18+Math.random()*20)+'s';
+  s.style.animationDelay = '-'+(Math.random()*30)+'s';
+  s.style.fontSize = (1.2+Math.random()*2)+'rem';
+  bg.appendChild(s);
+}
+
+// input listeners for order form
+['fname','lname','phone'].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el) el.addEventListener('input', updateSummary);
+});
+
+checkRoute();
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
