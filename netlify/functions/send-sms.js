@@ -23,7 +23,7 @@ exports.handler = async function(event) {
 
   const slotLine = data.slotDisplay || data.slot;
 
-  const message = `Hey ${data.fname}! Your BrocatoEatz order is confirmed 🍕\n\n${orderLines}${brownieLine}\n\nTotal: $${data.total} — due at pickup\nPickup: ${slotLine}, July 5th\n📍 33 McCaffery Crescent, St. Catharines, ON — Right side gate\n\nCash preferred · E-transfer available\n\nSee you then!`;
+  const message = `Hey ${data.fname}! Thank you so much for your order, your support means the world! 🍕\n\nYou're all set for pickup on July 5th @ ${slotLine}.\n\n${orderLines}${brownieLine}\n\nYour total is $${data.total}. Cash preferred · E-transfer available.\n\n📍 33 McCaffery Cres, St. Catharines ON L2S 3Z5\nRight side gate\n\nIf you can't make it or have any questions, please let me know ASAP so no pizzas go to waste!\nText Michael: 905-401-7804\n\nThank you and see you July 5th! 🍕`;
 
   await client.messages.create({
     body: message,
