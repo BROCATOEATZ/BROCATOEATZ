@@ -284,8 +284,11 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
     <div class="soldout-splash" id="soldout-splash">
       <div class="soldout-splash-title">SOLD OUT</div>
-      <div class="soldout-splash-sub">Next Pop Up — July 19th</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem">Join the Drop List below to get notified ↓</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.25rem">NEXT POP UP</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.4rem);letter-spacing:4px;color:white;margin-bottom:1rem">SUNDAY, JULY 19TH</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.25rem">PRE-ORDERS OPEN</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--tan);margin-bottom:.75rem">TUESDAY, JULY 15TH @ 7:00 PM</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Menu Drops July 12th</div>
     </div>
 
     <!-- MENU PREVIEW -->
@@ -1160,7 +1163,7 @@ function exportSubscribers(){
 // ══════════════════════════════════════
 // ORDERS OPEN / CLOSED
 // ══════════════════════════════════════
-function isSoldOut(){ return localStorage.getItem('brocato_sold_out') === 'true'; }
+function isSoldOut(){ return localStorage.getItem('brocato_sold_out') === 'true' || isTotalCapReached() || SLOT_LABELS.every(function(l){ return isSlotFull(l); }); }
 function isOrdersOpen(){ return new Date() >= ORDERS_OPEN_DATE; }
 
 function toggleSoldOut(){
@@ -1215,14 +1218,20 @@ function checkOrdersLocked(){
   var form = document.getElementById('order-form');
   var steps = document.querySelector('.steps');
   if(!locked || !form) return;
-  if(isOrdersOpen()){
-    locked.style.display = 'none';
-    form.style.display = 'block';
-    if(steps) steps.style.display = 'flex';
-  } else {
+  if(isSoldOut()){
+    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday July 19th<br>Pre-Orders Open: Tuesday July 15th @ 7PM<br>Menu Drops: July 12th</div>';
     locked.style.display = 'block';
     form.style.display = 'none';
     if(steps) steps.style.display = 'none';
+  } else if(!isOrdersOpen()){
+    locked.innerHTML = '<div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div><div class="orders-locked-sub">Orders open Tuesday, July 1st @ 7:00 PM<br>Join the Drop List to get notified first</div>';
+    locked.style.display = 'block';
+    form.style.display = 'none';
+    if(steps) steps.style.display = 'none';
+  } else {
+    locked.style.display = 'none';
+    form.style.display = 'block';
+    if(steps) steps.style.display = 'flex';
   }
 }
 
@@ -1419,6 +1428,8 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 updateReserveBtn();
 updateSoldOutState();
+// Auto-check sold out every 30 seconds in case orders fill up
+setInterval(updateSoldOutState, 30000);
 </script>
 </body>
 </html>
