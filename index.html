@@ -278,8 +278,10 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   <div id="form-state">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,7vw,3rem);letter-spacing:6px;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
     <h1><em>PIZZA</em><br><em style="color:var(--tan)">DROP</em></h1>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.2rem">SUNDAY, JULY 5TH</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem">Pre-Order Only</div>
+    <div id="current-drop-info">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.2rem">SUNDAY, JULY 5TH</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem">Pre-Order Only</div>
+    </div>
 
     <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
     <div class="soldout-splash" id="soldout-splash">
@@ -528,7 +530,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 // ══════════════════════════════════════
 var ADMIN_PASSWORD = 'pizza6';
 var DROP_DATE = new Date('2026-07-05T10:40:00');
-var ORDERS_OPEN_DATE = new Date('2026-06-01T19:00:00'); // Tuesday July 1st @ 7:00 PM
+var ORDERS_OPEN_DATE = new Date('2026-07-01T19:00:00'); // Tuesday July 1st @ 7:00 PM
 var TOTAL_CAP = 100; // max pizzas regardless of slot availability
 
 var PIZZAS = [
@@ -1179,18 +1181,22 @@ function updateSoldOutState(){
   var toggleBtn = document.getElementById('soldout-toggle-btn');
   var menuEl = document.querySelector('.menu-preview');
   var menuTeaser = document.getElementById('menu-teaser');
+  var currentDropInfo = document.getElementById('current-drop-info');
 
   if(isSoldOut()){
     if(btn) btn.style.display = 'none';
     if(soldoutEl) soldoutEl.classList.add('visible');
     if(menuEl) menuEl.style.display = 'none';
     if(menuTeaser) menuTeaser.style.display = 'block';
+    if(currentDropInfo) currentDropInfo.style.display = 'none';
+    if(currentDropInfo) { currentDropInfo.style.display = 'block'; currentDropInfo.style.textDecoration = 'line-through'; currentDropInfo.style.opacity = '.35'; }
     if(toggleBtn){ toggleBtn.classList.add('sold-out-active'); toggleBtn.textContent = 'SOLD OUT: ON'; }
   } else {
     if(btn) btn.style.display = 'block';
     if(soldoutEl) soldoutEl.classList.remove('visible');
     if(menuEl) menuEl.style.display = '';
     if(menuTeaser) menuTeaser.style.display = 'none';
+    if(currentDropInfo) { currentDropInfo.style.display = 'block'; currentDropInfo.style.textDecoration = ''; currentDropInfo.style.opacity = ''; }
     if(toggleBtn){ toggleBtn.classList.remove('sold-out-active'); toggleBtn.textContent = 'SOLD OUT'; }
   }
 }
