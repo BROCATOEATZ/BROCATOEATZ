@@ -311,7 +311,7 @@ display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-
           <span class="menu-preview-price">$5</span>
         </div>
       </div>
-      <div class="menu-preview-note">🎁 Free brownie with 2+ pizzas</div>
+      <div class="menu-preview-note">Free brownie with 2+ pizzas</div>
     </div>
 
     <!-- LOCKED POPUP moved to body level -->
@@ -500,13 +500,13 @@ display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-
 </div>
 
 <!-- LOCKED POPUP -->
-<div class="locked-overlay" id="locked-overlay" onclick="closeLocked()">
-  <div class="locked-popup" onclick="event.stopPropagation()">
-    <div class="locked-popup-title">NOT OPEN YET</div>
-    <div class="locked-popup-sub">Pre-orders open</div>
-    <div class="locked-popup-time">TUESDAY, JULY 1ST @ 7:00 PM</div>
-    <div class="locked-popup-note">Join the Drop List below to get notified first 👇</div>
-    <button class="locked-popup-close" onclick="closeLocked()">GOT IT</button>
+<div id="locked-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:99999;align-items:center;justify-content:center;padding:1.5rem" onclick="closeLocked()">
+  <div style="background:#111;border:2px solid #D4A97A;padding:2rem 1.75rem;max-width:340px;width:90%;text-align:center" onclick="event.stopPropagation()">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:4px;color:#D4A97A;margin-bottom:.5rem">NOT OPEN YET</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem">Pre-orders open</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:3px;color:white;margin-bottom:1.25rem">TUESDAY, JULY 1ST @ 7:00 PM</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:1.25rem">Join the Drop List below to get notified first 👇</div>
+    <button onclick="closeLocked()" style="background:none;border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer">GOT IT</button>
   </div>
 </div>
 
@@ -1229,15 +1229,17 @@ function sendReminders(){
   });
 }
 function handleReserveClick(){
-  if(isOrdersOpen()){
+  if(ORDERS_OPEN){
     enterOrdering();
   } else {
-    document.getElementById('locked-overlay').classList.add('visible');
+    var el = document.getElementById('locked-overlay');
+    el.style.display = 'flex';
   }
 }
 
 function closeLocked(){
-  document.getElementById('locked-overlay').classList.remove('visible');
+  var el = document.getElementById('locked-overlay');
+  el.style.display = 'none';
 }
 
 function updateReserveBtn(){
