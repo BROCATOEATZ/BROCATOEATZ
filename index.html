@@ -888,6 +888,10 @@ function submitOrder(){
     alert('Sorry — we\'ve hit our pizza limit for this drop! Check back next week.');
     return;
   }
+
+  var needed = cartCount();
+  var alloc = allocateSlots(selectedSlotIdx, needed);
+
   if(!alloc){
     var errEl = document.getElementById('slot-error');
     errEl.textContent = 'One or more slots just filled up — please pick a new start time.';
