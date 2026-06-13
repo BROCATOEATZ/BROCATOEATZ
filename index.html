@@ -284,7 +284,8 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
     <div class="soldout-splash" id="soldout-splash">
       <div class="soldout-splash-title">SOLD OUT</div>
-      <div class="soldout-splash-sub">Join the Drop List below for next week's drop ↓</div>
+      <div class="soldout-splash-sub">Next Pop Up — July 19th</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem">Join the Drop List below to get notified ↓</div>
     </div>
 
     <!-- MENU PREVIEW -->
@@ -316,6 +317,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     </div>
 
     <!-- LOCKED POPUP moved to body level -->
+
+    <!-- MENU TEASER (shown when sold out) -->
+    <div id="menu-teaser" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:1.25rem;margin:1.25rem auto;max-width:320px;text-align:center">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;color:rgba(255,255,255,.35);margin-bottom:.4rem">NEXT DROP</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--tan)">MENU DROPS JULY 12TH</div>
+    </div>
 
     <div class="divider"></div>
 
@@ -516,7 +523,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 // ══════════════════════════════════════
 // CONFIG
 // ══════════════════════════════════════
-var ADMIN_PASSWORD = 'pizza6';
+var ADMIN_PASSWORD = 'pizza69';
 var DROP_DATE = new Date('2026-07-05T10:40:00');
 var ORDERS_OPEN_DATE = new Date('2026-06-01T19:00:00'); // Tuesday July 1st @ 7:00 PM
 var TOTAL_CAP = 100; // max pizzas regardless of slot availability
@@ -995,6 +1002,7 @@ function restartOrder(){
 // ROUTING
 // ══════════════════════════════════════
 function enterOrdering(){
+  if(isSoldOut()) return;
   document.getElementById('splash-page').classList.add('hidden');
   document.getElementById('order-page').classList.add('visible');
   document.body.style.overflow = 'visible';
@@ -1166,13 +1174,20 @@ function updateSoldOutState(){
   var btn = document.getElementById('reserve-btn');
   var soldoutEl = document.getElementById('soldout-splash');
   var toggleBtn = document.getElementById('soldout-toggle-btn');
+  var menuEl = document.querySelector('.menu-preview');
+  var menuTeaser = document.getElementById('menu-teaser');
+
   if(isSoldOut()){
     if(btn) btn.style.display = 'none';
     if(soldoutEl) soldoutEl.classList.add('visible');
+    if(menuEl) menuEl.style.display = 'none';
+    if(menuTeaser) menuTeaser.style.display = 'block';
     if(toggleBtn){ toggleBtn.classList.add('sold-out-active'); toggleBtn.textContent = 'SOLD OUT: ON'; }
   } else {
     if(btn) btn.style.display = 'block';
     if(soldoutEl) soldoutEl.classList.remove('visible');
+    if(menuEl) menuEl.style.display = '';
+    if(menuTeaser) menuTeaser.style.display = 'none';
     if(toggleBtn){ toggleBtn.classList.remove('sold-out-active'); toggleBtn.textContent = 'SOLD OUT'; }
   }
 }
