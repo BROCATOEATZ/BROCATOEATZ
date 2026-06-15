@@ -8,7 +8,7 @@ exports.handler = async function(event) {
 
   // Drop List signup confirmation
   if(data.type === 'signup') {
-    const message = `You're on the BrocatoEatz Drop List! 🍕\n\nYou'll get early access to pre-orders before anyone else.\n\nStay tuned — next drop is July 5th in St. Catharines.\n\nText Michael @ 905-401-7804 with any questions!`;
+    const message = `You're on the BrocatoEatz Drop List! 🍕\n\nWe'll text you when the next drop goes live.\n\nStay tuned — next drop is July 5th in St. Catharines.\n\nText Michael @ 905-401-7804 with any questions!`;
     await client.messages.create({
       body: message,
       from: '+12897233561',
