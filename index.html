@@ -455,19 +455,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       </div>
 
       <!-- PAYMENT -->
-      <div class="payment-notice">
-        <div class="payment-icon">💵</div>
-        <div>
-          <div class="payment-notice-title">PAYMENT AT PICKUP</div>
-          <div class="payment-notice-body">Cash preferred · E-transfer available</div>
-        </div>
-      </div>
-
       <!-- SUMMARY -->
       <div class="section-title">ORDER SUMMARY</div>
       <div class="order-summary">
         <div id="summary-content"><p class="summary-empty">SELECT PIZZAS AND A TIME SLOT ABOVE</p></div>
       </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:600;color:#aaa;letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:.75rem">Cash preferred · E-transfer available · Payment at pickup</div>
       <div class="sms-consent">By placing an order you'll receive a confirmation and pickup reminder via text. Reply STOP to opt out.</div>
       <button class="submit-btn-order" id="submit-btn" onclick="submitOrder()" disabled>PLACE ORDER</button>
     </div>
@@ -938,6 +931,13 @@ function submitOrder(){
   orders.push(order);
   saveOrders(orders);
 
+  // Add to local drop list if not already there
+  var subs = loadSubscribers();
+  if(!subs.filter(function(s){ return s.phone === phone; }).length){
+    subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
+    saveSubscribers(subs);
+  }
+
   // Send confirmation SMS via Netlify function
   fetch('/.netlify/functions/send-sms', {
     method: 'POST',
@@ -1112,9 +1112,9 @@ function renderAdmin(){
   if(!subs.length){
     subsHtml += '<div class="no-orders">No subscribers yet</div>';
   } else {
-    subsHtml += '<div class="tbl-wrap"><table class="subs-table"><thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Signed Up</th></tr></thead><tbody>';
+    subsHtml += '<div class="tbl-wrap"><table class="subs-table"><thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Signed Up</th><th></th></tr></thead><tbody>';
     subs.forEach(function(s, i){
-      subsHtml += '<tr><td>' + (i+1) + '</td><td>' + s.fname + ' ' + s.lname + '</td><td>' + s.phone + '</td><td>' + new Date(s.ts).toLocaleDateString() + '</td></tr>';
+      subsHtml += '<tr><td>' + (i+1) + '</td><td>' + s.fname + ' ' + s.lname + '</td><td>' + s.phone + '</td><td>' + new Date(s.ts).toLocaleDateString() + '</td><td><span class="cancel-btn" onclick="removeSubscriber(\'' + s.phone + '\')">REMOVE</span></td></tr>';
     });
     subsHtml += '</tbody></table></div>';
   }
@@ -1127,6 +1127,13 @@ function togglePaid(id){
   var orders = loadOrders();
   orders = orders.map(function(o){ if(o.id===id){ o.paid = !o.paid; } return o; });
   saveOrders(orders);
+  renderAdmin();
+}
+
+function removeSubscriber(phone){
+  if(!confirm('Remove this subscriber from the Drop List?')) return;
+  var subs = loadSubscribers().filter(function(s){ return s.phone !== phone; });
+  saveSubscribers(subs);
   renderAdmin();
 }
 
@@ -1370,9 +1377,20 @@ function handleSignup(){
   }).then(function(){
     document.getElementById('form-state').style.display='none';
     document.getElementById('success-state').classList.add('visible');
+    // Send signup confirmation text
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'signup', phone: phone })
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
   }).catch(function(){
     document.getElementById('form-state').style.display='none';
     document.getElementById('success-state').classList.add('visible');
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'signup', phone: phone })
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
   });
 
   // Also save locally
