@@ -330,7 +330,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div class="divider"></div>
 
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,1.8rem);letter-spacing:4px;color:var(--tan);margin-bottom:.3rem">JOIN THE DROP LIST</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.06em;margin-bottom:1.25rem;line-height:1.5">Get drop alerts before anyone else<br>+ early access to pre-orders</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.06em;margin-bottom:1.25rem;line-height:1.5">Be the first to know when the next drop goes live</div>
 
     <div class="signup-form">
       <div class="form-row">
@@ -363,8 +363,9 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   <div class="notify-success" id="success-state">
     <div class="notify-success-icon">🍕</div>
     <h3>YOU'RE ON THE DROP LIST</h3>
-    <p>You'll get alerts before anyone else + early access to pre-orders.</p>
-    <button class="reserve-btn" onclick="enterOrdering()">RESERVE MY PIZZA</button>
+    <p>Check your phone — a confirmation text is on its way.</p>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:-.5rem">We'll text you when the next drop goes live.</p>
+    <button onclick="resetSignupForm()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer;margin-top:.75rem">← BACK</button>
   </div>
 </div>
 </div>
@@ -374,6 +375,9 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 ══════════════════════════ -->
 <div class="order-page" id="order-page">
   <div class="soldout-banner" id="soldout-banner">ALL SLOTS FULL — SEE YOU NEXT DROP!</div>
+  <div style="padding:.75rem 1rem;background:var(--charcoal)">
+    <button onclick="goHome()" style="background:none;border:none;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:0">← BACK</button>
+  </div>
   <div class="orders-locked" id="orders-locked" style="display:none">
     <div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div>
     <div class="orders-locked-sub">Orders open Monday @ 7:00 PM<br>Join the Drop List to get notified first</div>
@@ -1010,6 +1014,28 @@ function restartOrder(){
 // ══════════════════════════════════════
 // ROUTING
 // ══════════════════════════════════════
+function resetSignupForm(){
+  document.getElementById('success-state').classList.remove('visible');
+  document.getElementById('form-state').style.display = 'block';
+  document.getElementById('n-fname').value = '';
+  document.getElementById('n-lname').value = '';
+  document.getElementById('n-phone').value = '';
+  document.getElementById('consent').checked = false;
+  updateNotifyBtn();
+}
+
+function goHome(){
+  document.getElementById('order-page').classList.remove('visible');
+  document.getElementById('splash-page').classList.remove('hidden');
+  document.body.style.background = 'var(--charcoal)';
+  document.body.style.color = 'white';
+  document.body.style.display = 'flex';
+  document.body.style.alignItems = 'center';
+  document.body.style.justifyContent = 'flex-start';
+  document.body.style.padding = '3rem 1.5rem';
+  document.body.style.textAlign = 'center';
+  window.scrollTo(0,0);
+}
 function enterOrdering(){
   if(isSoldOut()) return;
   document.getElementById('splash-page').classList.add('hidden');
