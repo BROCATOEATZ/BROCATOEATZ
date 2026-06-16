@@ -314,7 +314,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
           <span class="menu-preview-price">$25</span>
         </div>
         <div class="menu-preview-item">
-          <span class="menu-preview-name">CALABRIAN HEAT</span>
+          <span class="menu-preview-name">????????????</span>
           <span class="menu-preview-price">$25</span>
         </div>
         <div class="menu-preview-item" style="border-top:1px solid rgba(255,255,255,.1);margin-top:.35rem;padding-top:.35rem">
@@ -515,11 +515,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem">Pre-orders open</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:3px;color:white;margin-bottom:1.25rem">TUESDAY, JULY 1ST @ 7:00 PM</div>
     <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem;margin-bottom:1rem">
-      <div style="display:flex;gap:.4rem">
-        <input id="secret-code-input" type="text" placeholder="Early Access" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:white;padding:.45rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;outline:none;text-transform:uppercase" onkeydown="if(event.key==='Enter')checkSecretCode()">
-        <button onclick="checkSecretCode()" style="background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);padding:.45rem .75rem;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:1px;cursor:pointer">GO</button>
-      </div>
-      <div id="secret-code-err" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:#e55;margin-top:.3rem;letter-spacing:.05em">Invalid code.</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5">Sign up for the Drop List below to get notified when orders open ↓</div>
     </div>
     <button onclick="closeLocked()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer">CLOSE</button>
   </div>
@@ -535,10 +531,10 @@ var ORDERS_OPEN_DATE = new Date('2026-07-01T19:00:00'); // Tuesday July 1st @ 7:
 var TOTAL_CAP = 100; // max pizzas regardless of slot availability
 
 var PIZZAS = [
-  {id:'margherita',  name:'MARGHERITA',     price:20, desc:'ORGANIC BIANCA DI NAPOLI, PARMIGIANO REGGIANO, FIOR DI LATTE, BASIL, EVOO'},
-  {id:'cupchar',     name:'CUP & CHAR',     price:25, desc:'ORGANIC BIANCO DI NAPOLI, MOZZARELLA MIX, LOTS OF CUP & CHAR PEPS, HOT HONEY'},
-  {id:'funguy',      name:'FUNGUY',         price:25, desc:'TRUFFLE EVOO, FIOR DI LATTE, MOZZARELLA MIX, MIXED MUSHROOMS, CHIMICHURRI'},
-  {id:'calabrian',   name:'CALABRIAN HEAT', price:25, desc:'ORGANIC BIANCO DI NAPOLI, MOZZARELLA MIX, HOT SOPPRESSATA, CALABRIAN CHILLIES'}
+  {id:'margherita',  name:'MARGHERITA',     price:20, desc:'ORGANIC BIANCA DI NAPOLI TOMATO SAUCE, 30 MONTH AGED PARMIGIANO REGGIANO, ITALIAN FIOR DI LATTE, BASIL, EVOO'},
+  {id:'cupchar',     name:'CUP & CHAR',     price:25, desc:'ORGANIC BIANCO DI NAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA, PIZZA MOZZARELLA, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
+  {id:'funguy',      name:'FUNGUY',         price:25, desc:'BLACK TRUFFLE OIL, ITALIAN FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI'},
+  {id:'calabrian',   name:'????????????',        price:25, desc:'SURPRISE FEATURE — REVEALED ON DROP DAY'}
 ];
 
 var SLOT_PIZZA_CAP = 4;
