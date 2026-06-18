@@ -8,7 +8,8 @@ exports.handler = async function(event) {
 
   // Drop List signup confirmation
   if(data.type === 'signup') {
-    const message = `Thanks for signing up! You're on the BrocatoEatz Drop List 🍕\n\nWe'll text you when the next drop goes live.\n\nStay tuned — next drop is July 5th in St. Catharines.\n\nReply STOP to unsubscribe.`;
+    const fname = data.fname || 'Hey';
+    const message = `Hey ${fname}! Thanks for signing up — you're on the BrocatoEatz Drop List 🍕\n\nWe'll text you when the next drop goes live.\n\nStay tuned — next drop is July 5th in St. Catharines.\n\nSave our number so you don't miss the drop 👇\nbrocatoeatz.com/brocatoeatz.vcf\n\nReply STOP to unsubscribe.`;
     await client.messages.create({
       body: message,
       from: '+12897233561',
