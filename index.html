@@ -291,10 +291,10 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.2rem);letter-spacing:4px;color:white;margin-bottom:.9rem">SUNDAY, JULY 19TH</div>
         <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:.9rem"></div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem">PRE-ORDERS OPEN</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--tan);margin-bottom:.9rem">TUESDAY, JULY 15TH @ 7:00 PM</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--tan);margin-bottom:.9rem">TUESDAY, JULY 14TH @ 7:00 PM</div>
         <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:.9rem"></div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem">MENU DROPS</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:rgba(255,255,255,.6)">SUNDAY, JULY 13TH @ 12:00 PM</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:rgba(255,255,255,.6)">SUNDAY, JULY 12TH @ 12:00 PM</div>
       </div>
     </div>
 
@@ -383,7 +383,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   </div>
   <div class="orders-locked" id="orders-locked" style="display:none">
     <div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div>
-    <div class="orders-locked-sub">Orders open Tuesday, July 1st @ 7:00 PM<br>Join the Drop List to get notified first</div>
+    <div class="orders-locked-sub">Orders open Tuesday, June 30th @ 7:00 PM<br>Join the Drop List to get notified first</div>
   </div>
 
   <div class="order-header">
@@ -512,7 +512,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   <div style="background:#111;border:2px solid #D4A97A;padding:2rem 1.75rem;max-width:340px;width:90%;text-align:center" onclick="event.stopPropagation()">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:4px;color:#D4A97A;margin-bottom:.5rem">NOT OPEN YET</div>
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem">Pre-orders open</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:white;margin-bottom:1.25rem;white-space:nowrap">TUESDAY, JULY 1ST @ 7:00 PM</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:white;margin-bottom:1.25rem;white-space:nowrap">TUESDAY, JUNE 30TH @ 7:00 PM</div>
     <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem;margin-bottom:1rem">
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5">Sign up for the Drop List below to get notified when orders open! ↓</div>
     </div>
@@ -526,7 +526,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 // ══════════════════════════════════════
 var ADMIN_PASSWORD = 'pizza6';
 var DROP_DATE = new Date('2026-07-05T10:40:00');
-var ORDERS_OPEN_DATE = new Date('2026-07-01T19:00:00'); // Tuesday July 1st @ 7:00 PM
+var ORDERS_OPEN_DATE = new Date('2026-06-30T19:00:00'); // Tuesday June 30th @ 7:00 PM
 var TOTAL_CAP = 100; // max pizzas regardless of slot availability
 
 var PIZZAS = [
@@ -1231,7 +1231,7 @@ function updateSoldOutState(){
 }
 
 function toggleOrders(){
-  alert('Orders open automatically on Tuesday July 1st @ 7:00 PM. No action needed.');
+  alert('Orders open automatically on Tuesday June 30th @ 7:00 PM. No action needed.');
 }
 
 function updateOrdersToggleBtn(){
@@ -1254,12 +1254,12 @@ function checkOrdersLocked(){
   var steps = document.querySelector('.steps');
   if(!locked || !form) return;
   if(isSoldOut()){
-    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday July 19th<br>Pre-Orders Open: Tuesday July 15th @ 7PM<br>Menu Drops: Sunday July 13th @ 12PM</div>';
+    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday July 19th<br>Pre-Orders Open: Tuesday July 14th @ 7PM<br>Menu Drops: Sunday July 12th @ 12PM</div>';
     locked.style.display = 'block';
     form.style.display = 'none';
     if(steps) steps.style.display = 'none';
   } else if(!isOrdersOpen() && !secretCodeUnlocked){
-    locked.innerHTML = '<div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div><div class="orders-locked-sub">Orders open Tuesday, July 1st @ 7:00 PM<br>Join the Drop List to get notified first</div>';
+    locked.innerHTML = '<div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div><div class="orders-locked-sub">Orders open Tuesday, June 30th @ 7:00 PM<br>Join the Drop List to get notified first</div>';
     locked.style.display = 'block';
     form.style.display = 'none';
     if(steps) steps.style.display = 'none';
