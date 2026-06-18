@@ -1402,7 +1402,7 @@ function handleSignup(){
     fetch('/.netlify/functions/send-sms', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ type: 'signup', phone: phone })
+      body: JSON.stringify({ type: 'signup', phone: phone, fname: fname })
     }).catch(function(e){ console.log('Signup SMS error:', e); });
   }).catch(function(){
     document.getElementById('form-state').style.display='none';
