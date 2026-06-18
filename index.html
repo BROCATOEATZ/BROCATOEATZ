@@ -279,7 +279,8 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,7vw,3rem);letter-spacing:6px;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
     <h1><em>PIZZA</em><br><em style="color:var(--tan)">DROP</em></h1>
     <div id="current-drop-info">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:1.5rem">SUNDAY, JULY 5TH</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.3rem">SUNDAY, JULY 5TH</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem">St. Catharines, ON</div>
     </div>
 
     <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
@@ -296,36 +297,6 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:rgba(255,255,255,.6)">SUNDAY, JULY 13TH @ 12:00 PM</div>
       </div>
     </div>
-
-    <!-- MENU PREVIEW -->
-    <div class="menu-preview">
-      <div class="menu-preview-title">JULY 5TH MENU</div>
-      <div class="menu-preview-items">
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">MARGHERITA</span>
-          <span class="menu-preview-price">$20</span>
-        </div>
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">CUP & CHAR</span>
-          <span class="menu-preview-price">$25</span>
-        </div>
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">FUNGUY</span>
-          <span class="menu-preview-price">$25</span>
-        </div>
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">????????????</span>
-          <span class="menu-preview-price">$25</span>
-        </div>
-        <div class="menu-preview-item" style="border-top:1px solid rgba(255,255,255,.1);margin-top:.35rem;padding-top:.35rem">
-          <span class="menu-preview-name" style="color:rgba(255,255,255,.5)">DUBAI BROWNIE</span>
-          <span class="menu-preview-price">$5</span>
-        </div>
-      </div>
-      <div class="menu-preview-note">Free brownie with 2+ pizzas</div>
-    </div>
-
-    <!-- LOCKED POPUP moved to body level -->
 
     <div class="divider"></div>
 
@@ -358,6 +329,38 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <button class="notify-submit" id="notify-btn" onclick="handleSignup()">JOIN THE LIST</button>
     </div>
     <div class="fine-print">Your info is only used to send BrocatoEatz updates. No spam, ever.</div>
+
+    <div class="divider" style="margin-top:1.75rem"></div>
+
+    <!-- MENU PREVIEW -->
+    <div class="menu-preview">
+      <div class="menu-preview-title">JULY 5TH MENU</div>
+      <div class="menu-preview-items">
+        <div class="menu-preview-item">
+          <span class="menu-preview-name">MARGHERITA</span>
+          <span class="menu-preview-price">$20</span>
+        </div>
+        <div class="menu-preview-item">
+          <span class="menu-preview-name">CUP & CHAR</span>
+          <span class="menu-preview-price">$25</span>
+        </div>
+        <div class="menu-preview-item">
+          <span class="menu-preview-name">FUNGUY</span>
+          <span class="menu-preview-price">$25</span>
+        </div>
+        <div class="menu-preview-item">
+          <span class="menu-preview-name">????????????</span>
+          <span class="menu-preview-price">$25</span>
+        </div>
+        <div class="menu-preview-item" style="border-top:1px solid rgba(255,255,255,.1);margin-top:.35rem;padding-top:.35rem">
+          <span class="menu-preview-name" style="color:rgba(255,255,255,.5)">DUBAI BROWNIE</span>
+          <span class="menu-preview-price">$5</span>
+        </div>
+      </div>
+      <div class="menu-preview-note">Free brownie with 2+ pizzas</div>
+    </div>
+
+    <!-- LOCKED POPUP moved to body level -->
   </div>
 
   <div class="notify-success" id="success-state">
