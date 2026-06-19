@@ -25,6 +25,10 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .drop-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);border:1.5px solid var(--tan);padding:.25rem .85rem;margin-bottom:1.5rem;opacity:.85}
 .splash-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,14vw,8rem);line-height:.88;letter-spacing:2px;color:white;margin-bottom:.5rem}
 .splash-inner h1 .line2{display:block;font-size:clamp(2rem,9vw,4.2rem);white-space:nowrap;margin-top:.1em}
+.hero-row{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:.5rem;max-width:100%}
+.hero-stack{margin-bottom:0!important;font-size:clamp(1.5rem,7vw,2.6rem)!important;text-align:left;line-height:.9!important}
+.hero-stack .line2{font-size:clamp(1rem,4.6vw,1.7rem)!important;white-space:nowrap;margin-top:.05em}
+.brand-side{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,4.8vw,1.7rem);letter-spacing:1px;color:var(--tan);line-height:1;text-align:left;border-left:2px solid rgba(255,255,255,.15);padding-left:.7rem;white-space:nowrap}
 .splash-inner h1 em{font-style:italic}
 .tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(1rem,3.5vw,1.4rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.5rem;white-space:nowrap}
 .countdown{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem}
@@ -78,6 +82,10 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .order-header{background:var(--charcoal);color:white;text-align:center;padding:1.5rem 1rem 1.25rem}
 .order-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,4rem);letter-spacing:4px;line-height:1}
 .order-header p{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-top:.35rem}
+.order-hero-row{display:flex;align-items:center;justify-content:center;gap:.7rem}
+.order-hero-stack{font-family:'Bebas Neue',sans-serif;font-style:italic;color:white;font-size:clamp(1.5rem,7vw,2.6rem);line-height:.9;text-align:left}
+.order-line2{display:block;font-size:clamp(1rem,4.6vw,1.7rem);white-space:nowrap;margin-top:.05em}
+.order-brand-side{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,4.8vw,1.7rem);letter-spacing:1px;color:var(--tan);line-height:1;text-align:left;border-left:2px solid rgba(255,255,255,.15);padding-left:.7rem;white-space:nowrap}
 
 /* steps nav */
 .steps{display:flex;background:white;border-bottom:2px solid var(--warm)}
@@ -403,8 +411,10 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   </div>
 
   <div class="order-header">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
-    <h1>SUNDAY PIZZA DROP</h1>
+    <div class="order-hero-row">
+      <div class="order-hero-stack"><em>SUNDAY</em><br><em class="order-line2" style="color:var(--tan)">PIZZA DROP</em></div>
+      <div class="order-brand-side">BROCATOEATZ</div>
+    </div>
     <p>Sunday, July 5th &nbsp;·&nbsp; 10:40 AM – 8:20 PM</p>
   </div>
 
@@ -531,7 +541,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem">Pre-orders open</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:white;margin-bottom:1.25rem;white-space:nowrap">TUESDAY, JUNE 30TH @ 7:00 PM</div>
     <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem;margin-bottom:1rem">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5">Sign up for the Drop List below to get notified when orders open! ↓</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5;margin-bottom:.75rem">Sign up for the Drop List below to get notified when orders open! ↓</div>
+      <div style="display:flex;gap:.4rem">
+        <input id="secret-code-input" type="text" placeholder="Code" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:white;padding:.45rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;outline:none;text-transform:uppercase" onkeydown="if(event.key==='Enter')checkSecretCode()">
+        <button onclick="checkSecretCode()" style="background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);padding:.45rem .75rem;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:1px;cursor:pointer">GO</button>
+      </div>
+      <div id="secret-code-err" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:#e55;margin-top:.3rem;letter-spacing:.05em">Invalid code.</div>
     </div>
     <button onclick="closeLocked()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer">CLOSE</button>
   </div>
