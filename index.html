@@ -23,7 +23,8 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 @keyframes drift{from{transform:translateY(110vh) rotate(0deg)}to{transform:translateY(-10vh) rotate(360deg)}}
 .splash-inner{position:relative;z-index:1;max-width:460px;width:100%}
 .drop-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);border:1.5px solid var(--tan);padding:.25rem .85rem;margin-bottom:1.5rem;opacity:.85}
-.splash-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,16vw,9rem);line-height:.88;letter-spacing:2px;color:white;margin-bottom:.5rem}
+.splash-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,14vw,8rem);line-height:.88;letter-spacing:2px;color:white;margin-bottom:.5rem}
+.splash-inner h1 .line2{display:block;font-size:clamp(2rem,9vw,4.2rem);white-space:nowrap;margin-top:.1em}
 .splash-inner h1 em{font-style:italic}
 .tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(1rem,3.5vw,1.4rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.5rem;white-space:nowrap}
 .countdown{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem}
@@ -228,13 +229,15 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .paid-btn{display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid;transition:all .15s;white-space:nowrap}
 .paid-btn.unpaid{border-color:#ddd;color:#bbb}
 .paid-btn.paid{border-color:var(--green);color:var(--green);background:#f0fff0}
-.menu-preview{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:1rem 1.25rem;margin:1.25rem 0;text-align:left;width:100%;max-width:320px;margin-left:auto;margin-right:auto}
+.menu-preview{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:1.1rem 1.4rem;margin:1.25rem 0;text-align:left;width:100%;max-width:400px;margin-left:auto;margin-right:auto}
 .menu-preview-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:4px;color:var(--tan);margin-bottom:.75rem;text-align:center}
-.menu-preview-items{display:flex;flex-direction:column;gap:.35rem}
+.menu-preview-items{display:flex;flex-direction:column;gap:.65rem}
+.menu-preview-item-wrap{padding-bottom:.5rem;border-bottom:1px dashed rgba(255,255,255,.1)}
+.menu-preview-desc{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4);line-height:1.4;margin-top:.2rem}
 .menu-preview-item{display:flex;justify-content:space-between;align-items:baseline}
 .menu-preview-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1.5px;color:white}
 .menu-preview-price{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan)}
-.menu-preview-note{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.35);text-align:center;margin-top:.75rem;letter-spacing:.05em}
+.menu-preview-note{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;color:white;text-align:center;margin-top:.75rem;letter-spacing:.05em;text-transform:uppercase}
 display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center}
 .locked-overlay{display:none!important;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;padding:1.5rem}
 .locked-overlay.visible{display:flex!important}
@@ -277,7 +280,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 <div class="splash-inner">
   <div id="form-state">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,7vw,3rem);letter-spacing:6px;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
-    <h1><em>PIZZA</em><br><em style="color:var(--tan)">DROP</em></h1>
+    <h1><em>SUNDAY</em><br><em class="line2" style="color:var(--tan)">PIZZA DROP</em></h1>
     <div id="current-drop-info">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.3rem">SUNDAY, JULY 5TH</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem">St. Catharines, ON</div>
@@ -334,30 +337,43 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 
     <!-- MENU PREVIEW -->
     <div class="menu-preview">
-      <div class="menu-preview-title">JULY 5TH MENU</div>
+      <div class="menu-preview-title">SUNDAY, JULY 5TH MENU</div>
       <div class="menu-preview-items">
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">MARGHERITA</span>
-          <span class="menu-preview-price">$20</span>
+        <div class="menu-preview-item-wrap">
+          <div class="menu-preview-item">
+            <span class="menu-preview-name">MARGHERITA</span>
+            <span class="menu-preview-price">$20</span>
+          </div>
+          <div class="menu-preview-desc">Organic Bianco DiNapoli Tomato Sauce, 30-Month Aged Parmigiano Reggiano, Fior Di Latte, Fresh Basil, EVOO</div>
         </div>
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">CUP & CHAR</span>
-          <span class="menu-preview-price">$25</span>
+        <div class="menu-preview-item-wrap">
+          <div class="menu-preview-item">
+            <span class="menu-preview-name">CUP & CHAR</span>
+            <span class="menu-preview-price">$25</span>
+          </div>
+          <div class="menu-preview-desc">Organic Bianco DiNapoli Tomato Sauce, Grass-Fed Mozzarella Mix, Ezzo Cup & Crisp Peps, Finished with My Hot Honey</div>
         </div>
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">FUNGUY</span>
-          <span class="menu-preview-price">$25</span>
+        <div class="menu-preview-item-wrap">
+          <div class="menu-preview-item">
+            <span class="menu-preview-name">FUNGUY</span>
+            <span class="menu-preview-price">$25</span>
+          </div>
+          <div class="menu-preview-desc">White Truffle Oil, Fior Di Latte, Grass-Fed Mozzarella, Roasted Mushrooms, House Chimichurri (On the Side)</div>
         </div>
-        <div class="menu-preview-item">
-          <span class="menu-preview-name">????????????</span>
-          <span class="menu-preview-price">$25</span>
+        <div class="menu-preview-item-wrap">
+          <div class="menu-preview-item">
+            <span class="menu-preview-name">????????????</span>
+            <span class="menu-preview-price">$25</span>
+          </div>
+          <div class="menu-preview-desc">Revealed When Pre-Orders Open — June 30th @ 7PM</div>
         </div>
         <div class="menu-preview-item" style="border-top:1px solid rgba(255,255,255,.1);margin-top:.35rem;padding-top:.35rem">
-          <span class="menu-preview-name" style="color:rgba(255,255,255,.5)">DUBAI BROWNIE</span>
+          <span class="menu-preview-name" style="color:white">DUBAI BROWNIE</span>
           <span class="menu-preview-price">$5</span>
         </div>
+        <div class="menu-preview-desc" style="margin-top:-.15rem">3 Layers — Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
       </div>
-      <div class="menu-preview-note">Free brownie with 2+ pizzas</div>
+      <div class="menu-preview-note">Free brownie with any 2 pizzas</div>
     </div>
 
     <!-- LOCKED POPUP moved to body level -->
@@ -388,7 +404,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 
   <div class="order-header">
     <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
-    <h1>PIZZA DROP</h1>
+    <h1>SUNDAY PIZZA DROP</h1>
     <p>Sunday, July 5th &nbsp;·&nbsp; 10:40 AM – 8:20 PM</p>
   </div>
 
@@ -411,6 +427,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         <div class="brownie-left">
           <div class="brownie-name">DUBAI BROWNIE</div>
           <div class="brownie-sub" id="brownie-sub">Add-on dessert · $5</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:#999;margin-top:.25rem">3 Layers — Brownie, Crispy Pistachio Kataifi, Dark Chocolate Ganache</div>
         </div>
         <div class="brownie-right">
           <div class="brownie-qty">
@@ -530,10 +547,10 @@ var ORDERS_OPEN_DATE = new Date('2026-06-30T19:00:00'); // Tuesday June 30th @ 7
 var TOTAL_CAP = 100; // max pizzas regardless of slot availability
 
 var PIZZAS = [
-  {id:'margherita',  name:'MARGHERITA',     price:20, desc:'ORGANIC BIANCA DI NAPOLI TOMATO SAUCE, 30 MONTH AGED PARMIGIANO REGGIANO, ITALIAN FIOR DI LATTE, BASIL, EVOO'},
-  {id:'cupchar',     name:'CUP & CHAR',     price:25, desc:'ORGANIC BIANCO DI NAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA, PIZZA MOZZARELLA, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
-  {id:'funguy',      name:'FUNGUY',         price:25, desc:'BLACK TRUFFLE OIL, ITALIAN FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI'},
-  {id:'calabrian',   name:'????????????',        price:25, desc:'SURPRISE FEATURE — REVEALED ON DROP DAY'}
+  {id:'margherita',  name:'MARGHERITA',     price:20, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, 30-MONTH AGED PARMIGIANO REGGIANO, FIOR DI LATTE, FRESH BASIL, EVOO'},
+  {id:'cupchar',     name:'CUP & CHAR',     price:25, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
+  {id:'funguy',      name:'FUNGUY',         price:25, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI (ON THE SIDE)'},
+  {id:'calabrian',   name:'????????????',        price:25, desc:'SURPRISE FEATURE — REVEALED WHEN PRE-ORDERS OPEN ON JUNE 30TH'}
 ];
 
 var SLOT_PIZZA_CAP = 4;
