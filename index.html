@@ -82,6 +82,10 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .order-header{background:var(--charcoal);color:white;text-align:center;padding:1.5rem 1rem 1.25rem}
 .order-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,4rem);letter-spacing:4px;line-height:1}
 .order-header p{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-top:.35rem}
+.order-meta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.55rem;margin-top:.6rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.order-meta-item{color:rgba(255,255,255,.6)}
+.order-meta-sep{color:var(--tan);opacity:.4;font-size:.7rem}
+.order-meta-city{margin:.55rem auto 0;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.12);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:white;display:table;text-align:center}
 .order-hero-row{display:flex;align-items:center;justify-content:center;gap:.7rem}
 .order-hero-stack{font-family:'Bebas Neue',sans-serif;font-style:italic;color:white;font-size:clamp(1.3rem,5.5vw,2.1rem);line-height:.9;text-align:center}
 .order-line2{display:block;font-size:clamp(1.3rem,6vw,2.1rem);white-space:nowrap;margin-top:.05em}
@@ -107,12 +111,14 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .pizza-card{border:2px solid #e0d8cc;background:white;padding:1rem 1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
 .pizza-header-row{display:flex;align-items:flex-start;gap:1rem}
 .pizza-thumb{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.pizza-thumb-placeholder{display:flex;align-items:center;justify-content:center;background:var(--warm);font-size:2.2rem;line-height:1;border:1.5px dashed var(--tan)}
 .pizza-header-text{flex:1;min-width:0;padding-top:.1rem}
 .pizza-card:hover{border-color:#c0b8a8}
 .pizza-card.selected{border-color:var(--red);background:#FFF5F2}
-.badge{display:none;position:absolute;top:.5rem;right:.5rem;background:var(--red);color:white;font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:1.5px;padding:.15rem .5rem}
-.pizza-card.selected .badge{display:block}
-.pizza-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem;gap:.5rem}
+.badge{display:none;background:var(--red);color:white;font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:1.5px;padding:.15rem .5rem;flex-shrink:0;align-self:center}
+.pizza-card.selected .badge{display:inline-flex}
+.pizza-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.3rem;gap:.5rem}
+.pizza-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;flex-shrink:0}
 .pizza-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px}
 .pizza-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--red)}
 .pizza-desc{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:#888;letter-spacing:.04em;text-transform:uppercase;line-height:1.4;margin-bottom:.6rem}
@@ -418,7 +424,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div class="order-hero-stack"><em>SUNDAY</em><br><em class="order-line2" style="color:var(--tan)">PIZZA DROP</em></div>
       <div class="order-brand-side">BROCATOEATZ</div>
     </div>
-    <p>Sunday, July 5th &nbsp;·&nbsp; 11:00 AM – 8:00 PM</p>
+    <div class="order-meta-row">
+      <span class="order-meta-item">Sunday, July 5th</span>
+      <span class="order-meta-sep">|</span>
+      <span class="order-meta-item">11:00 AM – 8:00 PM</span>
+    </div>
+    <div class="order-meta-city">St. Catharines, ON</div>
   </div>
 
   <nav class="steps">
@@ -565,9 +576,9 @@ var TOTAL_CAP = 100; // max pizzas regardless of slot availability
 
 var PIZZAS = [
   {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, 30-MONTH AGED PARMIGIANO REGGIANO, FIOR DI LATTE, FRESH BASIL, EVOO'},
-  {id:'cupchar',     name:'CUP & CHAR',     price:25, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
-  {id:'funguy',      name:'FUNGUY',         price:25, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI (ON THE SIDE)'},
-  {id:'calabrian',   name:'????????????',        price:25, desc:'SURPRISE FEATURE — REVEALED WHEN PRE-ORDERS OPEN ON JUNE 30TH'}
+  {id:'cupchar',     name:'CUP & CHAR',     price:25, img:null, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
+  {id:'funguy',      name:'FUNGUY',         price:25, img:null, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI (ON THE SIDE)'},
+  {id:'calabrian',   name:'????????????',        price:25, img:null, desc:'SURPRISE FEATURE — REVEALED WHEN PRE-ORDERS OPEN ON JUNE 30TH'}
 ];
 
 var SLOT_PIZZA_CAP = 4;
@@ -674,11 +685,11 @@ function renderPizzas(){
   var html = '';
   PIZZAS.forEach(function(p){
     html += '<div class="pizza-card" id="card-' + p.id + '" onclick="togglePizza(\'' + p.id + '\')">';
-    html += '<div class="badge">ADDED</div>';
     html += '<div class="pizza-header-row">';
     if(p.img) html += '<img src="' + p.img + '" class="pizza-thumb" alt="' + p.name + '">';
+    else html += '<div class="pizza-thumb pizza-thumb-placeholder" aria-hidden="true">🍕</div>';
     html += '<div class="pizza-header-text">';
-    html += '<div class="pizza-header"><div class="pizza-name">' + p.name + '</div><div class="pizza-price">$' + p.price + '</div></div>';
+    html += '<div class="pizza-header"><div class="pizza-name">' + p.name + '</div><div class="pizza-header-right"><div class="pizza-price">$' + p.price + '</div><div class="badge">ADDED</div></div></div>';
     html += '<div class="pizza-desc">' + p.desc + '</div>';
     html += '</div></div>';
     html += '<div class="qty-control">';
@@ -1113,6 +1124,8 @@ function checkRoute(){
     document.body.style.justifyContent = 'unset';
     document.body.style.padding = '0';
     document.body.style.textAlign = 'left';
+  } else if(window.location.search.includes('order') && !isSoldOut()){
+    enterOrdering();
   }
 }
 
