@@ -613,6 +613,7 @@ function normalizeSheetOrder(o){
     orderNum: o.orderNum,
     fname: o.fname, lname: o.lname, phone: o.phone, notes: o.notes,
     slot: o.slotDisplay, slotDisplay: o.slotDisplay,
+    slots: o.slots || [], // per-slot breakdown for split orders, used by pizzasSoldInSlot()
     pizzaCount: Number(o.pizzaCount) || 0,
     pizzas: [
       {id:'margherita', qty:Number(o.margherita)||0},
@@ -1060,6 +1061,7 @@ function submitOrder(){
       phone: order.phone,
       slot: order.slot,
       slotDisplay: order.slotDisplay,
+      slots: order.slots, // [{slot, qty}, ...] real per-slot breakdown, used for accurate capacity checks
       pizzas: order.pizzas,
       pizzaCount: order.pizzaCount,
       brownie: order.brownie,
