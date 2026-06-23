@@ -1,4 +1,8 @@
-"dependencies": {
-     "twilio": "^4.x.x",
-     "googleapis": "^140.0.0"
-   }
+{
+  "name": "brocatoeatz",
+  "version": "1.0.0",
+  "dependencies": {
+    "twilio": "^4.19.0",
+    "googleapis": "^140.0.0"
+  }
+}
