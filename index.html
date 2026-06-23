@@ -1040,37 +1040,17 @@ function submitOrder(){
     pizzaCount: needed, total: calcTotal(),
     paid: false, ts: new Date().toISOString()
   };
-  // Update the local cache immediately so slot math reflects this order right
-  // away, in case the same customer orders again before the next live fetch.
-  liveOrdersCache = orders.concat([order]);
 
-  // Add to local drop list if not already there
-  var subs = loadSubscribers();
-  if(!subs.filter(function(s){ return s.phone === phone; }).length){
-    subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
-    saveSubscribers(subs);
-  }
+  // Disable the submit button while we confirm with the server, so the
+  // customer can't double-submit while we're waiting.
+  var submitBtn = document.getElementById('submit-btn');
+  if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'CONFIRMING…'; }
 
-  // Send confirmation SMS via Netlify function
-  fetch('/.netlify/functions/send-sms', {
+  // Send to Google Sheets FIRST, and wait for a real answer before treating
+  // this as a confirmed order. The Apps Script re-checks slot capacity
+  // server-side, so two near-simultaneous orders can't both overfill a slot.
+  fetch(APPS_SCRIPT_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      fname: order.fname,
-      phone: order.phone,
-      pizzas: order.pizzas,
-      brownie: order.brownie,
-      freeBrownie: order.freeBrownie,
-      total: order.total,
-      slot: order.slot,
-      slotDisplay: order.slotDisplay
-    })
-  }).catch(function(e){ console.log('SMS error:', e); });
-
-  // Send to Google Sheets
-  fetch('https://script.google.com/macros/s/AKfycbys8Dust9gUfdQgn6K1O5GsXiI6uVjOuOUEYfrG_KMQE_g9L4u3YiqdI3JBhzYS24kCSQ/exec', {
-    method: 'POST',
-    mode: 'no-cors',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       type: 'order',
@@ -1088,7 +1068,63 @@ function submitOrder(){
       notes: order.notes,
       ts: order.ts
     })
-  }).catch(function(e){ console.log('Sheet sync error:', e); });
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(result){
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'PLACE ORDER'; }
+
+    if(!result.success){
+      // Someone else just filled this slot in the time it took to submit.
+      // Refresh live data and ask them to pick a new slot.
+      fetchLiveOrders().then(function(){
+        renderSlots();
+        var errEl = document.getElementById('slot-error');
+        errEl.textContent = 'Sorry — that time slot just filled up. Please pick a new time.';
+        errEl.classList.add('visible');
+        selectedSlot = null; selectedSlotIdx = null; updateSummary();
+        errEl.scrollIntoView({behavior:'smooth', block:'center'});
+      });
+      return;
+    }
+
+    // Confirmed! Update local cache and show the success screen.
+    liveOrdersCache = orders.concat([order]);
+    showOrderConfirmation(order, pizzaItems, alloc, primarySlot);
+
+    // Add to local drop list if not already there
+    var subs = loadSubscribers();
+    if(!subs.filter(function(s){ return s.phone === phone; }).length){
+      subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
+      saveSubscribers(subs);
+    }
+
+    // Send confirmation SMS via Netlify function
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        fname: order.fname,
+        phone: order.phone,
+        pizzas: order.pizzas,
+        brownie: order.brownie,
+        freeBrownie: order.freeBrownie,
+        total: order.total,
+        slot: order.slot,
+        slotDisplay: order.slotDisplay
+      })
+    }).catch(function(e){ console.log('SMS error:', e); });
+  })
+  .catch(function(e){
+    console.log('Sheet sync error:', e);
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'PLACE ORDER'; }
+    alert('Something went wrong submitting your order. Please try again, or text Michael @ 905-401-7804.');
+  });
+  return;
+}
+
+function showOrderConfirmation(order, pizzaItems, alloc, primarySlot){
+  var brownieQty = order.brownie, freeBrownie = order.freeBrownie;
+  var fname = order.fname, lname = order.lname, phone = order.phone, notes = order.notes;
 
   var pLines = pizzaItems.map(function(p){ return '<div class="detail-row">' + p.name + ' <span>x' + p.qty + ' — $' + (p.price*p.qty) + '</span></div>'; }).join('');
   var bLine = brownieQty > 0 ? '<div class="detail-row">DUBAI BROWNIE <span>x' + brownieQty + ' — ' + (freeBrownie && brownieQty===1 ? 'FREE' : '$'+calcBrownieTotal()) + '</span></div>' : '';
@@ -1101,7 +1137,7 @@ function submitOrder(){
     '<div class="detail-row">NAME <span>' + fname + ' ' + lname + '</span></div>' +
     '<div class="detail-row">PHONE <span>' + phone + '</span></div>' +
     slotLine + pLines + bLine +
-    '<div class="detail-row" style="margin-top:.5rem;font-weight:700">TOTAL DUE AT PICKUP <span>$' + calcTotal() + '</span></div>' +
+    '<div class="detail-row" style="margin-top:.5rem;font-weight:700">TOTAL DUE AT PICKUP <span>$' + order.total + '</span></div>' +
     (notes ? '<div class="detail-row">NOTES <span>' + notes + '</span></div>' : '');
 
   document.getElementById('order-form').style.display = 'none';
@@ -1285,13 +1321,41 @@ function removeSubscriber(phone){
 
 function cancelOrder(id){
   if(!confirm('Cancel this order? This cannot be undone.')) return;
-  var orders = loadOrders().filter(function(o){ return o.id !== id; });
-  saveOrders(orders);
-  renderAdmin();
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ type: 'cancel_order', orderNum: id })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(result){
+    if(!result.success){
+      alert('Could not cancel that order (it may have already been removed). Refreshing the list.');
+    }
+    return fetchLiveOrders();
+  })
+  .then(renderAdmin)
+  .catch(function(e){
+    console.log('Cancel order error:', e);
+    alert('Something went wrong canceling this order. Please try again.');
+  });
 }
 
 function clearOrders(){
-  if(confirm('Delete ALL orders? This cannot be undone.')){ localStorage.removeItem('brocato_orders'); renderAdmin(); }
+  if(!confirm('Delete ALL orders? This cannot be undone.')) return;
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ type: 'clear_orders' })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(){ return fetchLiveOrders(); })
+  .then(renderAdmin)
+  .catch(function(e){
+    console.log('Clear orders error:', e);
+    alert('Something went wrong clearing orders. Please try again.');
+  });
 }
 
 function exportCSV(){
