@@ -379,18 +379,20 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
           </div>
           <div class="menu-preview-desc">White Truffle Oil, Fior Di Latte, Grass-Fed Mozzarella, Roasted Mushrooms, House Chimichurri (On the Side)</div>
         </div>
-        <div class="menu-preview-item-wrap">
+        <div class="menu-preview-item-wrap" style="border-bottom:1px solid rgba(255,255,255,.15)">
           <div class="menu-preview-item">
             <span class="menu-preview-name">CALABRIAN HEAT</span>
             <span class="menu-preview-price">$25</span>
           </div>
           <div class="menu-preview-desc">Organic Bianco DiNapoli Tomato Sauce, Grass-Fed Mozzarella Mix, Calabrian Chillies, Hot Soppressata, Finished with Hot Oil</div>
         </div>
-        <div class="menu-preview-item" style="border-top:1px solid rgba(255,255,255,.1);margin-top:.1rem;padding-top:.85rem">
-          <span class="menu-preview-name" style="color:white">DUBAI BROWNIE</span>
-          <span class="menu-preview-price">$5</span>
+        <div class="menu-preview-item-wrap" style="border-bottom:none">
+          <div class="menu-preview-item">
+            <span class="menu-preview-name" style="color:white">DUBAI BROWNIE</span>
+            <span class="menu-preview-price">$5</span>
+          </div>
+          <div class="menu-preview-desc">3 Layers. Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
         </div>
-        <div class="menu-preview-desc" style="margin-top:.2rem">3 Layers — Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
       </div>
       <div class="menu-preview-note">Free brownie with any 2 pizzas</div>
     </div>
@@ -452,7 +454,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div class="brownie-card" id="brownie-card" onclick="toggleBrownie()">
         <div class="brownie-left">
           <div class="brownie-name">DUBAI BROWNIE</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:#999;margin-top:.25rem">3 Layers — Brownie, Crispy Pistachio Kataifi, Dark Chocolate Ganache</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:#999;margin-top:.25rem">3 Layers. Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
         </div>
         <div class="brownie-right">
           <div class="brownie-qty">
@@ -1127,6 +1129,7 @@ function checkRoute(){
     document.body.style.padding = '0';
     document.body.style.textAlign = 'left';
   } else if(window.location.search.includes('order') && !isSoldOut()){
+    secretCodeUnlocked = true; // ?order link bypasses the Tuesday 7PM lock intentionally
     enterOrdering();
   }
 }
