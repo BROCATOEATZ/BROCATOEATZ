@@ -1051,7 +1051,7 @@ function submitOrder(){
   // server-side, so two near-simultaneous orders can't both overfill a slot.
   fetch(APPS_SCRIPT_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'text/plain'}, // avoids CORS preflight (Apps Script doesn't reply to preflight requests)
     body: JSON.stringify({
       type: 'order',
       orderNum: order.orderNum,
@@ -1324,7 +1324,7 @@ function cancelOrder(id){
 
   fetch(APPS_SCRIPT_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'text/plain'},
     body: JSON.stringify({ type: 'cancel_order', orderNum: id })
   })
   .then(function(r){ return r.json(); })
@@ -1346,7 +1346,7 @@ function clearOrders(){
 
   fetch(APPS_SCRIPT_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'text/plain'},
     body: JSON.stringify({ type: 'clear_orders' })
   })
   .then(function(r){ return r.json(); })
