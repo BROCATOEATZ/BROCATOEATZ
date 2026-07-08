@@ -239,7 +239,7 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .slot-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;margin-bottom:1rem}
 .slot-admin-card{background:white;border:2px solid #e0d8cc;padding:.85rem 1rem}
 .slot-admin-card.full{opacity:.5}
-.slot-admin-time{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px}
+.slot-admin-time{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--charcoal);margin-bottom:.15rem}
 .slot-admin-bar{height:5px;background:#f0e8d8;border-radius:3px;margin:.35rem 0;overflow:hidden}
 .slot-admin-fill{height:100%;background:var(--red);border-radius:3px}
 .slot-admin-info{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#999}
@@ -264,15 +264,6 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .menu-preview-note{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;color:white;text-align:center;margin-top:.75rem;letter-spacing:.05em;text-transform:uppercase}
 
 display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center}
-.locked-overlay{display:none!important;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;padding:1.5rem}
-.locked-overlay.visible{display:flex!important}
-.locked-popup{background:var(--charcoal);border:2px solid var(--tan);padding:2rem 1.75rem;max-width:340px;width:90%;text-align:center;position:relative}
-.locked-popup-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:4px;color:var(--tan);margin-bottom:.5rem}
-.locked-popup-sub{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem}
-.locked-popup-time{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:3px;color:white;margin-bottom:1.25rem}
-.locked-popup-note{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:1.25rem}
-.locked-popup-close{background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer;transition:all .2s}
-.locked-popup-close:hover{border-color:white;color:white}
 .reserve-btn.locked{opacity:1;cursor:pointer}
 
 .orders-locked-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem}
@@ -307,9 +298,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,7vw,3rem);letter-spacing:6px;color:var(--tan);margin-bottom:.25rem">BROCATOEATZ</div>
     <h1><em>SUNDAY</em><br><em class="line2" style="color:var(--tan)">PIZZA DROP</em></h1>
     <div id="current-drop-info">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.6rem">SUNDAY, JULY 19TH</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan);margin-bottom:.2rem">King's Court Estate Winery &amp; Vineyard</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem">St. Catharines, ON</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);letter-spacing:4px;color:rgba(255,255,255,.85);margin-bottom:.5rem">SUNDAY, JULY 19TH</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.08em;color:var(--tan);margin-bottom:.9rem">King's Court Estate Winery &amp; Vineyard &nbsp;&middot;&nbsp; St. Catharines</div>
+      <div id="preorder-pill" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.3);padding:.85rem 1.4rem;margin:0 auto .9rem;max-width:fit-content">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)">Pre-orders open</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--tan)">TUESDAY, JULY 14TH @ 7PM</span>
+      </div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red-light);margin-bottom:1.5rem">Pre-Order Only &mdash; No Walk-Ups</div>
     </div>
 
@@ -1505,6 +1499,8 @@ function updateSoldOutState(){
   var menuEl = document.querySelector('.menu-preview');
   var currentDropInfo = document.getElementById('current-drop-info');
 
+  updatePreorderPill();
+
   if(isSoldOut()){
     if(btn) btn.style.display = 'none';
     if(soldoutEl) soldoutEl.classList.add('visible');
@@ -1711,6 +1707,16 @@ function closeLocked(){
   el.style.display = 'none';
 }
 
+// Shows the "pre-orders open [date]" pill on the splash hero only while it's
+// actually useful info — hidden once orders are open (redundant with the
+// Reserve button working) or once sold out (the sold-out panel covers it).
+function updatePreorderPill(){
+  var pill = document.getElementById('preorder-pill');
+  if(!pill) return;
+  var show = !isOrdersOpen() && !secretCodeUnlocked && !isSoldOut();
+  pill.style.display = show ? 'flex' : 'none';
+}
+
 function updateReserveBtn(){
   var btn = document.getElementById('reserve-btn');
   if(!btn) return;
@@ -1875,6 +1881,7 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 updateReserveBtn();
 updateSoldOutState();
+updatePreorderPill();
 // Auto-check sold out every 30 seconds in case orders fill up
 setInterval(updateSoldOutState, 30000);
 </script>
