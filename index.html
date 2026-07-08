@@ -159,10 +159,10 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .slot-time{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;display:block}
 .slot-avail{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;color:#bbb;margin-top:.2rem;display:block;text-transform:uppercase;letter-spacing:.05em}
 .slot-btn.selected .slot-avail{color:var(--red)}
-.avail-4{color:#2e9e4f!important}
-.avail-3{color:#e07b20!important}
-.avail-2{color:#c9a800!important}
-.avail-1{color:#d63030!important}
+.avail-green{color:#2e9e4f!important}
+.avail-yellow{color:#c9a800!important}
+.avail-red{color:#d63030!important}
+.slot-btn.full .slot-time{text-decoration:line-through;opacity:.6}
 .cap-warning{background:var(--red);color:white;padding:.6rem 1rem;margin-bottom:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;display:none}
 .cap-warning.visible{display:block}
 .slot-error{background:var(--red);color:white;padding:.8rem 1rem;margin-bottom:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;display:none}
@@ -552,7 +552,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div class="admin-bar">
       <h1>BROCATO ADMIN</h1>
       <div class="admin-bar-actions">
-        <button class="admin-btn" onclick="renderAdmin()">REFRESH</button>
+        <button class="admin-btn" onclick="refreshAdmin()">REFRESH</button>
         <button class="admin-btn green" id="orders-toggle-btn" onclick="toggleOrders()">OPEN ORDERS</button>
         <button class="admin-btn" id="soldout-toggle-btn" onclick="toggleSoldOut()">SOLD OUT</button>
         <button class="admin-btn" onclick="sendReminders()">SEND REMINDERS</button>
@@ -625,7 +625,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 var ADMIN_PASSWORD = 'pizza6';
 var DROP_DATE = new Date('2026-07-05T11:00:00');
 var ORDERS_OPEN_DATE = new Date('2026-07-14T19:00:00'); // Tuesday July 14th @ 7:00 PM
-var TOTAL_CAP = 100; // max pizzas regardless of slot availability
+var TOTAL_CAP = 125; // max pizzas regardless of slot availability
 
 var PIZZAS = [
   {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, 30-MONTH AGED PARMIGIANO REGGIANO, FIOR DI LATTE, FRESH BASIL, EVOO'},
@@ -701,11 +701,30 @@ function loadOrders(){
   return liveOrdersCache || [];
 }
 function saveOrders(o){ /* no-op: orders are written via Apps Script in submitOrder(), not localStorage */ }
-function loadSubscribers(){
-  try { return JSON.parse(localStorage.getItem('brocato_subs') || '[]'); }
-  catch(e){ return []; }
+
+var liveSubscribersCache = null; // populated by fetchLiveSubscribers()
+
+// Fetches the live, shared Drop List from the "Sign Ups" sheet. Returns a
+// Promise, mirroring fetchLiveOrders() — this replaces the old localStorage
+// version, which only ever showed whoever signed up on that ONE browser.
+function fetchLiveSubscribers(){
+  return fetch(APPS_SCRIPT_URL + '?type=signups')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      liveSubscribersCache = data.subscribers || [];
+      return liveSubscribersCache;
+    })
+    .catch(function(e){
+      console.log('fetchLiveSubscribers error:', e);
+      liveSubscribersCache = liveSubscribersCache || [];
+      return liveSubscribersCache;
+    });
 }
-function saveSubscribers(s){ localStorage.setItem('brocato_subs', JSON.stringify(s)); }
+
+function loadSubscribers(){
+  return liveSubscribersCache || [];
+}
+function saveSubscribers(s){ /* no-op: subscribers now live in Google Sheets, written via the signup form's POST */ }
 
 // ══════════════════════════════════════
 // SLOT HELPERS
@@ -930,14 +949,24 @@ function renderSlots(){
     var canStart = !full && allocateSlots(idx, needed) !== null;
     var isSelected = selectedSlot === label;
     var availText = full ? 'FULL' : (pLeft + ' LEFT');
-    var availClass = full ? '' : ('avail-' + pLeft);
+    var availClass = full ? '' : slotAvailClass(pLeft);
     var disabled = (!canStart && !isSelected) ? 'disabled' : '';
-    html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + '" id="slot-' + idx + '" ' + disabled + ' onclick="selectSlot(\'' + label.replace(/'/g, "\\'") + '\',' + idx + ')">';
+    html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + (full ? ' full' : '') + '" id="slot-' + idx + '" ' + disabled + ' onclick="selectSlot(\'' + label.replace(/'/g, "\\'") + '\',' + idx + ')">';
     html += '<span class="slot-time">' + label + '</span>';
     html += '<span class="slot-avail ' + availClass + '">' + availText + '</span>';
     html += '</button>';
   });
   document.getElementById('slot-grid').innerHTML = html;
+}
+
+// Green/yellow/red split proportional to SLOT_PIZZA_CAP, so this keeps
+// working correctly no matter what the cap is set to (it was previously
+// hardcoded to specific leftover counts that only matched a cap of 4).
+function slotAvailClass(pLeft){
+  var third = SLOT_PIZZA_CAP / 3;
+  if(pLeft <= third) return 'avail-red';
+  if(pLeft <= third * 2) return 'avail-yellow';
+  return 'avail-green';
 }
 
 function selectSlot(label, idx){
@@ -1148,12 +1177,10 @@ function submitOrder(){
     liveOrdersCache = orders.concat([order]);
     showOrderConfirmation(order, pizzaItems, alloc, primarySlot);
 
-    // Add to local drop list if not already there
-    var subs = loadSubscribers();
-    if(!subs.filter(function(s){ return s.phone === phone; }).length){
-      subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
-      saveSubscribers(subs);
-    }
+    // The Apps Script already added this phone number to the Sign Ups
+    // sheet (see addToSignups() server-side), so just refresh our local
+    // cache from the real source instead of guessing at it here.
+    fetchLiveSubscribers();
 
     // Send confirmation SMS via Netlify function
     fetch('/.netlify/functions/send-sms', {
@@ -1287,10 +1314,14 @@ function adminLogin(){
   if(document.getElementById('admin-pw').value === ADMIN_PASSWORD){
     document.getElementById('admin-login-screen').style.display = 'none';
     document.getElementById('admin-dashboard').style.display = 'block';
-    fetchLiveOrders().then(renderAdmin);
+    Promise.all([fetchLiveOrders(), fetchLiveSubscribers()]).then(renderAdmin);
   } else {
     document.getElementById('admin-err').style.display = 'block';
   }
+}
+
+function refreshAdmin(){
+  Promise.all([fetchLiveOrders(), fetchLiveSubscribers()]).then(renderAdmin);
 }
 
 function renderAdmin(){
@@ -1371,9 +1402,23 @@ function togglePaid(id){
 
 function removeSubscriber(phone){
   if(!confirm('Remove this subscriber from the Drop List?')) return;
-  var subs = loadSubscribers().filter(function(s){ return s.phone !== phone; });
-  saveSubscribers(subs);
-  renderAdmin();
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({ type: 'remove_subscriber', phone: phone })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(result){
+    if(!result.success){
+      alert('Could not remove that subscriber (they may have already been removed). Refreshing the list.');
+    }
+    return fetchLiveSubscribers();
+  })
+  .then(renderAdmin)
+  .catch(function(e){
+    console.log('removeSubscriber error:', e);
+    alert('Something went wrong removing that subscriber. Please try again.');
+  });
 }
 
 function cancelOrder(id){
@@ -1533,18 +1578,36 @@ function updateDropCharCount(){
 }
 
 function sendCustomDropMessage(){
-  var subs = loadSubscribers();
-  if(!subs.length){ alert('No subscribers on the Drop List yet.'); return; }
-
   var box = document.getElementById('drop-message');
   var message = box.value.trim();
   if(!message){ alert('Type a message first.'); return; }
-  if(!confirm('Send this message to ' + subs.length + ' Drop List subscribers?\n\n"' + message + '"')) return;
 
   var btn = document.getElementById('drop-send-btn');
   btn.disabled = true;
-  btn.textContent = 'SENDING...';
+  btn.textContent = 'LOADING LIST...';
 
+  // Pull the real, current Drop List from the Sheet right before sending —
+  // never trust whatever was last cached, since that could be stale or (on
+  // a fresh page load before the admin dashboard fetched anything) empty.
+  fetchLiveSubscribers().then(function(subs){
+    if(!subs.length){
+      alert('No subscribers on the Drop List yet.');
+      btn.disabled = false;
+      btn.textContent = 'SEND TO DROP LIST';
+      return;
+    }
+    if(!confirm('Send this message to ' + subs.length + ' Drop List subscribers?\n\n"' + message + '"')){
+      btn.disabled = false;
+      btn.textContent = 'SEND TO DROP LIST';
+      return;
+    }
+
+    btn.textContent = 'SENDING...';
+    sendCustomDropMessageTo(subs, message, box, btn);
+  });
+}
+
+function sendCustomDropMessageTo(subs, message, box, btn){
   fetch('/.netlify/functions/send-bulk', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -1680,12 +1743,8 @@ function handleSignup(){
     }).catch(function(e){ console.log('Signup SMS error:', e); });
   });
 
-  // Also save locally
-  var subs = loadSubscribers();
-  if(!subs.filter(function(s){ return s.phone===phone; }).length){
-    subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
-    saveSubscribers(subs);
-  }
+  // Refresh the live cache from the sheet instead of guessing locally.
+  fetchLiveSubscribers();
 }
 
 function handlePopupSignup(){
@@ -1726,11 +1785,8 @@ function handlePopupSignup(){
     }).catch(function(e){ console.log('Signup SMS error:', e); });
   });
 
-  var subs = loadSubscribers();
-  if(!subs.filter(function(s){ return s.phone===phone; }).length){
-    subs.push({fname:fname, lname:lname, phone:phone, ts:new Date().toISOString()});
-    saveSubscribers(subs);
-  }
+  // Refresh the live cache from the sheet instead of guessing locally.
+  fetchLiveSubscribers();
 }
 
 // ══════════════════════════════════════
