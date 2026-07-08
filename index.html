@@ -1634,6 +1634,18 @@ function sendCustomDropMessageTo(subs, message, box, btn){
 // ══════════════════════════════════════
 // SEND REMINDERS
 // ══════════════════════════════════════
+// Builds a short readable summary of what was ordered, e.g.
+// "MARGHERITA x1, CALABRIAN HEAT x2, Dubai Brownie x1" — used to include
+// each customer's actual order in their day-before pickup reminder.
+function reminderOrderSummary(o){
+  var parts = (o.pizzas || []).filter(function(p){ return p.qty > 0; }).map(function(p){
+    var def = PIZZAS.filter(function(x){ return x.id === p.id; })[0];
+    return (def ? def.name : p.id) + ' x' + p.qty;
+  });
+  if(o.brownie > 0){ parts.push('Dubai Brownie x' + o.brownie); }
+  return parts.join(', ');
+}
+
 function sendReminders(){
   var orders = loadOrders();
   if(!orders.length){ alert('No orders yet.'); return; }
@@ -1648,7 +1660,15 @@ function sendReminders(){
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       type: 'reminder',
-      recipients: orders.map(function(o){ return { fname: o.fname, phone: o.phone, slot: o.slotDisplay || o.slot }; })
+      recipients: orders.map(function(o){
+        return {
+          fname: o.fname,
+          phone: o.phone,
+          slot: o.slotDisplay || o.slot,
+          order: reminderOrderSummary(o),
+          total: o.total
+        };
+      })
     })
   }).then(function(r){ return r.json(); })
   .then(function(data){
