@@ -651,7 +651,7 @@ var SLOT_LABELS = [
 // ══════════════════════════════════════
 // STORAGE
 // ══════════════════════════════════════
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbys8Dust9gUfdQgn6K1O5GsXiI6uVjOuOUEYfrG_KMQE_g9L4u3YiqdI3JBhzYS24kCSQ/exec';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0zOhy00BAgU5Rz1IpzPXlm_ZeZevaPEOJ3GTbal2IlvmQl16Xh3JPHAaLqG0i9BoXow/exec';
 var liveOrdersCache = null; // populated by fetchLiveOrders()
 
 // Converts a raw order row from the Sheet into the shape the rest of the
@@ -1721,7 +1721,7 @@ function handleSignup(){
   btn.disabled = true;
   btn.textContent = 'SENDING...';
 
-  fetch('https://script.google.com/macros/s/AKfycbys8Dust9gUfdQgn6K1O5GsXiI6uVjOuOUEYfrG_KMQE_g9L4u3YiqdI3JBhzYS24kCSQ/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbw0zOhy00BAgU5Rz1IpzPXlm_ZeZevaPEOJ3GTbal2IlvmQl16Xh3JPHAaLqG0i9BoXow/exec', {
     method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({fname:fname, lname:lname, phone:phone})
   }).then(function(){
@@ -1764,7 +1764,7 @@ function handlePopupSignup(){
   btn.disabled = true;
   btn.textContent = 'SENDING...';
 
-  fetch('https://script.google.com/macros/s/AKfycbys8Dust9gUfdQgn6K1O5GsXiI6uVjOuOUEYfrG_KMQE_g9L4u3YiqdI3JBhzYS24kCSQ/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbw0zOhy00BAgU5Rz1IpzPXlm_ZeZevaPEOJ3GTbal2IlvmQl16Xh3JPHAaLqG0i9BoXow/exec', {
     method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({fname:fname, lname:lname, phone:phone})
   }).then(function(){
