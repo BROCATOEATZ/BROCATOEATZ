@@ -383,17 +383,10 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         </div>
         <div class="menu-preview-item-wrap">
           <div class="menu-preview-item">
-            <span class="menu-preview-name">CALABRIAN HEAT</span>
+            <span class="menu-preview-name">BUFFALO CHICKEN</span>
             <span class="menu-preview-price">$25</span>
           </div>
-          <div class="menu-preview-desc">Organic Bianco DiNapoli Tomato Sauce, Grass-Fed Mozzarella Mix, Calabrian Chillies, Hot Soppressata, Finished with Hot Oil</div>
-        </div>
-        <div class="menu-preview-item-wrap" style="border-bottom:1px solid rgba(255,255,255,.15)">
-          <div class="menu-preview-item">
-            <span class="menu-preview-name">???</span>
-            <span class="menu-preview-price">$??</span>
-          </div>
-          <div class="menu-preview-desc">A surprise pizza we're not ready to reveal yet. Stay tuned 👀</div>
+          <div class="menu-preview-desc">Creamy Gorgonzola Ricotta Sauce, Grass-Fed Mozzarella Mix, Chicken Breast, Red Onion, Hot Honey Buffalo Drizzle, Pickled Celery</div>
         </div>
         <div class="menu-preview-item-wrap" style="border-bottom:none">
           <div class="menu-preview-item">
@@ -617,7 +610,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 // CONFIG
 // ══════════════════════════════════════
 var ADMIN_PASSWORD = 'pizza6';
-var DROP_DATE = new Date('2026-07-05T11:00:00');
+var DROP_DATE = new Date('2026-07-19T11:00:00');
 var ORDERS_OPEN_DATE = new Date('2026-07-14T19:00:00'); // Tuesday July 14th @ 7:00 PM
 var TOTAL_CAP = 125; // max pizzas regardless of slot availability
 
@@ -625,7 +618,7 @@ var PIZZAS = [
   {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, 30-MONTH AGED PARMIGIANO REGGIANO, FIOR DI LATTE, FRESH BASIL, EVOO'},
   {id:'cupchar',     name:'CUP & CHAR',     price:25, img:null, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
   {id:'funguy',      name:'FUNGUY',         price:25, img:null, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI (ON THE SIDE)'},
-  {id:'calabrian',   name:'CALABRIAN HEAT',  price:25, img:null, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, CALABRIAN CHILLIES, HOT SOPPRESSATA, FINISHED WITH HOT OIL'}
+  {id:'calabrian',   name:'BUFFALO CHICKEN',  price:25, img:null, desc:'CREAMY GORGONZOLA RICOTTA SAUCE, GRASS-FED MOZZARELLA MIX, CHICKEN BREAST, RED ONION, HOT HONEY BUFFALO DRIZZLE, PICKLED CELERY'}
 ];
 
 var SLOT_PIZZA_CAP = 6;
@@ -857,7 +850,7 @@ function updateBrowniePriceDisplay(){
       priceEl.innerHTML = '<span style="color:var(--tan);font-family:\'Bebas Neue\',sans-serif;letter-spacing:1px">1 FREE</span><span style="display:block;font-size:.65rem;color:#999;font-family:\'Barlow Condensed\',sans-serif;letter-spacing:.03em">+$' + extraCost + ' extra</span>';
     }
   } else {
-    priceEl.textContent = '$' + (brownieQty * 5);
+    priceEl.textContent = '$' + (brownieQty === 0 ? 5 : brownieQty * 5);
   }
 }
 
