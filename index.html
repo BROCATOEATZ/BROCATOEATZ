@@ -726,8 +726,11 @@ function pizzasSoldInSlot(label){
   var orders = loadOrders();
   var count = 0;
   orders.forEach(function(o){
-    if(o.slots){
-      var entry = o.slots.filter(function(s){ return s.slot === label; })[0];
+    var slots = o.slots;
+    // The sheet may return slots as a JSON string — parse it if so
+    if(typeof slots === 'string'){ try{ slots = JSON.parse(slots); }catch(e){ slots = []; } }
+    if(slots && slots.length){
+      var entry = slots.filter(function(s){ return s.slot === label; })[0];
       if(entry) count += entry.qty;
     } else if(o.slot === label){
       count += o.pizzaCount;
