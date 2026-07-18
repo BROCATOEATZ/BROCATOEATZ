@@ -1,5 +1,4 @@
 const twilio = require('twilio');
-
 // How many texts to fire at once, and how long to pause between batches.
 // Sending everything in one giant burst is what was breaking bulk sends —
 // Twilio will "accept" the request (so the old code reported it as sent)
@@ -15,10 +14,8 @@ function sleep(ms) {
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method not allowed' };
-
   const data = JSON.parse(event.body);
   const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
-
   const recipients = data.recipients || [];
 
   function buildMessage(type, r) {
@@ -27,13 +24,39 @@ exports.handler = async function (event) {
       const body = String(data.message || '').replace(/\{name\}/g, fname);
       return `${body}\n\nReply STOP to opt out.`;
     }
+
     if (type === 'reminder') {
       const fname = r.fname || 'Hey';
-      const slotLine = r.slot || '';
-      const orderLine = r.order ? '\n\n' + r.order : '';
-      const totalLine = (r.total !== undefined && r.total !== null) ? '\nTotal: $' + r.total : '';
-      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, July 19th${slotLine ? ' @ ' + slotLine : ''}.${orderLine}${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
+      const slotLine = r.slot || 'TBD';
+
+      // Count non-brownie pizzas to determine free brownie eligibility
+      const totalPizzas = (r.M || 0) + (r.CC || r['C & C'] || 0) + (r.F || 0) + (r.BC || 0);
+      const brownieQty = r.DB || 0;
+      const freeBrownie = totalPizzas >= 2 && brownieQty > 0;
+
+      const pizzaMap = [
+        ['Margherita',      r.M  || 0],
+        ['Cup & Char',      r.CC || r['C & C'] || 0],
+        ['FunGuy',          r.F  || 0],
+        ['Buffalo Chicken', r.BC || 0],
+      ];
+      const orderParts = pizzaMap
+        .filter(([, qty]) => qty > 0)
+        .map(([name, qty]) => `${name} x${qty}`);
+
+      if (brownieQty > 0) {
+        orderParts.push(freeBrownie
+          ? `Dubai Brownie x${brownieQty} (1 free!)`
+          : `Dubai Brownie x${brownieQty}`);
+      }
+
+      const orderLine = orderParts.join(', ');
+
+      const totalLine = (r.total !== undefined && r.total !== null) ? `\nTotal: $${r.total}` : '';
+
+      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, July 19th @ ${slotLine}.\n\n${orderLine}${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
     }
+
     // fallback generic message if an unknown type is passed
     return `Hey ${r.fname || 'there'}! This is a message from BrocatoEatz.`;
   }
