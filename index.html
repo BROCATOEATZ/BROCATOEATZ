@@ -53,6 +53,7 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .consent-text strong{color:rgba(255,255,255,.7)}
 .reserve-btn{width:100%;padding:1rem;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-bottom:1rem}
 .reserve-btn:hover:not(.locked){background:var(--red-light);transform:translateY(-1px);box-shadow:0 4px 20px #8B1A0E55}
+.reserve-btn.locked{opacity:.55;background:#555;cursor:not-allowed;box-shadow:none;transform:none}
 .notify-submit{width:100%;padding:1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.15);font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-top:.25rem}
 .notify-submit:hover:not(:disabled){background:rgba(255,255,255,.12);color:white}
 .notify-submit:disabled{opacity:.35;cursor:not-allowed}
@@ -264,7 +265,7 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .menu-preview-note{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;color:white;text-align:center;margin-top:.75rem;letter-spacing:.05em;text-transform:uppercase}
 
 display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center}
-.reserve-btn.locked{opacity:.55;background:#555;cursor:not-allowed;box-shadow:none;transform:none}
+.reserve-btn.locked{opacity:1;cursor:pointer}
 
 .orders-locked-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem}
 .orders-locked-sub{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:500;opacity:.6;letter-spacing:.05em}
@@ -308,6 +309,70 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     </div>
 
     <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
+    <!-- PRE-ORDERS NOTE -->
+    <div style="margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.45);text-align:center;margin-bottom:.6rem;line-height:1.5">Pre-orders open the <strong style="color:rgba(255,255,255,.75)">Tuesday before</strong> each drop @ <strong style="color:rgba(255,255,255,.75)">7:00 PM</strong></div>
+
+    <!-- SUMMER 2026 DROP SCHEDULE -->
+    <div style="border:1px solid rgba(212,169,122,.2);padding:.9rem 1rem 0">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:.7rem;text-align:center">Summer 2026 Dates</div>
+
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.4);text-align:left;padding:.14rem .5rem;border-left:2px solid rgba(212,169,122,.25);margin-bottom:.2rem">July</div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(212,169,122,.07);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.6)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--tan)">08</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:white">SUNDAY, JULY 26TH</span>
+        <div style="position:absolute;right:.7rem;top:50%;transform:translateY(-50%);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;background:var(--tan);color:#111;padding:.2rem .5rem">NEXT</div>
+      </div>
+
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.4);text-align:left;padding:.14rem .5rem;border-left:2px solid rgba(212,169,122,.25);margin-bottom:.2rem;margin-top:.35rem">August</div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">09</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 2ND</span>
+      </div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">10</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 16TH</span>
+      </div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">11</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 23RD</span>
+      </div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">12</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 30TH</span>
+      </div>
+
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.4);text-align:left;padding:.14rem .5rem;border-left:2px solid rgba(212,169,122,.25);margin-bottom:.2rem;margin-top:.35rem">September</div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">13</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, SEPTEMBER 6TH</span>
+      </div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);text-align:center">
+        <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">14</span>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, SEPTEMBER 27TH</span>
+      </div>
+    </div>
+
     <div class="soldout-splash" id="soldout-splash">
       <div class="soldout-splash-title">SOLD OUT</div>
       <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:1.25rem 1.5rem;margin-top:.75rem;text-align:center">
@@ -318,7 +383,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--tan);margin-bottom:.9rem">TUESDAY, JULY 21ST @ 7:00 PM</div>
         <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:.9rem"></div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem">MENU DROPS</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:rgba(255,255,255,.6)">SUNDAY, JULY 19TH @ 12:00 PM</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:rgba(255,255,255,.6)">SUNDAY, JULY 12TH @ 12:00 PM</div>
       </div>
     </div>
 
@@ -379,14 +444,14 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
             <span class="menu-preview-name">FUNGUY</span>
             <span class="menu-preview-price">$25</span>
           </div>
-          <div class="menu-preview-desc">White Truffle Oil, Fior Di Latte, Grass-Fed Mozzarella, Roasted Mushrooms, House Chimichurri (On the Side)</div>
+          <div class="menu-preview-desc">White Truffle Oil, Fior Di Latte, Grass-Fed Mozzarella Mix, Roasted Mushrooms, House Chimichurri (On the Side)</div>
         </div>
         <div class="menu-preview-item-wrap">
           <div class="menu-preview-item">
-            <span class="menu-preview-name">????</span>
+            <span class="menu-preview-name">PESTO & RICOTTA <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.5rem;letter-spacing:.1em;color:#111;background:var(--tan);padding:.12rem .35rem;vertical-align:middle;margin-left:.25rem">DROP 8 FEATURE</span></span>
             <span class="menu-preview-price">$25</span>
           </div>
-          <div class="menu-preview-desc">Coming soon... 🤫</div>
+          <div class="menu-preview-desc">Garlic EVOO, Grass-Fed Mozzarella Mix, Basil Pesto, Fresh Ricotta Dollops, 30-Month Aged Parmigiano Reggiano</div>
         </div>
         <div class="menu-preview-item-wrap" style="border-bottom:none">
           <div class="menu-preview-item">
@@ -509,7 +574,11 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div class="order-summary">
         <div id="summary-content"><p class="summary-empty">SELECT PIZZAS AND A TIME SLOT ABOVE</p></div>
       </div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:600;color:#aaa;letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:.75rem">Cash preferred · E-transfer available · Payment at pickup</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:600;color:#aaa;letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:.75rem">Cash preferred · Payment at pickup</div>
+      <div style="border:1.5px solid rgba(212,169,122,.25);background:rgba(212,169,122,.05);padding:1rem 1.25rem;margin-bottom:1.25rem;text-align:left">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem">Fresh Pizza Takes Time</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:#888;letter-spacing:.03em;line-height:1.55">We don't make pizzas ahead of time. Each one is crafted fresh after you check in, which means wait times of 15–20 minutes during peak periods. Our open kitchen gives you a front-row seat to the entire process, and every pizza is served straight from the oven.</div>
+      </div>
       <div class="sms-consent">By placing an order you'll receive a confirmation and pickup reminder via text. Reply STOP to opt out.</div>
       <button class="submit-btn-order" id="submit-btn" onclick="submitOrder()" disabled>PLACE ORDER</button>
     </div>
@@ -617,8 +686,8 @@ var TOTAL_CAP = 125; // max pizzas regardless of slot availability
 var PIZZAS = [
   {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, 30-MONTH AGED PARMIGIANO REGGIANO, FIOR DI LATTE, FRESH BASIL, EVOO'},
   {id:'cupchar',     name:'CUP & CHAR',     price:25, img:null, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
-  {id:'funguy',      name:'FUNGUY',         price:25, img:null, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA, ROASTED MUSHROOMS, HOUSE CHIMICHURRI (ON THE SIDE)'},
-  {id:'calabrian',   name:'????',  price:25, img:null, desc:'Coming soon... 🤫'}
+  {id:'funguy',      name:'FUNGUY',         price:25, img:null, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA MIX, ROASTED MUSHROOMS, HOUSE CHIMICHURRI (ON THE SIDE)'},
+  {id:'calabrian',   name:'PESTO & RICOTTA',  price:25, img:null, feature:'DROP 8 FEATURE', desc:'GARLIC EVOO, GRASS-FED MOZZARELLA MIX, BASIL PESTO, FRESH RICOTTA DOLLOPS, 30-MONTH AGED PARMIGIANO REGGIANO'}
 ];
 
 var SLOT_PIZZA_CAP = 6;
@@ -793,7 +862,7 @@ function renderPizzas(){
     if(p.img) html += '<img src="' + p.img + '" class="pizza-thumb" alt="' + p.name + '">';
     else html += '<div class="pizza-thumb pizza-thumb-placeholder" aria-hidden="true">🍕</div>';
     html += '<div class="pizza-header-text">';
-    html += '<div class="pizza-header"><div class="pizza-name">' + p.name + '</div><div class="pizza-header-right"><div class="pizza-price">$' + p.price + '</div><div class="badge">ADDED</div></div></div>';
+    html += '<div class="pizza-header"><div class="pizza-name">' + p.name + (p.feature ? ' <span style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.1em;color:#111;background:var(--tan);padding:.12rem .35rem;vertical-align:middle;margin-left:.25rem">' + p.feature + '</span>' : '') + '</div><div class="pizza-header-right"><div class="pizza-price">$' + p.price + '</div><div class="badge">ADDED</div></div></div>';
     html += '<div class="pizza-desc">' + p.desc + '</div>';
     html += '</div></div>';
     html += '<div class="qty-control">';
@@ -1534,7 +1603,7 @@ function checkOrdersLocked(){
   var steps = document.querySelector('.steps');
   if(!locked || !form) return;
   if(isSoldOut()){
-    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">The Next Pop Up Date Is: Sunday July 26th<br>Pre-Orders Open: Tuesday July 21st @ 7PM<br>Menu Drops: Sunday July 19th @ 12PM</div>';
+    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday July 26th<br>Pre-Orders Open: Tuesday July 21st @ 7PM<br>Menu Drops: Sunday July 26th @ 11AM</div>';
     locked.style.display = 'block';
     form.style.display = 'none';
     if(steps) steps.style.display = 'none';
