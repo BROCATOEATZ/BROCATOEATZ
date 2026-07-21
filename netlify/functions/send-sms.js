@@ -73,7 +73,7 @@ exports.handler = async function(event) {
 
   const slotLine = data.slotDisplay || data.slot;
 
-  const message = `Hey ${data.fname}! You're locked in for the July 19th Pizza Drop 🍕\n\nPickup @ ${slotLine}\n\n${orderLines}${brownieLine}\n\nYour total is $${data.total}. Cash preferred · E-transfer available.\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nIf you can't make it or have any questions, please let me know ASAP so no pizzas go to waste!\nText Michael @ 905-401-7804\n\nSee you July 19th! 🍕`;
+  const message = `Hey ${data.fname}! You're locked in for the July 26th Pizza Drop 🍕\n\nPickup @ ${slotLine}\n\n${orderLines}${brownieLine}\n\nYour total is $${data.total}. Cash preferred.\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nIf you can't make it or have any questions, please let me know ASAP so no pizzas go to waste!\nText Michael @ 905-401-7804\n\nSee you July 26th! 🍕`;
 
   const result = await sendWithRetry(client, {
     body: message,
