@@ -44,7 +44,7 @@ exports.handler = async function(event) {
   // Drop List signup confirmation
   if(data.type === 'signup') {
     const fname = data.fname || 'Hey';
-    const message = `Hey ${fname}! Thanks for signing up — you're on the BrocatoEatz Drop List 🍕\n\nWe'll text you when the next drop goes live.\n\nStay tuned — next drop is July 19th at King's Court Estate Winery & Vineyard in St. Catharines.\n\nSave our number so you don't miss the drop 👇\nbrocatoeatz.com/brocatoeatz.vcf\n\nReply STOP to unsubscribe.`;
+    const message = `Hey ${fname}! Thanks for signing up — you're on the BrocatoEatz Drop List 🍕\n\nWe'll text you when the next drop goes live.\n\nStay tuned — next drop is August 2nd at King's Court Estate Winery & Vineyard in St. Catharines.\n\nSave our number so you don't miss the drop 👇\nbrocatoeatz.com/brocatoeatz.vcf\n\nReply STOP to unsubscribe.`;
 
     const result = await sendWithRetry(client, {
       body: message,
@@ -73,7 +73,7 @@ exports.handler = async function(event) {
 
   const slotLine = data.slotDisplay || data.slot;
 
-  const message = `Hey ${data.fname}! You're locked in for the July 26th Pizza Drop 🍕\n\nPickup @ ${slotLine}\n\n${orderLines}${brownieLine}\n\nYour total is $${data.total}. Cash preferred.\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nIf you can't make it or have any questions, please let me know ASAP so no pizzas go to waste!\nText Michael @ 905-401-7804\n\nSee you July 26th! 🍕`;
+  const message = `Hey ${data.fname}! You're locked in for the Augist 2nd Pizza Drop 🍕\n\nPickup @ ${slotLine}\n\n${orderLines}${brownieLine}\n\nYour total is $${data.total}. Cash preferred.\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nIf you can't make it or have any questions, please let me know ASAP so no pizzas go to waste!\nText Michael @ 905-401-7804\n\nSee you July 26th! 🍕`;
 
   const result = await sendWithRetry(client, {
     body: message,
