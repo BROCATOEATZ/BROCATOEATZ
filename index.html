@@ -1764,7 +1764,7 @@ var secretCodeUnlocked = false;
 
 function checkSecretCode(){
   var code = document.getElementById('secret-code-input').value.trim().toUpperCase();
-  if(code === 'NEXT.WEEK.OFF'){
+  if(code === 'CLOSED.NEXT.WEEK'){
     secretCodeUnlocked = true;
     closeLocked();
     enterOrdering();
