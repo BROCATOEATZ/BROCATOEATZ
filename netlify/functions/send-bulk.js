@@ -38,7 +38,7 @@ exports.handler = async function (event) {
         ['Margherita',      r.M  || 0],
         ['Cup & Char',      r.CC || r['C & C'] || 0],
         ['FunGuy',          r.F  || 0],
-        ['Buffalo Chicken', r.BC || 0],
+        ['Pesto & Ricotta', r.BC || 0],
       ];
       const orderParts = pizzaMap
         .filter(([, qty]) => qty > 0)
@@ -54,7 +54,7 @@ exports.handler = async function (event) {
 
       const totalLine = (r.total !== undefined && r.total !== null) ? `\nTotal: $${r.total}` : '';
 
-      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, July 19th @ ${slotLine}.\n\n${orderLine}${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
+      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, August 2nd @ ${slotLine}.\n\n${orderLine}${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
     }
 
     // fallback generic message if an unknown type is passed
