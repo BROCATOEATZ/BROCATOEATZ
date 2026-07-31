@@ -283,6 +283,37 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 .subs-table td{padding:.65rem .85rem;border-bottom:1px solid #f0e8d8;font-family:'Barlow Condensed',sans-serif;font-weight:500;color:var(--charcoal)}
 .send-status{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;padding:.5rem 1rem;margin-top:.5rem;display:none}
 .send-status.visible{display:block}
+
+/* DOUGH TRACKER — splash */
+.dough-tracker-wrap{margin:.75rem 0 1.25rem;width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(212,169,122,.25);padding:1.1rem 1.25rem}
+.dough-tracker-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.dough-tracker-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.dough-info-btn{width:1.1rem;height:1.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:none;color:rgba(255,255,255,.35);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;line-height:1;padding:0}
+.dough-info-btn:hover{border-color:var(--tan);color:var(--tan)}
+.dough-numbers-row{display:flex;align-items:baseline;justify-content:center;gap:.2rem;margin-bottom:.75rem}
+.dough-big-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,9vw,3.5rem);letter-spacing:2px;color:white;line-height:1}
+.dough-big-of{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin:0 .3rem;padding-bottom:.3rem}
+.dough-big-total{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,2rem);color:rgba(255,255,255,.35);letter-spacing:1px}
+.dough-big-unit{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-left:.35rem;padding-bottom:.25rem}
+.dough-bar-wrap{background:rgba(255,255,255,.1);height:8px;border-radius:4px;overflow:hidden;margin-bottom:.6rem}
+.dough-bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .8s ease}
+.dough-status{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.dough-status.ok{color:#2e9e4f}
+.dough-status.warning{color:#c9a800}
+.dough-status.urgent{color:var(--red-light)}
+/* Dough info modal */
+.dough-info-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99999;align-items:center;justify-content:center;padding:1.5rem}
+.dough-info-modal.open{display:flex}
+.dough-info-box{background:#111;border:1.5px solid rgba(212,169,122,.4);padding:1.5rem 1.75rem;max-width:300px;width:90%;text-align:center}
+.dough-info-box h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--tan);margin-bottom:.6rem}
+.dough-info-box p{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.6);line-height:1.55;letter-spacing:.02em}
+.dough-info-close{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.4rem 1.25rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;cursor:pointer;margin-top:1rem}
+/* Order page dough strip */
+.order-dough-strip{background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.08);padding:.7rem 1.25rem;display:flex;align-items:center;gap:.75rem}
+.order-dough-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+.order-dough-bar-wrap{flex:1;background:rgba(255,255,255,.12);height:6px;border-radius:3px;overflow:hidden}
+.order-dough-fill{height:100%;background:var(--red);border-radius:3px;transition:width .6s}
+.order-dough-pct{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -310,6 +341,25 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     </div>
 
     <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
+
+    <!-- DOUGH TRACKER -->
+    <div class="dough-tracker-wrap" id="dough-tracker" style="display:none">
+      <div class="dough-tracker-header">
+        <span class="dough-tracker-title">🍕 Dough Tracker</span>
+        <button class="dough-info-btn" onclick="openDoughInfo()" title="What is this?">i</button>
+      </div>
+      <div class="dough-numbers-row">
+        <span class="dough-big-num" id="dough-booked">0</span>
+        <span class="dough-big-of">of</span>
+        <span class="dough-big-total" id="dough-total">105</span>
+        <span class="dough-big-unit">pies booked</span>
+      </div>
+      <div class="dough-bar-wrap">
+        <div class="dough-bar-fill" id="dough-bar-fill" style="width:0%"></div>
+      </div>
+      <div class="dough-status ok" id="dough-status">Spots Available</div>
+    </div>
+
     <!-- PRE-ORDERS NOTE -->
     <div style="margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.45);text-align:center;margin-bottom:.6rem;line-height:1.5">Pre-orders open the <strong style="color:rgba(255,255,255,.75)">Tuesday before</strong> each drop @ <strong style="color:rgba(255,255,255,.75)">7:00 PM</strong></div>
 
@@ -516,6 +566,15 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div class="order-meta-city">St. Catharines, ON</div>
   </div>
 
+  <!-- ORDER PAGE DOUGH STRIP -->
+  <div class="order-dough-strip" id="order-dough-strip" style="display:none">
+    <span class="order-dough-label">🍕 Dough
+      <button class="dough-info-btn" onclick="openDoughInfo()" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">i</button>
+    </span>
+    <div class="order-dough-bar-wrap"><div class="order-dough-fill" id="order-dough-fill" style="width:0%"></div></div>
+    <span class="order-dough-pct" id="order-dough-pct">—</span>
+  </div>
+
   <nav class="steps">
     <div class="step active" id="step1"><span class="step-num">1</span> Menu</div>
     <div class="step" id="step2"><span class="step-num">2</span> Time</div>
@@ -631,7 +690,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       </div>
     </div>
     <div class="admin-compose">
-      <div class="admin-section-title">MESSAGE THE DROP LIST</div>
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed rgba(139,26,14,.3);flex-wrap:wrap">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--red)">DOUGH COUNT</div>
+        <input type="number" id="admin-dough-count" min="1" max="999" value="105" style="width:80px;padding:.4rem .6rem;border:2px solid #e0d8cc;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;outline:none;text-align:center;border-radius:0" oninput="saveDoughCount()">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;color:#999;letter-spacing:.04em;line-height:1.4">Total pies for this drop.<br>Set Thursday when dough prep begins.</span>
+      </div>
+      <div class="admin-section-title" style="margin-top:0">MESSAGE THE DROP LIST</div>
       <textarea id="drop-message" class="admin-compose-textarea" rows="3" maxlength="1000" placeholder="Type your message here. Use {name} to insert each person's first name." oninput="updateDropCharCount()"></textarea>
       <div class="admin-compose-row">
         <span id="drop-char-count" class="admin-compose-count">0 characters &middot; 1 SMS segment</span>
@@ -687,6 +751,17 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   </div>
 </div>
 
+<!-- DOUGH INFO MODAL -->
+<div class="dough-info-modal" id="dough-info-modal" onclick="closeDoughInfo()">
+  <div class="dough-info-box" onclick="event.stopPropagation()">
+    <h4>🍕 DOUGH TRACKER</h4>
+    <p>The Dough Tracker is set on <strong style="color:rgba(255,255,255,.8)">Thursday</strong> when Brocato begins his dough prep — a 3-day process that creates a gut-friendly crust. Most people with gluten sensitivities can enjoy it safely.</p>
+    <p style="margin-top:.6rem;font-style:italic;color:rgba(255,255,255,.35)">Eat at your own risk! 😄</p>
+    <p style="margin-top:.6rem">This number reflects total pies committed to for the drop — not individual pickup time slots.</p>
+    <button class="dough-info-close" onclick="closeDoughInfo()">GOT IT</button>
+  </div>
+</div>
+
 <script>
 // ══════════════════════════════════════
 // CONFIG
@@ -694,7 +769,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 var ADMIN_PASSWORD = 'pizza6';
 var DROP_DATE = new Date('2026-08-02T11:00:00');
 var ORDERS_OPEN_DATE = new Date('2026-07-28T19:00:00'); // Tuesday July 28th @ 7:00 PM
-var TOTAL_CAP = 150; // max pizzas regardless of slot availability
+var TOTAL_CAP = 85; // max pizzas regardless of slot availability
 
 var PIZZAS = [
   {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, FIOR DI LATTE, FRESH BASIL, EVOO, 30-MONTH AGED PARMIGIANO REGGIANO'},
@@ -1354,6 +1429,7 @@ function enterOrdering(){
   fetchLiveOrders().then(function(){
     renderPizzas(); renderSlots(); updateSummary(); updateSteps();
     checkOrdersLocked();
+    renderDoughTracker();
     if(allSlotsFull()) document.getElementById('soldout-banner').classList.add('visible');
   });
 }
@@ -1457,6 +1533,8 @@ function renderAdmin(){
 
   document.getElementById('admin-body').innerHTML = statsHtml + slotsHtml + subsHtml + tableHtml;
   updateOrdersToggleBtn();
+  var doughEl = document.getElementById('admin-dough-count');
+  if(doughEl) doughEl.value = DOUGH_COUNT;
 }
 
 function togglePaid(id){
@@ -1888,6 +1966,63 @@ function handlePopupSignup(){
 }
 
 // ══════════════════════════════════════
+// DOUGH TRACKER
+// ══════════════════════════════════════
+var DOUGH_COUNT = parseInt(localStorage.getItem('brocato_dough_count') || '105', 10);
+
+function saveDoughCount(){
+  var el = document.getElementById('admin-dough-count');
+  if(!el) return;
+  var val = parseInt(el.value, 10);
+  if(isNaN(val) || val < 1) return;
+  DOUGH_COUNT = val;
+  localStorage.setItem('brocato_dough_count', String(val));
+  renderDoughTracker();
+}
+
+function renderDoughTracker(){
+  var sold = totalPizzasSold();
+  var total = DOUGH_COUNT;
+  var pct = total > 0 ? Math.min(100, Math.round((sold / total) * 100)) : 0;
+
+  // Status text + class based on fill level
+  var statusText, statusClass;
+  if(pct >= 90){ statusText = '🔥 Almost Gone — Order Now'; statusClass = 'urgent'; }
+  else if(pct >= 70){ statusText = '⚡ Going Fast — Limited Spots'; statusClass = 'warning'; }
+  else if(pct >= 40){ statusText = 'Filling Up — Reserve Your Pies'; statusClass = 'warning'; }
+  else { statusText = 'Spots Available'; statusClass = 'ok'; }
+
+  // Splash tracker — show when orders open, hide when sold out
+  var tracker = document.getElementById('dough-tracker');
+  if(tracker){
+    var show = isOrdersOpen() && !isSoldOut();
+    tracker.style.display = show ? 'block' : 'none';
+    if(show){
+      document.getElementById('dough-bar-fill').style.width = pct + '%';
+      document.getElementById('dough-booked').textContent = sold;
+      document.getElementById('dough-total').textContent = total;
+      var statusEl = document.getElementById('dough-status');
+      if(statusEl){ statusEl.textContent = statusText; statusEl.className = 'dough-status ' + statusClass; }
+    }
+  }
+
+  // Order page strip
+  var strip = document.getElementById('order-dough-strip');
+  if(strip){
+    strip.style.display = 'flex';
+    document.getElementById('order-dough-fill').style.width = pct + '%';
+    document.getElementById('order-dough-pct').textContent = pct + '% booked';
+  }
+}
+
+function openDoughInfo(){
+  document.getElementById('dough-info-modal').classList.add('open');
+}
+function closeDoughInfo(){
+  document.getElementById('dough-info-modal').classList.remove('open');
+}
+
+// ══════════════════════════════════════
 // COUNTDOWN
 // ══════════════════════════════════════
 function updateCountdown(){
@@ -1956,6 +2091,8 @@ updateSoldOutState();
 updatePreorderPill();
 // Auto-check sold out every 30 seconds in case orders fill up
 setInterval(updateSoldOutState, 30000);
+// Fetch live orders for dough tracker on splash
+fetchLiveOrders().then(renderDoughTracker);
 </script>
 </body>
 </html>
