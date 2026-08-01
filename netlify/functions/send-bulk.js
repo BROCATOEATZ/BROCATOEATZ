@@ -1,10 +1,5 @@
 const twilio = require('twilio');
-// How many texts to fire at once, and how long to pause between batches.
-// Sending everything in one giant burst is what was breaking bulk sends —
-// Twilio will "accept" the request (so the old code reported it as sent)
-// even when the carrier silently drops it for looking like a spam blast.
-// Small batches + a short pause between them keeps this looking like normal
-// traffic and keeps us well under Netlify's function time limit.
+
 const BATCH_SIZE = 8;
 const BATCH_DELAY_MS = 300;
 
@@ -14,6 +9,7 @@ function sleep(ms) {
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method not allowed' };
+
   const data = JSON.parse(event.body);
   const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
   const recipients = data.recipients || [];
@@ -24,40 +20,12 @@ exports.handler = async function (event) {
       const body = String(data.message || '').replace(/\{name\}/g, fname);
       return `${body}\n\nReply STOP to opt out.`;
     }
-
     if (type === 'reminder') {
       const fname = r.fname || 'Hey';
       const slotLine = r.slot || 'TBD';
-
-      // Count non-brownie pizzas to determine free brownie eligibility
-      const totalPizzas = (r.M || 0) + (r.CC || r['C & C'] || 0) + (r.F || 0) + (r.BC || 0);
-      const brownieQty = r.DB || 0;
-      const freeBrownie = totalPizzas >= 2 && brownieQty > 0;
-
-      const pizzaMap = [
-        ['Margherita',      r.M  || 0],
-        ['Cup & Char',      r.CC || r['C & C'] || 0],
-        ['FunGuy',          r.F  || 0],
-        ['Pesto & Ricotta', r.BC || 0],
-      ];
-      const orderParts = pizzaMap
-        .filter(([, qty]) => qty > 0)
-        .map(([name, qty]) => `${name} x${qty}`);
-
-      if (brownieQty > 0) {
-        orderParts.push(freeBrownie
-          ? `Dubai Brownie x${brownieQty} (1 free!)`
-          : `Dubai Brownie x${brownieQty}`);
-      }
-
-      const orderLine = orderParts.join(', ');
-
       const totalLine = (r.total !== undefined && r.total !== null) ? `\nTotal: $${r.total}` : '';
-
-      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, August 2nd @ ${slotLine}.\n\n${orderLine}${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
+      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, August 2nd @ ${slotLine}.${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\n🍷 We've set up tables inside the winery's processing room — should be a nice vibe change!\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
     }
-
-    // fallback generic message if an unknown type is passed
     return `Hey ${r.fname || 'there'}! This is a message from BrocatoEatz.`;
   }
 
@@ -69,16 +37,9 @@ exports.handler = async function (event) {
         from: '+12897233561',
         to: '+1' + String(r.phone || '').replace(/\D/g, '')
       });
-      // create() resolving only means Twilio *accepted* the message into its
-      // queue, not that it was delivered. Log the sid + initial status so
-      // failures that happen after acceptance are still traceable in the
-      // Netlify function logs / Twilio console.
       console.log('SMS queued', { phone: r.phone, sid: msg.sid, status: msg.status });
       return { phone: r.phone, status: 'sent', sid: msg.sid };
     } catch (err) {
-      // err.code / err.moreInfo are Twilio-specific and point straight at
-      // the Twilio error reference page — log them so a future failure is
-      // debuggable from the Netlify function logs instead of a guess.
       console.error('SMS failed', { phone: r.phone, code: err.code, message: err.message, moreInfo: err.moreInfo });
       return { phone: r.phone, status: 'failed', error: err.message, code: err.code };
     }
