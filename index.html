@@ -1,139 +1,2220 @@
-<div class="soldout-splash" id="soldout-splash">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BROCATOEATZ | Pizza Pre-Order</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FFFDF8;--red:#8B1A0E;--red-light:#B52A1A;
+  --charcoal:#111;--tan:#D4A97A;--warm:#F0E8D8;--green:#2e9e4f;
+}
 
-  <div style="
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:700;
-    font-size:.7rem;
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    color:var(--tan);
-    margin-bottom:.35rem;
-  ">
-    DROP 09
-  </div>
+/* ══════════════════
+   SPLASH / NOTIFY PAGE
+══════════════════ */
+html,body{height:100%}
+body{background:var(--charcoal);color:white;font-family:'Barlow',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:3rem 1.5rem;text-align:center;position:relative;overflow-x:hidden;overflow-y:auto}
+body::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,#8B1A0E18 0%,transparent 55%),radial-gradient(ellipse at 80% 30%,#D4A97A10 0%,transparent 50%);pointer-events:none}
+.bg-pizza{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bg-pizza span{position:absolute;font-size:2rem;opacity:.04;animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(110vh) rotate(0deg)}to{transform:translateY(-10vh) rotate(360deg)}}
+.splash-inner{position:relative;z-index:1;max-width:460px;width:100%}
+.drop-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);border:1.5px solid var(--tan);padding:.25rem .85rem;margin-bottom:1.5rem;opacity:.85}
+.splash-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,14vw,8rem);line-height:.88;letter-spacing:2px;color:white;margin-bottom:1.25rem}
+.splash-inner h1 .line2{display:block;font-size:clamp(2rem,9vw,4.2rem);white-space:nowrap;margin-top:.1em}
+.hero-row{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:.5rem;max-width:100%}
+.hero-stack{margin-bottom:0!important;font-size:clamp(1.5rem,7vw,2.6rem)!important;text-align:left;line-height:.9!important}
+.hero-stack .line2{font-size:clamp(1rem,4.6vw,1.7rem)!important;white-space:nowrap;margin-top:.05em}
+.brand-side{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,4.8vw,1.7rem);letter-spacing:1px;color:var(--tan);line-height:1;text-align:left;border-left:2px solid rgba(255,255,255,.15);padding-left:.7rem;white-space:nowrap}
+.splash-inner h1 em{font-style:italic}
+.tagline{font-family:"Bebas Neue",sans-serif;font-size:clamp(1rem,3.5vw,1.4rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.5rem;white-space:nowrap}
+.countdown{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem}
+.cd-block{text-align:center;min-width:3.2rem}
+.cd-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,8vw,3rem);line-height:1;color:var(--tan);letter-spacing:2px;display:block}
+.cd-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.15rem;display:block}
+.cd-sep{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--tan);opacity:.3;align-self:flex-start;padding-top:.1rem;line-height:1}
+.event-date{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);padding:.6rem 1.35rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.divider{width:3rem;height:1.5px;background:var(--tan);opacity:.25;margin:0 auto 1.75rem}
+.optin-note{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.25rem}
+.signup-form{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:440px){.form-row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:.3rem;text-align:left}
+.field label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.field input{padding:.8rem 1rem;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:white;font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;border-radius:0;transition:border-color .2s;-webkit-appearance:none}
+.field input::placeholder{color:rgba(255,255,255,.2)}
+.field input:focus{border-color:var(--tan)}
+.consent{display:flex;align-items:flex-start;gap:.65rem;text-align:left;cursor:pointer}
+.consent input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:.15rem;accent-color:var(--red);cursor:pointer}
+.consent-text{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.45);line-height:1.5;letter-spacing:.02em}
+.consent-text strong{color:rgba(255,255,255,.7)}
+.reserve-btn{width:100%;padding:1rem;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-bottom:1rem}
+.reserve-btn:hover:not(.locked){background:var(--red-light);transform:translateY(-1px);box-shadow:0 4px 20px #8B1A0E55}
+.reserve-btn.locked{opacity:.55;background:#555;cursor:not-allowed;box-shadow:none;transform:none}
+.notify-submit{width:100%;padding:1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.15);font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-top:.25rem}
+.notify-submit:hover:not(:disabled){background:rgba(255,255,255,.12);color:white}
+.notify-submit:disabled{opacity:.35;cursor:not-allowed}
+.fine-print{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2);letter-spacing:.04em;line-height:1.5;margin-top:.75rem}
+.notify-success{display:none;padding:1rem 0}
+.notify-success.visible{display:block}
+.notify-success-icon{font-size:2rem;margin-bottom:.5rem}
+.notify-success h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem}
+.notify-success p{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.field-err{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:#e57;letter-spacing:.04em;display:none;margin-top:.2rem}
+.field-err.visible{display:block}
+.splash-page{display:block}
+.splash-page.hidden{display:none}
 
-  <div class="soldout-splash-title" style="
-    font-size:clamp(3rem,12vw,5rem);
-    color:white;
-    line-height:1;
-    margin-bottom:.5rem;
-  ">
-    SOLD OUT
-  </div>
+/* ══════════════════
+   ORDERING PAGE
+══════════════════ */
+.order-page{display:none;background:var(--cream);min-height:100vh;color:var(--charcoal)}
+.order-page.visible{display:block}
+.order-page body{background:var(--cream)}
 
-  <div style="
-    width:42px;
-    height:2px;
-    background:var(--tan);
-    margin:.9rem auto 1.1rem;
-    opacity:.8;
-  "></div>
+/* soldout */
+.soldout-banner{background:var(--red);color:white;text-align:center;padding:.75rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;display:none}
+.soldout-banner.visible{display:block}
 
-  <div style="
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:500;
-    font-size:.95rem;
-    line-height:1.55;
-    letter-spacing:.04em;
-    color:rgba(255,255,255,.6);
-    margin:0 auto 1.5rem;
-    max-width:330px;
-  ">
-    105 pizzas reserved.<br>
-    Thank you for another incredible drop.
-  </div>
+/* header */
+.order-header{background:var(--charcoal);color:white;text-align:center;padding:1.5rem 1rem 1.25rem}
+.order-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,4rem);letter-spacing:4px;line-height:1}
+.order-header p{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-top:.35rem}
+.order-meta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.55rem;margin-top:.6rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.order-meta-item{color:rgba(255,255,255,.6)}
+.order-meta-sep{color:var(--tan);opacity:.4;font-size:.7rem}
+.order-meta-city{margin:.55rem auto 0;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.12);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:white;display:table;text-align:center}
+.order-hero-row{display:flex;align-items:center;justify-content:center;gap:.7rem}
+.order-hero-stack{font-family:'Bebas Neue',sans-serif;font-style:italic;color:white;font-size:clamp(1.3rem,5.5vw,2.1rem);line-height:.9;text-align:center}
+.order-line2{display:block;font-size:clamp(1.3rem,6vw,2.1rem);white-space:nowrap;margin-top:.05em}
+.order-brand-side{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,4.8vw,1.7rem);letter-spacing:1px;color:var(--tan);line-height:1;text-align:left;border-left:2px solid rgba(255,255,255,.15);padding-left:.7rem;white-space:nowrap}
 
+/* steps nav */
+.steps{display:flex;background:white;border-bottom:2px solid var(--warm)}
+.step{flex:1;padding:.75rem .5rem;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;color:#bbb;border-bottom:3px solid transparent;cursor:default;transition:all .2s}
+.step.active{color:var(--red);border-bottom-color:var(--red)}
+.step.done{color:var(--charcoal)}
+.step-num{display:inline-block;width:1.2rem;height:1.2rem;border-radius:50%;background:#e0d8cc;color:var(--charcoal);font-size:.7rem;line-height:1.2rem;text-align:center;margin-right:.25rem;font-family:'Barlow Condensed',sans-serif;font-weight:700}
+.step.active .step-num{background:var(--red);color:white}
+.step.done .step-num{background:var(--charcoal);color:white}
 
-  <!-- NEXT DROP -->
-  <div style="
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(212,169,122,.25);
-    padding:1.35rem 1.25rem;
-    margin:0 auto 1.25rem;
-    max-width:380px;
-  ">
+/* main */
+.order-main{max-width:540px;margin:0 auto;padding:1.5rem 1rem 4rem}
 
-    <div style="
-      font-family:'Barlow Condensed',sans-serif;
-      font-weight:700;
-      font-size:.65rem;
-      letter-spacing:.25em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.35);
-      margin-bottom:.35rem;
-    ">
-      SEE YOU AT THE NEXT DROP
+/* section headers */
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:4px;color:var(--red);border-bottom:2px dashed var(--red);padding-bottom:.35rem;margin-bottom:1.25rem}
+
+/* pizza cards */
+.pizza-grid{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem}
+.pizza-card{border:2px solid #e0d8cc;background:white;padding:1rem 1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.pizza-header-row{display:flex;align-items:flex-start;gap:1rem}
+.pizza-thumb{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.pizza-thumb-placeholder{display:flex;align-items:center;justify-content:center;background:var(--warm);font-size:2.2rem;line-height:1;border:1.5px dashed var(--tan)}
+.pizza-header-text{flex:1;min-width:0;padding-top:.1rem}
+.pizza-card:hover{border-color:#c0b8a8}
+.pizza-card.selected{border-color:var(--red);background:#FFF5F2}
+.badge{display:none;background:var(--red);color:white;font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:1.5px;padding:.15rem .5rem;flex-shrink:0;align-self:center}
+.pizza-card.selected .badge{display:inline-flex}
+.pizza-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.3rem;gap:.5rem}
+.pizza-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;flex-shrink:0}
+.pizza-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px}
+.pizza-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--red)}
+.pizza-desc{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:#888;letter-spacing:.04em;text-transform:uppercase;line-height:1.4;margin-bottom:.6rem}
+.qty-control{display:none;align-items:center;gap:.6rem;margin-top:.4rem}
+.pizza-card.selected .qty-control{display:flex}
+.qty-btn{width:1.6rem;height:1.6rem;border:1.5px solid var(--charcoal);background:none;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Barlow',sans-serif;transition:all .15s}
+.qty-btn:hover{background:var(--charcoal);color:white}
+.qty-num{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;min-width:1.2rem;text-align:center}
+.qty-label{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:600;color:#aaa;letter-spacing:.05em}
+
+/* brownie */
+.brownie-promo-bar{display:none;background:var(--tan);color:var(--charcoal);font-family:'Bebas Neue',sans-serif;font-size:.78rem;letter-spacing:2px;padding:.35rem 1.25rem;text-align:center}
+.brownie-promo-bar.visible{display:block}
+.brownie-card{background:var(--charcoal);color:white;border:2px solid var(--charcoal);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .2s;margin-bottom:2.5rem;position:relative}
+.brownie-card.selected{border-color:var(--tan)}
+.brownie-card.free-mode{border-color:var(--tan);background:#3a2500}
+.brownie-left .brownie-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px}
+.brownie-left .brownie-sub{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:500;opacity:.6;margin-top:.15rem}
+.brownie-right{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.brownie-price{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan)}
+.brownie-badge{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:1.5px;color:var(--tan);display:none}
+.brownie-card.selected .brownie-badge{display:block}
+.brownie-qty{display:none;align-items:center;gap:.5rem}
+.brownie-card.selected .brownie-qty{display:flex}
+
+/* divider */
+.section-divider{border:none;border-top:2px dashed #e0d8cc;margin:2.5rem 0}
+
+/* slots */
+.slot-rule{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin-bottom:.85rem;line-height:1.5}
+.slot-rule strong{color:var(--charcoal)}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+@media(min-width:400px){.slot-grid{grid-template-columns:repeat(4,1fr)}}
+.slot-btn{padding:.7rem .3rem;border:2px solid #e0d8cc;background:white;cursor:pointer;text-align:center;transition:all .2s;position:relative}
+.slot-btn:hover:not(:disabled){border-color:var(--red)}
+.slot-btn.selected{border-color:var(--red);background:#FFF5F2}
+.slot-btn:disabled{opacity:.28;cursor:not-allowed;background:#fafafa}
+.slot-time{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;display:block}
+.slot-avail{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;color:#bbb;margin-top:.2rem;display:block;text-transform:uppercase;letter-spacing:.05em}
+.slot-btn.selected .slot-avail{color:var(--red)}
+.avail-green{color:#2e9e4f!important}
+.avail-yellow{color:#c9a800!important}
+.avail-red{color:#d63030!important}
+.slot-btn.full .slot-time{text-decoration:line-through;opacity:.6}
+.cap-warning{background:var(--red);color:white;padding:.6rem 1rem;margin-bottom:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;display:none}
+.cap-warning.visible{display:block}
+.slot-error{background:var(--red);color:white;padding:.8rem 1rem;margin-bottom:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;display:none}
+.slot-error.visible{display:block}
+
+/* contact */
+.contact-grid{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem}
+.o-field{display:flex;flex-direction:column;gap:.3rem}
+.o-field label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#aaa}
+.o-field input,.o-field textarea{padding:.75rem 1rem;border:2px solid #e0d8cc;font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;border-radius:0;background:white;transition:border .2s}
+.o-field input:focus,.o-field textarea:focus{border-color:var(--red)}
+.o-field textarea{resize:vertical;min-height:70px}
+.name-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+
+/* payment */
+.payment-notice{display:flex;align-items:center;gap:.75rem;background:var(--charcoal);color:white;padding:1rem 1.25rem;margin-bottom:2rem}
+.payment-icon{font-size:1.4rem;flex-shrink:0}
+.payment-notice-title{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;margin-bottom:.15rem}
+.payment-notice-body{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;opacity:.6}
+
+/* summary */
+.order-summary{border:2px solid #e0d8cc;padding:1.25rem 1.5rem;margin-bottom:1.5rem;background:white}
+.summary-empty{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#ccc;text-align:center;padding:.5rem 0}
+.summary-row{display:flex;justify-content:space-between;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.88rem;padding:.3rem 0;border-bottom:1px solid #f0e8d8}
+.summary-row:last-child{border-bottom:none}
+.summary-row.highlight{color:var(--red);font-weight:700}
+.summary-row.total{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding-top:.5rem;margin-top:.25rem;border-top:2px solid var(--charcoal);border-bottom:none}
+
+/* submit */
+.sms-consent{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:#aaa;letter-spacing:.03em;line-height:1.5;margin-bottom:.75rem;text-align:center}
+.submit-btn-order{width:100%;padding:1.1rem;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:4px;cursor:pointer;transition:all .2s}
+.submit-btn-order:hover:not(:disabled){background:var(--red-light)}
+.submit-btn-order:disabled{opacity:.35;cursor:not-allowed}
+
+/* success */
+.success-screen{display:none;text-align:center;padding:3rem 1.5rem}
+.success-screen.visible{display:block}
+.success-screen h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:var(--green);margin-bottom:.5rem}
+.success-details{background:white;border:2px solid #e0d8cc;padding:1.25rem 1.5rem;max-width:420px;margin:0 auto 1rem;text-align:left}
+.success-details h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--red);margin-bottom:.75rem}
+.detail-row{font-size:.85rem;margin-bottom:.3rem;font-family:'Barlow Condensed',sans-serif;font-weight:500}
+.detail-row span{font-weight:700}
+.restart-btn{background:none;border:2px solid var(--red);color:var(--red);padding:.6rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;cursor:pointer;transition:all .2s;margin-top:1rem}
+.restart-btn:hover{background:var(--red);color:white}
+
+/* admin */
+#admin-view{display:none;background:var(--cream);min-height:100vh}
+.admin-login{max-width:380px;margin:5rem auto;text-align:center;padding:2rem}
+.admin-login h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--red);margin-bottom:1.5rem}
+.admin-login input{width:100%;padding:.75rem 1rem;border:2px solid #e0d8cc;font-family:'Barlow',sans-serif;font-size:1rem;outline:none;margin-bottom:.75rem}
+.admin-login input:focus{border-color:var(--red)}
+.admin-login button{width:100%;padding:.9rem;background:var(--charcoal);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;cursor:pointer}
+.admin-login button:hover{background:var(--red)}
+.admin-err{color:var(--red);font-family:'Barlow Condensed',sans-serif;font-size:.85rem;margin-top:.5rem;display:none}
+.admin-bar{background:var(--charcoal);color:white;padding:1.1rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.admin-compose{padding:1.25rem 2rem;background:var(--warm);border-bottom:2px dashed var(--red)}
+.admin-compose .admin-section-title{margin:0 0 .6rem}
+.admin-compose-textarea{width:100%;padding:.75rem 1rem;border:2px solid #e0d8cc;font-family:'Barlow',sans-serif;font-size:1rem;outline:none;resize:vertical;box-sizing:border-box}
+.admin-compose-textarea:focus{border-color:var(--red)}
+.admin-compose-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-top:.6rem}
+.admin-compose-count{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;color:#7a7166;letter-spacing:.03em}
+.admin-bar h1{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px}
+.admin-bar-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.admin-btn{background:none;border:1.5px solid rgba(255,255,255,.3);color:white;padding:.4rem 1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.admin-btn:hover{border-color:white}
+.admin-btn.danger:hover{border-color:#e55;color:#e55}
+.admin-body{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:white;border:2px solid #e0d8cc;padding:1rem 1.2rem}
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:.25rem}
+.stat-value{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:2px;color:var(--red);line-height:1}
+.stat-sub{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:#bbb;margin-top:.15rem}
+.admin-section-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--red);border-bottom:2px dashed var(--red);padding-bottom:.35rem;margin:2rem 0 1rem}
+.slot-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;margin-bottom:1rem}
+.slot-admin-card{background:white;border:2px solid #e0d8cc;padding:.85rem 1rem}
+.slot-admin-card.full{opacity:.5}
+.slot-admin-time{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--charcoal);margin-bottom:.15rem}
+.slot-admin-bar{height:5px;background:#f0e8d8;border-radius:3px;margin:.35rem 0;overflow:hidden}
+.slot-admin-fill{height:100%;background:var(--red);border-radius:3px}
+.slot-admin-info{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#999}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -1.5rem;padding:0 1.5rem}
+.orders-table{width:100%;border-collapse:collapse;background:white;font-size:.82rem;min-width:600px}
+.orders-table th{background:var(--charcoal);color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem .85rem;text-align:left;white-space:nowrap}
+.orders-table td{padding:.65rem .85rem;border-bottom:1px solid #f0e8d8;font-family:'Barlow Condensed',sans-serif;font-weight:500;vertical-align:top;color:var(--charcoal)}
+.orders-table tr:hover td{background:#fdf6ec}
+.ord-num{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--red)}
+.paid-btn{display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid;transition:all .15s;white-space:nowrap}
+.paid-btn.unpaid{border-color:#ddd;color:#bbb}
+.paid-btn.paid{border-color:var(--green);color:var(--green);background:#f0fff0}
+
+.menu-preview{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:1.1rem 1.4rem;margin:1.25rem 0;text-align:left;width:100%;max-width:400px;margin-left:auto;margin-right:auto}
+.menu-preview-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:4px;color:var(--tan);margin-bottom:.75rem;text-align:center}
+.menu-preview-items{display:flex;flex-direction:column;gap:.85rem}
+.menu-preview-item-wrap{padding-bottom:.6rem;border-bottom:1px dashed rgba(255,255,255,.12)}
+.menu-preview-desc{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4);line-height:1.4;margin-top:.2rem}
+.menu-preview-item{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.15rem}
+.menu-preview-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2.5px;color:white}
+.menu-preview-price{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan)}
+.menu-preview-note{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;color:white;text-align:center;margin-top:.75rem;letter-spacing:.05em;text-transform:uppercase}
+
+display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center}
+.reserve-btn.locked{opacity:1;cursor:pointer}
+
+.orders-locked-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem}
+.orders-locked-sub{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:500;opacity:.6;letter-spacing:.05em}
+.admin-btn.green{border-color:#2e9e4f;color:#2e9e4f}
+.admin-btn.green:hover{background:#2e9e4f;color:white}
+.soldout-splash{display:none;text-align:center;margin-bottom:1rem}
+.soldout-splash.visible{display:block}
+.soldout-splash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,8vw,3rem);letter-spacing:6px;color:var(--red);margin-bottom:.35rem}
+.soldout-splash-sub{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:.1em;color:rgba(255,255,255,.45);text-transform:uppercase}
+.admin-btn.sold-out-active{border-color:var(--red);color:var(--red)}
+display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid #e55;color:#e55;transition:all .15s;white-space:nowrap}
+.cancel-btn:hover{background:#e55;color:white}
+.subs-table{width:100%;border-collapse:collapse;background:white;font-size:.82rem}
+.subs-table th{background:var(--charcoal);color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem .85rem;text-align:left}
+.subs-table td{padding:.65rem .85rem;border-bottom:1px solid #f0e8d8;font-family:'Barlow Condensed',sans-serif;font-weight:500;color:var(--charcoal)}
+.send-status{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;padding:.5rem 1rem;margin-top:.5rem;display:none}
+.send-status.visible{display:block}
+
+/* DOUGH TRACKER — splash */
+.dough-tracker-wrap{margin:.75rem 0 1.25rem;width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(212,169,122,.25);padding:1.1rem 1.25rem}
+.dough-tracker-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.dough-tracker-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.dough-info-btn{width:1.1rem;height:1.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:none;color:rgba(255,255,255,.35);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;line-height:1;padding:0}
+.dough-info-btn:hover{border-color:var(--tan);color:var(--tan)}
+.dough-numbers-row{display:flex;align-items:baseline;justify-content:center;gap:.2rem;margin-bottom:.75rem}
+.dough-big-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,9vw,3.5rem);letter-spacing:2px;color:white;line-height:1}
+.dough-big-of{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin:0 .3rem;padding-bottom:.3rem}
+.dough-big-total{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,2rem);color:rgba(255,255,255,.35);letter-spacing:1px}
+.dough-big-unit{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-left:.35rem;padding-bottom:.25rem}
+.dough-bar-wrap{background:rgba(255,255,255,.1);height:8px;border-radius:4px;overflow:hidden;margin-bottom:.6rem}
+.dough-bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .8s ease}
+.dough-status{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.dough-status.ok{color:#2e9e4f}
+.dough-status.warning{color:#c9a800}
+.dough-status.urgent{color:var(--red-light)}
+/* Dough info modal */
+.dough-info-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99999;align-items:center;justify-content:center;padding:1.5rem}
+.dough-info-modal.open{display:flex}
+.dough-info-box{background:#111;border:1.5px solid rgba(212,169,122,.4);padding:1.5rem 1.75rem;max-width:300px;width:90%;text-align:center}
+.dough-info-box h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--tan);margin-bottom:.6rem}
+.dough-info-box p{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.6);line-height:1.55;letter-spacing:.02em}
+.dough-info-close{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.4rem 1.25rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;cursor:pointer;margin-top:1rem}
+/* Order page dough strip */
+.order-dough-strip{background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.08);padding:.7rem 1.25rem;display:flex;align-items:center;gap:.75rem}
+.order-dough-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+.order-dough-bar-wrap{flex:1;background:rgba(255,255,255,.12);height:6px;border-radius:3px;overflow:hidden}
+.order-dough-fill{height:100%;background:var(--red);border-radius:3px;transition:width .6s}
+.order-dough-pct{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan);white-space:nowrap}
+
+/* DOUGH TRACKER — splash */
+.dough-tracker-wrap{margin:.75rem 0 1.25rem;width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(212,169,122,.25);padding:1.1rem 1.25rem}
+.dough-tracker-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.dough-tracker-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.dough-info-btn{width:1.1rem;height:1.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:none;color:rgba(255,255,255,.35);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;line-height:1;padding:0}
+.dough-info-btn:hover{border-color:var(--tan);color:var(--tan)}
+.dough-numbers-row{display:flex;align-items:baseline;justify-content:center;gap:.2rem;margin-bottom:.75rem}
+.dough-big-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,9vw,3.5rem);letter-spacing:2px;color:white;line-height:1}
+.dough-big-of{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin:0 .3rem;padding-bottom:.3rem}
+.dough-big-total{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,5vw,2rem);color:rgba(255,255,255,.35);letter-spacing:1px}
+.dough-big-unit{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-left:.35rem;padding-bottom:.25rem}
+.dough-bar-wrap{background:rgba(255,255,255,.1);height:8px;border-radius:4px;overflow:hidden;margin-bottom:.6rem}
+.dough-bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .8s ease}
+.dough-status{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.dough-status.ok{color:#2e9e4f}
+.dough-status.warning{color:#c9a800}
+.dough-status.urgent{color:var(--red-light)}
+.dough-info-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99999;align-items:center;justify-content:center;padding:1.5rem}
+.dough-info-modal.open{display:flex}
+.dough-info-box{background:#111;border:1.5px solid rgba(212,169,122,.4);padding:1.5rem 1.75rem;max-width:300px;width:90%;text-align:center}
+.dough-info-box h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--tan);margin-bottom:.6rem}
+.dough-info-box p{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.6);line-height:1.55;letter-spacing:.02em}
+.dough-info-close{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.4rem 1.25rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;cursor:pointer;margin-top:1rem}
+.order-dough-strip{background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.08);padding:.7rem 1.25rem;display:flex;align-items:center;gap:.75rem}
+.order-dough-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+.order-dough-bar-wrap{flex:1;background:rgba(255,255,255,.12);height:6px;border-radius:3px;overflow:hidden}
+.order-dough-fill{height:100%;background:var(--red);border-radius:3px;transition:width .6s}
+.order-dough-pct{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan);white-space:nowrap}
+/* TABS */
+.tab-nav{display:flex;border-bottom:1px solid rgba(255,255,255,.12);margin:.6rem 0 0;gap:0}
+.tab-btn{flex:1;padding:.65rem .15rem;font-family:'Bebas Neue',sans-serif;font-size:.82rem;letter-spacing:2px;color:rgba(255,255,255,.28);background:none;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:-1px}
+.tab-btn.active{color:var(--tan);border-bottom-color:var(--tan)}
+.tab-btn:hover:not(.active){color:rgba(255,255,255,.55)}
+.tab-panel{display:none;padding-top:1.25rem}
+.tab-panel.active{display:block;animation:tabIn .2s ease}
+@keyframes tabIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.tab-section-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:4px;color:rgba(255,255,255,.18);margin-bottom:.5rem;text-align:center}
+.tab-section-sub{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:.06em;text-align:center;margin-bottom:1.1rem;font-style:italic}
+.menu-tab-card{border:1px solid rgba(255,255,255,.1);padding:1rem 1.25rem;background:rgba(255,255,255,.03);margin-bottom:.6rem}
+.menu-tab-card.feature{border-color:rgba(212,169,122,.3);background:rgba(212,169,122,.05)}
+.menu-tab-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.3rem;gap:.5rem}
+.menu-tab-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2.5px;color:white}
+.menu-tab-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--tan);flex-shrink:0}
+.menu-tab-desc{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.04em;line-height:1.45}
+.menu-tab-note{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;color:var(--tan);margin-top:.4rem}
+.live-pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(46,158,79,.12);border:1px solid rgba(46,158,79,.4);padding:.35rem .9rem;margin-bottom:1rem}
+.live-dot{width:.45rem;height:.45rem;border-radius:50%;background:#2e9e4f;flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.live-text{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#2e9e4f}
+
+</style>
+</head>
+<body>
+
+<!-- floating bg pizzas -->
+<div class="bg-pizza" id="bg-pizza"></div>
+
+<!-- ══════════════════════════
+     SPLASH / NOTIFY PAGE
+══════════════════════════ -->
+<div class="splash-page" id="splash-page">
+<div class="splash-inner">
+  <div id="form-state">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.5);margin-bottom:.3rem">DROP &nbsp;&middot;&nbsp; 09 &nbsp;&middot;&nbsp; AUG 2</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:5px;color:var(--tan);margin-bottom:.2rem">BROCATOEATZ</div>
+    <h1><em>SUNDAY</em><br><em class="line2" style="color:var(--tan)">PIZZA DROP</em></h1>
+
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="drop" onclick="switchTab('drop')">DROP</button>
+      <button class="tab-btn" data-tab="menu" onclick="switchTab('menu')">MENU</button>
+      <button class="tab-btn" data-tab="dates" onclick="switchTab('dates')">DATES</button>
+      <button class="tab-btn" data-tab="list" onclick="switchTab('list')">LIST</button>
+    </nav>
+
+    <!-- TAB: DROP -->
+    <div class="tab-panel active" id="tab-drop">
+      <div id="current-drop-info">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,5vw,1.8rem);letter-spacing:4px;color:white;margin-bottom:.2rem;margin-top:.25rem">SUNDAY, AUGUST 2ND</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:.2rem">11:20 AM &ndash; 7:00 PM</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.08em;color:var(--tan);margin-bottom:.4rem">King&rsquo;s Court Estate Winery &nbsp;&middot;&nbsp; St. Catharines</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red-light);margin-bottom:1.25rem">Pre-Order Only &mdash; No Walk-Ups</div>
+        <div id="preorder-pill" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.3);padding:.85rem 1.4rem;margin:0 auto .9rem;max-width:fit-content">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)">Pre-orders open</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--tan)">TUESDAY, JULY 28TH @ 7PM</span>
+        </div>
+        <div class="live-pill" id="live-pill" style="display:none">
+          <span class="live-dot"></span>
+          <span class="live-text">Pre-Orders Are Live</span>
+        </div>
+      </div>
+      <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
+      <div class="dough-tracker-wrap" id="dough-tracker" style="display:none">
+        <div class="dough-tracker-header">
+          <span class="dough-tracker-title">&#127829; Dough Tracker</span>
+          <button class="dough-info-btn" onclick="openDoughInfo()" title="What is this?">i</button>
+        </div>
+        <div class="dough-numbers-row">
+          <span class="dough-big-num" id="dough-booked">0</span>
+          <span class="dough-big-of">of</span>
+          <span class="dough-big-total" id="dough-total">105</span>
+          <span class="dough-big-unit">pies booked</span>
+        </div>
+        <div class="dough-bar-wrap"><div class="dough-bar-fill" id="dough-bar-fill" style="width:0%"></div></div>
+        <div class="dough-status ok" id="dough-status">Spots Available</div>
+      </div>
+      <div style="margin-top:1.25rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.45);text-align:center;margin-bottom:.6rem;line-height:1.5">Pre-orders open the <strong style="color:rgba(255,255,255,.75)">Tuesday before</strong> each drop @ <strong style="color:rgba(255,255,255,.75)">7:00 PM</strong></div>
+      <div class="soldout-splash" id="soldout-splash">
+        <div class="soldout-splash-title">SOLD OUT</div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:1.25rem 1.5rem;margin-top:.75rem;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem">THE NEXT POP UP DATE IS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.2rem);letter-spacing:4px;color:white;margin-bottom:.9rem">SUNDAY, AUGUST 2ND</div>
+          <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:.9rem"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem">PRE-ORDERS OPEN</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--tan);margin-bottom:.9rem">TUESDAY, JULY 28TH @ 7:00 PM</div>
+          <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:.9rem"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem">MENU DROPS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:rgba(255,255,255,.6)">SUNDAY, JULY 12TH @ 12:00 PM</div>
+        </div>
+      </div>
     </div>
 
-    <div style="
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.8rem,7vw,2.5rem);
-      letter-spacing:3px;
-      color:white;
-      line-height:1.1;
-      margin-bottom:.4rem;
-    ">
-      SUNDAY, AUGUST 16TH
+    <!-- TAB: MENU -->
+    <div class="tab-panel" id="tab-menu">
+      <div class="tab-section-title">AUGUST 2ND MENU</div>
+      <div class="tab-section-sub">Premium ingredients sourced from around the world</div>
+      <div class="menu-tab-card">
+        <div class="menu-tab-header">
+          <div style="display:flex;align-items:center;gap:.5rem"><span style="font-size:1.3rem;line-height:1">&#127813;</span><span class="menu-tab-name">MARGHERITA</span></div>
+          <span class="menu-tab-price">$20</span>
+        </div>
+        <div class="menu-tab-desc">Organic Bianco DiNapoli Tomato Sauce, Fior Di Latte, Fresh Basil, EVOO, 30-Month Aged Parmigiano Reggiano</div>
+      </div>
+      <div class="menu-tab-card">
+        <div class="menu-tab-header">
+          <div style="display:flex;align-items:center;gap:.5rem"><span style="font-size:1.3rem;line-height:1">&#127798;</span><span class="menu-tab-name">CUP &amp; CHAR</span></div>
+          <span class="menu-tab-price">$25</span>
+        </div>
+        <div class="menu-tab-desc">Organic Bianco DiNapoli Tomato Sauce, Grass-Fed Mozzarella Mix, Ezzo Cup &amp; Crisp Peps, Finished with My Hot Honey</div>
+      </div>
+      <div class="menu-tab-card">
+        <div class="menu-tab-header">
+          <div style="display:flex;align-items:center;gap:.5rem"><span style="font-size:1.3rem;line-height:1">&#127812;</span><span class="menu-tab-name">FUNGUY</span></div>
+          <span class="menu-tab-price">$25</span>
+        </div>
+        <div class="menu-tab-desc">White Truffle Oil, Fior Di Latte, Grass-Fed Mozzarella Mix, Roasted Mushrooms, House Chimichurri, 30-Month Aged Parmigiano Reggiano</div>
+      </div>
+      <div class="menu-tab-card feature">
+        <div class="menu-tab-header">
+          <div>
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.2rem"><span style="font-size:1.3rem;line-height:1">&#127807;</span><span class="menu-tab-name">PESTO &amp; RICOTTA</span></div>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.5rem;letter-spacing:.1em;color:#111;background:var(--tan);padding:.12rem .35rem;vertical-align:middle">DROP 9 FEATURE</span>
+          </div>
+          <span class="menu-tab-price">$25</span>
+        </div>
+        <div class="menu-tab-desc">Basil Pesto, Grass-Fed Mozzarella Mix, 30-Month Aged Parmigiano Reggiano, Fresh Basil, EVOO, Fresh Ricotta</div>
+      </div>
+      <div class="menu-tab-card" style="border-color:rgba(212,169,122,.15);background:rgba(212,169,122,.03)">
+        <div class="menu-tab-header">
+          <div style="display:flex;align-items:center;gap:.5rem"><span style="font-size:1.3rem;line-height:1">&#127851;</span><span class="menu-tab-name" style="color:rgba(255,255,255,.75)">DUBAI BROWNIE</span></div>
+          <span class="menu-tab-price">$5</span>
+        </div>
+        <div class="menu-tab-desc">3 Layers. Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
+        <div class="menu-tab-note">Free with any 2 pizzas</div>
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;margin-top:.25rem">Pre-order only &mdash; no walk-ups</div>
     </div>
 
-    <div style="
-      font-family:'Barlow Condensed',sans-serif;
-      font-weight:600;
-      font-size:.78rem;
-      letter-spacing:.07em;
-      color:var(--tan);
-      line-height:1.4;
-    ">
-      King's Court Estate Winery &amp; Vineyard<br>
-      St. Catharines
+    <!-- TAB: DATES -->
+    <div class="tab-panel" id="tab-dates">
+      <div class="tab-section-title">SUMMER 2026</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.4);text-align:center;margin-bottom:1.1rem;line-height:1.5">Pre-orders open the <strong style="color:rgba(255,255,255,.7)">Tuesday before</strong> each drop @ <strong style="color:rgba(255,255,255,.7)">7:00 PM</strong></div>
+        <div style="border:1px solid rgba(212,169,122,.2);padding:.9rem 1rem 0">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.4);text-align:left;padding:.14rem .5rem;border-left:2px solid rgba(212,169,122,.25);margin-bottom:.2rem">July</div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">08</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.45);text-decoration:line-through">SUNDAY, JULY 26TH</span>
+          </div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.4);text-align:left;padding:.14rem .5rem;border-left:2px solid rgba(212,169,122,.25);margin-bottom:.2rem;margin-top:.35rem">August</div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(212,169,122,.07);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.6)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--tan)">09</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:white">SUNDAY, AUGUST 2ND</span>
+            <div style="position:absolute;right:.7rem;top:50%;transform:translateY(-50%);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;background:var(--tan);color:#111;padding:.2rem .5rem">NEXT</div>
+          </div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">10</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 16TH</span>
+          </div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">11</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 23RD</span>
+          </div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">12</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, AUGUST 30TH</span>
+          </div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.4);text-align:left;padding:.14rem .5rem;border-left:2px solid rgba(212,169,122,.25);margin-bottom:.2rem;margin-top:.35rem">September</div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">13</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, SEPTEMBER 6TH</span>
+          </div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);text-align:center">
+            <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.3)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(212,169,122,.38)">14</span></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,.85)">SUNDAY, SEPTEMBER 27TH</span>
+          </div>
+        </div>
     </div>
 
-    <div style="
-      height:1px;
-      background:rgba(255,255,255,.1);
-      margin:1.1rem 0;
-    "></div>
-
-    <div style="
-      font-family:'Barlow Condensed',sans-serif;
-      font-weight:700;
-      font-size:.63rem;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.35);
-      margin-bottom:.25rem;
-    ">
-      PRE-ORDERS OPEN
+    <!-- TAB: LIST -->
+    <div class="tab-panel" id="tab-list">
+      <div class="tab-section-title">JOIN THE DROP LIST</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.06em;margin-bottom:1.25rem;line-height:1.5;text-align:center">Be the first to know when the next drop goes live &mdash; get a text the moment pre-orders open.</div>
+      <div class="signup-form">
+        <div class="form-row">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" id="n-fname" placeholder="First name" autocomplete="given-name">
+            <span class="field-err" id="err-fname">Required</span>
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" id="n-lname" placeholder="Last name" autocomplete="family-name">
+            <span class="field-err" id="err-lname">Required</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Phone Number</label>
+          <input type="tel" id="n-phone" placeholder="555-012-3456" autocomplete="tel">
+          <span class="field-err" id="err-phone">Enter a valid phone number</span>
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="consent">
+          <span class="consent-text">I agree to receive <strong>text message updates</strong> about upcoming BrocatoEatz drops. Reply STOP to unsubscribe.</span>
+        </label>
+        <span class="field-err" id="err-consent">Please check the box to opt in</span>
+        <button class="notify-submit" id="notify-btn" onclick="handleSignup()">JOIN THE LIST</button>
+      </div>
+      <div class="fine-print">Your info is only used to send BrocatoEatz updates. No spam, ever.</div>
     </div>
 
-    <div style="
-      font-family:'Bebas Neue',sans-serif;
-      font-size:1.25rem;
-      letter-spacing:2px;
-      color:var(--tan);
-    ">
-      TUESDAY, AUGUST 11TH @ 7:00 PM
+    <!-- SOCIAL -->
+    <div class="divider" style="margin-top:1.75rem"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:.45rem">
+      <a href="https://www.instagram.com/brocatoeatz" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--tan);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @brocatoeatz
+      </a>
+      <a href="tel:9054017804" style="display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.1em;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.29 6.29l1.62-1.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        905-401-7804
+      </a>
     </div>
 
+    <!-- LOCKED POPUP moved to body level -->
   </div>
-
-
-  <!-- DROP LIST MESSAGE -->
-  <div style="
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:500;
-    font-size:.78rem;
-    line-height:1.5;
-    letter-spacing:.04em;
-    color:rgba(255,255,255,.4);
-    max-width:330px;
-    margin:0 auto .5rem;
-  ">
-    Join the Drop List below for the feature pizza reveal
-    and <strong style="color:rgba(255,255,255,.7);">
-      15-minute early access
-    </strong>
-    to pre-orders.
+  <div class="notify-success" id="success-state">
+    <div class="notify-success-icon">🍕</div>
+    <h3>YOU'RE ON THE DROP LIST</h3>
+    <p>Check your phone — a confirmation text is on its way.</p>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:-.5rem">We'll text you when the next drop goes live.</p>
+    <button onclick="resetSignupForm()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer;margin-top:.75rem">← BACK</button>
   </div>
-
 </div>
+</div>
+
+<!-- ══════════════════════════
+     ORDERING PAGE
+══════════════════════════ -->
+<div class="order-page" id="order-page">
+  <div class="soldout-banner" id="soldout-banner">ALL SLOTS FULL — SEE YOU NEXT DROP!</div>
+  <div style="padding:.75rem 1rem;background:var(--charcoal)">
+    <button onclick="goHome()" style="background:none;border:none;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:0">← BACK</button>
+  </div>
+  <div class="orders-locked" id="orders-locked" style="display:none">
+    <div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div>
+    <div class="orders-locked-sub">Orders open Tuesday, July 28th @ 7:00 PM<br>Next Pop Up: Sunday, August 2nd</div>
+  </div>
+
+  <div class="order-header">
+    <div class="order-hero-row">
+      <div class="order-hero-stack"><em>SUNDAY</em><br><em class="order-line2" style="color:var(--tan)">PIZZA DROP</em></div>
+      <div class="order-brand-side">BROCATOEATZ</div>
+    </div>
+    <div class="order-meta-row">
+      <span class="order-meta-item">Sunday, August 2nd</span>
+      <span class="order-meta-sep">|</span>
+      <span class="order-meta-item">11:20 AM – 7:00 PM</span>
+    </div>
+    <div class="order-meta-city">St. Catharines, ON</div>
+  </div>
+  <div class="order-dough-strip" id="order-dough-strip" style="display:none">
+    <span class="order-dough-label">&#127829; Dough
+      <button class="dough-info-btn" onclick="openDoughInfo()" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">i</button>
+    </span>
+    <div class="order-dough-bar-wrap"><div class="order-dough-fill" id="order-dough-fill" style="width:0%"></div></div>
+    <span class="order-dough-pct" id="order-dough-pct">&#8212;</span>
+  </div>
+
+  <!-- ORDER PAGE DOUGH STRIP -->
+  <div class="order-dough-strip" id="order-dough-strip" style="display:none">
+    <span class="order-dough-label">🍕 Dough
+      <button class="dough-info-btn" onclick="openDoughInfo()" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">i</button>
+    </span>
+    <div class="order-dough-bar-wrap"><div class="order-dough-fill" id="order-dough-fill" style="width:0%"></div></div>
+    <span class="order-dough-pct" id="order-dough-pct">—</span>
+  </div>
+
+  <nav class="steps">
+    <div class="step active" id="step1"><span class="step-num">1</span> Menu</div>
+    <div class="step" id="step2"><span class="step-num">2</span> Time</div>
+    <div class="step" id="step3"><span class="step-num">3</span> Info</div>
+  </nav>
+
+  <div class="order-main">
+    <div id="order-form">
+
+      <!-- PIZZAS -->
+      <div class="section-title">CHOOSE YOUR PIZZA</div>
+      <div class="pizza-grid" id="pizza-grid"></div>
+
+      <!-- BROWNIE -->
+      <div class="brownie-promo-bar" id="brownie-promo-bar">ADD 1 MORE PIZZA — GET A FREE BROWNIE</div>
+      <div class="brownie-card" id="brownie-card" onclick="toggleBrownie()">
+        <div class="brownie-left">
+          <div class="brownie-name">DUBAI BROWNIE</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:#999;margin-top:.25rem">3 Layers. Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
+        </div>
+        <div class="brownie-right">
+          <div class="brownie-qty">
+            <button class="qty-btn" style="border-color:white;color:white" onclick="event.stopPropagation();changeBrownieQty(-1)">-</button>
+            <span class="qty-num" id="brownie-qty-num" style="color:white">1</span>
+            <button class="qty-btn" style="border-color:white;color:white" onclick="event.stopPropagation();changeBrownieQty(1)">+</button>
+          </div>
+          <div class="brownie-price" id="brownie-price">$5</div>
+          <div class="brownie-badge" id="brownie-badge">ADDED</div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- TIME SLOTS -->
+      <div class="section-title">PICK A TIME</div>
+      <div class="slot-rule"><strong>6 pizzas per slot.</strong> Large orders will span the next slot.</div>
+      <div class="slot-error" id="slot-error"></div>
+      <div class="slot-grid" id="slot-grid"></div>
+      <div class="cap-warning" id="cap-warning"></div>
+
+      <hr class="section-divider">
+
+      <!-- CONTACT -->
+      <div class="section-title">YOUR INFO</div>
+      <div class="contact-grid">
+        <div class="name-row">
+          <div class="o-field">
+            <label>First Name</label>
+            <input type="text" id="fname" placeholder="First" autocomplete="given-name">
+          </div>
+          <div class="o-field">
+            <label>Last Name</label>
+            <input type="text" id="lname" placeholder="Last" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="o-field">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="(905) 555-0100" autocomplete="tel">
+        </div>
+        <div class="o-field">
+          <label>Notes (optional)</label>
+          <textarea id="notes" placeholder="Allergies, special requests..."></textarea>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <!-- SUMMARY -->
+      <div class="section-title">ORDER SUMMARY</div>
+      <div class="order-summary">
+        <div id="summary-content"><p class="summary-empty">SELECT PIZZAS AND A TIME SLOT ABOVE</p></div>
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:600;color:#aaa;letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:.75rem">Cash preferred · Payment at pickup</div>
+      <div style="border:1.5px solid rgba(212,169,122,.25);background:rgba(212,169,122,.05);padding:1rem 1.25rem;margin-bottom:1.25rem;text-align:left">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem">Fresh Pizza Takes Time</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:#888;letter-spacing:.03em;line-height:1.55">We don't make pizzas ahead of time. Each one is crafted fresh after you check in, which means wait times of 15–20 minutes during peak periods. Our open kitchen gives you a front-row seat to the entire process, and every pizza is served straight from the oven.</div>
+      </div>
+      <div class="sms-consent">By placing an order you'll receive a confirmation and pickup reminder via text. Reply STOP to opt out.</div>
+      <button class="submit-btn-order" id="submit-btn" onclick="submitOrder()" disabled>PLACE ORDER</button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success-screen">
+      <div style="font-size:3.5rem;margin-bottom:1rem">🍕</div>
+      <h2>ORDER PLACED!</h2>
+      <p style="font-family:'Barlow Condensed',sans-serif;color:#666;margin-bottom:1.5rem">See you August 2nd at the Pizza Drop!</p>
+      <div class="success-details" id="success-details"></div>
+      <button class="restart-btn" onclick="restartOrder()">PLACE ANOTHER ORDER</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     ADMIN
+══════════════════════════ -->
+<div id="admin-view">
+  <div id="admin-login-screen" class="admin-login">
+    <h2>ADMIN</h2>
+    <input type="password" id="admin-pw" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()">
+    <button onclick="adminLogin()">LOGIN</button>
+    <div class="admin-err" id="admin-err">Wrong password</div>
+  </div>
+  <div id="admin-dashboard" style="display:none">
+    <div class="admin-bar">
+      <h1>BROCATO ADMIN</h1>
+      <div class="admin-bar-actions">
+        <button class="admin-btn" onclick="refreshAdmin()">REFRESH</button>
+        <button class="admin-btn green" id="orders-toggle-btn" onclick="toggleOrders()">OPEN ORDERS</button>
+        <button class="admin-btn" id="soldout-toggle-btn" onclick="toggleSoldOut()">SOLD OUT</button>
+        <button class="admin-btn" onclick="sendReminders()">SEND REMINDERS</button>
+        <button class="admin-btn" onclick="exportCSV()">EXPORT CSV</button>
+        <button class="admin-btn" onclick="exportSubscribers()">NOTIFY LIST</button>
+        <button class="admin-btn danger" onclick="clearOrders()">CLEAR ORDERS</button>
+      </div>
+    </div>
+    <div class="admin-compose">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed rgba(139,26,14,.3);flex-wrap:wrap">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--red)">DOUGH COUNT</div>
+        <input type="number" id="admin-dough-count" min="1" max="999" value="105" style="width:80px;padding:.4rem .6rem;border:2px solid #e0d8cc;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;outline:none;text-align:center;border-radius:0" oninput="saveDoughCount()">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;color:#999;letter-spacing:.04em;line-height:1.4">Total pies for this drop.<br>Set Thursday when dough prep begins.</span>
+      </div>
+      <div class="admin-section-title" style="margin-top:0">MESSAGE THE DROP LIST</div>
+      <textarea id="drop-message" class="admin-compose-textarea" rows="3" maxlength="1000" placeholder="Type your message here. Use {name} to insert each person's first name." oninput="updateDropCharCount()"></textarea>
+      <div class="admin-compose-row">
+        <span id="drop-char-count" class="admin-compose-count">0 characters &middot; 1 SMS segment</span>
+        <button class="admin-btn" style="background:#8B1A0E;color:white;border-color:#8B1A0E" id="drop-send-btn" onclick="sendCustomDropMessage()">SEND TO DROP LIST</button>
+      </div>
+    </div>
+    <div class="admin-body" id="admin-body"></div>
+  </div>
+</div>
+
+<!-- LOCKED POPUP -->
+<div id="locked-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:99999;align-items:center;justify-content:center;padding:1.5rem" onclick="closeLocked()">
+  <div style="background:#111;border:2px solid #D4A97A;padding:2rem 1.75rem;max-width:340px;width:90%;text-align:center" onclick="event.stopPropagation()">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:4px;color:#D4A97A;margin-bottom:.5rem">NOT OPEN YET</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem">Pre-orders open</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:white;margin-bottom:1.25rem;white-space:nowrap">TUESDAY, JULY 28TH @ 7:00 PM</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5;margin-bottom:.9rem">Sign up for the Drop List below to get notified when orders open! ↓</div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:1rem">
+      <div id="lp-form" style="text-align:left">
+        <div style="display:flex;gap:.4rem;margin-bottom:.5rem">
+          <div style="flex:1">
+            <input type="text" id="lp-fname" placeholder="First name" autocomplete="given-name" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.5rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none">
+            <span id="lp-err-fname" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;color:#e55;margin-top:.2rem">Required</span>
+          </div>
+          <div style="flex:1">
+            <input type="text" id="lp-lname" placeholder="Last name" autocomplete="family-name" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.5rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none">
+            <span id="lp-err-lname" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;color:#e55;margin-top:.2rem">Required</span>
+          </div>
+        </div>
+        <input type="tel" id="lp-phone" placeholder="555-012-3456" autocomplete="tel" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.5rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none;margin-bottom:.2rem">
+        <span id="lp-err-phone" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;color:#e55">Enter a valid phone number</span>
+        <label style="display:flex;gap:.4rem;align-items:flex-start;margin:.6rem 0 .2rem;cursor:pointer">
+          <input type="checkbox" id="lp-consent" style="margin-top:.2rem">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.4">I agree to receive <strong>text message updates</strong> about upcoming BrocatoEatz drops. Reply STOP to unsubscribe.</span>
+        </label>
+        <span id="lp-err-consent" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;color:#e55">Please check the box to opt in</span>
+        <button id="lp-notify-btn" onclick="handlePopupSignup()" style="width:100%;margin-top:.6rem;background:var(--tan);border:none;color:#111;padding:.65rem;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;cursor:pointer">JOIN THE LIST</button>
+      </div>
+      <div id="lp-success" style="display:none;text-align:center;font-family:'Barlow Condensed',sans-serif;color:var(--tan);font-weight:600;letter-spacing:.05em">You're on the Drop List! 🍕 Check your phone for a confirmation text.</div>
+    </div>
+
+    <button onclick="closeLocked()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1.5rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;cursor:pointer;margin-top:1.25rem">CLOSE</button>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08);margin-top:1.25rem;padding-top:.9rem">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.06em;margin-bottom:.5rem">Have an early access code?</div>
+      <div style="display:flex;gap:.4rem">
+        <input id="secret-code-input" type="text" placeholder="Code" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:white;padding:.45rem .6rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;outline:none;text-transform:uppercase" onkeydown="if(event.key==='Enter')checkSecretCode()">
+        <button onclick="checkSecretCode()" style="background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);padding:.45rem .75rem;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:1px;cursor:pointer">GO</button>
+      </div>
+      <div id="secret-code-err" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:#e55;margin-top:.3rem;letter-spacing:.05em">Invalid code.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DOUGH INFO MODAL -->
+<div class="dough-info-modal" id="dough-info-modal" onclick="closeDoughInfo()">
+  <div class="dough-info-box" onclick="event.stopPropagation()">
+    <h4>🍕 DOUGH TRACKER</h4>
+    <p>The Dough Tracker is set on <strong style="color:rgba(255,255,255,.8)">Thursday</strong> when Brocato begins his dough prep — a 3-day process that creates a gut-friendly crust. Most people with gluten sensitivities can enjoy it safely.</p>
+    <p style="margin-top:.6rem;font-style:italic;color:rgba(255,255,255,.35)">Eat at your own risk! 😄</p>
+    <p style="margin-top:.6rem">This number reflects total pies committed to for the drop — not individual pickup time slots.</p>
+    <button class="dough-info-close" onclick="closeDoughInfo()">GOT IT</button>
+  </div>
+</div>
+
+<div class="dough-info-modal" id="dough-info-modal" onclick="closeDoughInfo()">
+  <div class="dough-info-box" onclick="event.stopPropagation()">
+    <h4>&#127829; DOUGH TRACKER</h4>
+    <p>The Dough Tracker is set on <strong>Thursday</strong> when Brocato begins his dough prep &mdash; a 3-day process that creates a gut-friendly crust. Most people with gluten sensitivities can enjoy it safely.</p>
+    <p style="font-style:italic;color:rgba(255,255,255,.35)">Eat at your own risk! &#128514;</p>
+    <p>This number reflects total pies committed to for the drop &mdash; not individual pickup time slots.</p>
+    <button class="dough-info-close" onclick="closeDoughInfo()">GOT IT</button>
+  </div>
+</div>
+
+
+<script>
+// ══════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════
+var ADMIN_PASSWORD = 'pizza6';
+var DROP_DATE = new Date('2026-08-02T11:00:00');
+var ORDERS_OPEN_DATE = new Date('2026-07-28T19:00:00'); // Tuesday July 28th @ 7:00 PM
+var TOTAL_CAP = 105; // max pizzas regardless of slot availability
+
+var PIZZAS = [
+  {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, FIOR DI LATTE, FRESH BASIL, EVOO, 30-MONTH AGED PARMIGIANO REGGIANO'},
+  {id:'cupchar',     name:'CUP & CHAR',     price:25, img:null, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
+  {id:'funguy',      name:'FUNGUY',         price:25, img:null, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA MIX, ROASTED MUSHROOMS, HOUSE CHIMICHURRI, 30-MONTH AGED PARMIGIANO REGGIANO'},
+  {id:'calabrian',   name:'PESTO & RICOTTA',  price:25, img:null, feature:'DROP 9 FEATURE', desc:'BASIL PESTO, GRASS-FED MOZZARELLA MIX, 30-MONTH AGED PARMIGIANO REGGIANO, FRESH BASIL, EVOO, FRESH RICOTTA'}
+];
+
+var SLOT_PIZZA_CAP = 6;
+var SLOT_LABELS = [
+  '11:20 AM','11:40 AM',
+  '12:00 PM','12:20 PM','12:40 PM',
+  '1:00 PM','1:20 PM','1:40 PM',
+  '2:00 PM','2:20 PM','2:40 PM',
+  '3:00 PM','3:20 PM','3:40 PM',
+  '4:00 PM','4:20 PM','4:40 PM',
+  '5:00 PM','5:20 PM','5:40 PM',
+  '6:00 PM','6:20 PM','6:40 PM',
+  '7:00 PM'
+];
+
+// ══════════════════════════════════════
+// STORAGE
+// ══════════════════════════════════════
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0zOhy00BAgU5Rz1IpzPXlm_ZeZevaPEOJ3GTbal2IlvmQl16Xh3JPHAaLqG0i9BoXow/exec';
+var liveOrdersCache = null; // populated by fetchLiveOrders()
+
+// Converts a raw order row from the Sheet into the shape the rest of the
+// site's slot-math functions already expect (slot + pizzaCount).
+function normalizeSheetOrder(o){
+  return {
+    id: o.orderNum,
+    orderNum: o.orderNum,
+    fname: o.fname, lname: o.lname, phone: o.phone, notes: o.notes,
+    slot: o.slotDisplay, slotDisplay: o.slotDisplay,
+    slots: o.slots || [], // per-slot breakdown for split orders, used by pizzasSoldInSlot()
+    pizzaCount: Number(o.pizzaCount) || 0,
+    pizzas: [
+      {id:'margherita', qty:Number(o.margherita)||0},
+      {id:'cupchar', qty:Number(o.cupchar)||0},
+      {id:'funguy', qty:Number(o.funguy)||0},
+      {id:'calabrian', qty:Number(o.calabrian)||0}
+    ],
+    brownie: Number(o.brownie) || 0,
+    total: Number(o.total) || 0,
+    ts: o.timestamp
+  };
+}
+
+// Fetches the live, shared order list from Google Sheets. Returns a Promise.
+// Call this BEFORE relying on loadOrders() for anything that needs to be
+// accurate across devices (e.g. before rendering slots or submitting an order).
+function fetchLiveOrders(){
+  return fetch(APPS_SCRIPT_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      liveOrdersCache = (data.orders || []).map(normalizeSheetOrder);
+      return liveOrdersCache;
+    })
+    .catch(function(e){
+      console.log('fetchLiveOrders error:', e);
+      // Fall back to whatever we last had (possibly null -> empty array)
+      liveOrdersCache = liveOrdersCache || [];
+      return liveOrdersCache;
+    });
+}
+
+// loadOrders() now returns the live cache if we have it, otherwise an empty
+// array. It is synchronous, so callers get fresh data only AFTER
+// fetchLiveOrders() has resolved at least once (see enterOrdering()).
+function loadOrders(){
+  return liveOrdersCache || [];
+}
+function saveOrders(o){ /* no-op: orders are written via Apps Script in submitOrder(), not localStorage */ }
+
+var liveSubscribersCache = null; // populated by fetchLiveSubscribers()
+
+// Fetches the live, shared Drop List from the "Sign Ups" sheet. Returns a
+// Promise, mirroring fetchLiveOrders() — this replaces the old localStorage
+// version, which only ever showed whoever signed up on that ONE browser.
+function fetchLiveSubscribers(){
+  return fetch(APPS_SCRIPT_URL + '?type=signups')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      liveSubscribersCache = data.subscribers || [];
+      return liveSubscribersCache;
+    })
+    .catch(function(e){
+      console.log('fetchLiveSubscribers error:', e);
+      liveSubscribersCache = liveSubscribersCache || [];
+      return liveSubscribersCache;
+    });
+}
+
+function loadSubscribers(){
+  return liveSubscribersCache || [];
+}
+function saveSubscribers(s){ /* no-op: subscribers now live in Google Sheets, written via the signup form's POST */ }
+
+// ══════════════════════════════════════
+// SLOT HELPERS
+// ══════════════════════════════════════
+function totalPizzasSold(){
+  return loadOrders().reduce(function(s,o){ return s + (o.pizzaCount||0); }, 0);
+}
+function isTotalCapReached(){ return totalPizzasSold() >= TOTAL_CAP; }
+function pizzasRemaining(){ return Math.max(0, TOTAL_CAP - totalPizzasSold()); }
+
+function pizzasSoldInSlot(label){
+  var orders = loadOrders();
+  var count = 0;
+  orders.forEach(function(o){
+    if(o.slots){
+      var entry = o.slots.filter(function(s){ return s.slot === label; })[0];
+      if(entry) count += entry.qty;
+    } else if(o.slot === label){
+      count += o.pizzaCount;
+    }
+  });
+  return count;
+}
+function slotPizzasLeft(label){ return Math.max(0, SLOT_PIZZA_CAP - pizzasSoldInSlot(label)); }
+function isSlotFull(label){ return slotPizzasLeft(label) <= 0; }
+function allSlotsFull(){ return isTotalCapReached() || SLOT_LABELS.every(function(l){ return isSlotFull(l); }); }
+
+function allocateSlots(startIdx, needed){
+  var alloc = [];
+  var remaining = needed;
+  for(var i = startIdx; i < SLOT_LABELS.length && remaining > 0; i++){
+    var label = SLOT_LABELS[i];
+    var avail = slotPizzasLeft(label);
+    if(avail <= 0) break;
+    var take = Math.min(avail, remaining);
+    if(pizzasSoldInSlot(label) + take > SLOT_PIZZA_CAP) break;
+    alloc.push({slot: label, qty: take});
+    remaining -= take;
+  }
+  return remaining > 0 ? null : alloc;
+}
+
+// ══════════════════════════════════════
+// CART STATE
+// ══════════════════════════════════════
+var cart = {};
+var brownieQty = 0;
+var freeBrownie = false;
+var brownieAutoAdded = false;
+var selectedSlot = null;
+var selectedSlotIdx = null;
+
+function cartCount(){
+  return Object.values(cart).reduce(function(s,q){ return s+q; }, 0);
+}
+function calcBrownieTotal(){
+  if(brownieQty === 0) return 0;
+  if(freeBrownie) return Math.max(0, brownieQty - 1) * 5;
+  return brownieQty * 5;
+}
+function calcTotal(){
+  var t = 0;
+  Object.keys(cart).forEach(function(id){
+    var p = PIZZAS.filter(function(x){ return x.id === id; })[0];
+    t += p.price * cart[id];
+  });
+  t += calcBrownieTotal();
+  return t;
+}
+
+// ══════════════════════════════════════
+// RENDER PIZZAS
+// ══════════════════════════════════════
+function renderPizzas(){
+  var html = '';
+  PIZZAS.forEach(function(p){
+    html += '<div class="pizza-card" id="card-' + p.id + '" onclick="togglePizza(\'' + p.id + '\')">';
+    html += '<div class="pizza-header-row">';
+    html += '<div class="pizza-header-text">';
+    html += '<div class="pizza-header"><div class="pizza-name">' + p.name + (p.feature ? ' <span style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.1em;color:#111;background:var(--tan);padding:.12rem .35rem;vertical-align:middle;margin-left:.25rem">' + p.feature + '</span>' : '') + '</div><div class="pizza-header-right"><div class="pizza-price">$' + p.price + '</div><div class="badge">ADDED</div></div></div>';
+    html += '<div class="pizza-desc">' + p.desc + '</div>';
+    html += '</div></div>';
+    html += '<div class="qty-control">';
+    html += '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + p.id + '\',-1)">-</button>';
+    html += '<span class="qty-num" id="qty-' + p.id + '">1</span>';
+    html += '<span class="qty-label" id="lbl-' + p.id + '">pie</span>';
+    html += '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + p.id + '\',1)">+</button>';
+    html += '</div></div>';
+  });
+  document.getElementById('pizza-grid').innerHTML = html;
+}
+
+function togglePizza(id){
+  if(cart[id]){
+    delete cart[id];
+    document.getElementById('card-' + id).classList.remove('selected');
+  } else {
+    cart[id] = 1;
+    document.getElementById('card-' + id).classList.add('selected');
+    document.getElementById('qty-' + id).textContent = 1;
+    document.getElementById('lbl-' + id).textContent = 'pie';
+  }
+  updateBrowniePromo();
+  updateSummary();
+  updateSteps();
+  updateCapWarning();
+  renderSlots();
+}
+
+function changeQty(id, delta){
+  if(!cart[id]) return;
+  var nq = cart[id] + delta;
+  if(nq < 1){ togglePizza(id); return; }
+  cart[id] = Math.max(1, nq);
+  document.getElementById('qty-' + id).textContent = cart[id];
+  document.getElementById('lbl-' + id).textContent = cart[id] > 1 ? 'pies' : 'pie';
+  updateBrowniePromo();
+  updateSummary();
+  updateCapWarning();
+  renderSlots();
+}
+
+// ══════════════════════════════════════
+// BROWNIE
+// ══════════════════════════════════════
+function updateBrowniePriceDisplay(){
+  var priceEl = document.getElementById('brownie-price');
+  if(!priceEl) return;
+  if(freeBrownie){
+    if(brownieQty <= 1){
+      priceEl.innerHTML = '<span style="color:var(--tan);font-family:\'Bebas Neue\',sans-serif;letter-spacing:1px">FREE</span>';
+    } else {
+      var extraCost = (brownieQty - 1) * 5;
+      priceEl.innerHTML = '<span style="color:var(--tan);font-family:\'Bebas Neue\',sans-serif;letter-spacing:1px">1 FREE</span><span style="display:block;font-size:.65rem;color:#999;font-family:\'Barlow Condensed\',sans-serif;letter-spacing:.03em">+$' + extraCost + ' extra</span>';
+    }
+  } else {
+    priceEl.textContent = '$' + (brownieQty === 0 ? 5 : brownieQty * 5);
+  }
+}
+
+function updateBrowniePromo(){
+  var count = cartCount();
+  var card = document.getElementById('brownie-card');
+  var bar = document.getElementById('brownie-promo-bar');
+  var priceEl = document.getElementById('brownie-price');
+  var subEl = document.getElementById('brownie-sub');
+  var badgeEl = document.getElementById('brownie-badge');
+
+  if(count >= 2){
+    freeBrownie = true;
+    bar.classList.remove('visible');
+    if(subEl) subEl.textContent = 'On us — you earned it';
+    card.classList.add('free-mode');
+    badgeEl.textContent = 'ADDED';
+    if(brownieQty === 0){
+      brownieQty = 1;
+      brownieAutoAdded = true;
+      card.classList.add('selected');
+      document.getElementById('brownie-qty-num').textContent = 1;
+    }
+    updateBrowniePriceDisplay();
+  } else {
+    var wasFree = freeBrownie;
+    freeBrownie = false;
+    if(subEl) subEl.textContent = 'Add-on dessert · $5';
+    card.classList.remove('free-mode');
+    badgeEl.textContent = 'ADDED';
+    if(count === 1){
+      bar.classList.add('visible');
+      if(wasFree && brownieAutoAdded){
+        brownieQty = 0;
+        brownieAutoAdded = false;
+        card.classList.remove('selected');
+      }
+    } else {
+      bar.classList.remove('visible');
+      brownieQty = 0;
+      brownieAutoAdded = false;
+      card.classList.remove('selected');
+    }
+    updateBrowniePriceDisplay();
+  }
+}
+
+function toggleBrownie(){
+  if(freeBrownie) return;
+  var card = document.getElementById('brownie-card');
+  if(brownieQty > 0){
+    brownieQty = 0;
+    brownieAutoAdded = false;
+    card.classList.remove('selected');
+  } else {
+    brownieQty = 1;
+    brownieAutoAdded = false;
+    card.classList.add('selected');
+    document.getElementById('brownie-qty-num').textContent = 1;
+  }
+  updateBrowniePriceDisplay();
+  updateSummary();
+  updateSteps();
+}
+
+function changeBrownieQty(delta){
+  var min = freeBrownie ? 1 : 1;
+  brownieQty = Math.max(min, Math.min(10, brownieQty + delta));
+  document.getElementById('brownie-qty-num').textContent = brownieQty;
+  updateBrowniePriceDisplay();
+  updateSummary();
+}
+
+// ══════════════════════════════════════
+// SLOTS
+// ══════════════════════════════════════
+function renderSlots(){
+  var needed = cartCount() || 1;
+  var html = '';
+  SLOT_LABELS.forEach(function(label, idx){
+    var pLeft = slotPizzasLeft(label);
+    var full = isSlotFull(label);
+    var canStart = !full && allocateSlots(idx, needed) !== null;
+    var isSelected = selectedSlot === label;
+    var availText = full ? 'FULL' : (pLeft + ' LEFT');
+    var availClass = full ? '' : slotAvailClass(pLeft);
+    var disabled = (!canStart && !isSelected) ? 'disabled' : '';
+    html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + (full ? ' full' : '') + '" id="slot-' + idx + '" ' + disabled + ' onclick="selectSlot(\'' + label.replace(/'/g, "\\'") + '\',' + idx + ')">';
+    html += '<span class="slot-time">' + label + '</span>';
+    html += '<span class="slot-avail ' + availClass + '">' + availText + '</span>';
+    html += '</button>';
+  });
+  document.getElementById('slot-grid').innerHTML = html;
+}
+
+// Green/yellow/red split proportional to SLOT_PIZZA_CAP, so this keeps
+// working correctly no matter what the cap is set to (it was previously
+// hardcoded to specific leftover counts that only matched a cap of 4).
+function slotAvailClass(pLeft){
+  var third = SLOT_PIZZA_CAP / 3;
+  if(pLeft <= third) return 'avail-red';
+  if(pLeft <= third * 2) return 'avail-yellow';
+  return 'avail-green';
+}
+
+function selectSlot(label, idx){
+  selectedSlot = label;
+  selectedSlotIdx = idx;
+  document.getElementById('slot-error').classList.remove('visible');
+  updateSummary();
+  updateSteps();
+  updateCapWarning();
+  renderSlots();
+}
+
+function updateCapWarning(){
+  var el = document.getElementById('cap-warning');
+  if(!selectedSlot){ el.classList.remove('visible'); return; }
+  var needed = cartCount();
+  var alloc = needed > 0 ? allocateSlots(selectedSlotIdx, needed) : null;
+  if(needed > 0 && !alloc){
+    el.textContent = 'NOT ENOUGH CONSECUTIVE SPACE — try an earlier slot or reduce your order';
+    el.classList.add('visible');
+  } else if(isSlotFull(selectedSlot)){
+    el.textContent = 'THIS SLOT IS FULL — please choose another time';
+    el.classList.add('visible');
+  } else {
+    el.classList.remove('visible');
+  }
+}
+
+// ══════════════════════════════════════
+// STEPS
+// ══════════════════════════════════════
+function updateSteps(){
+  var s1 = document.getElementById('step1');
+  var s2 = document.getElementById('step2');
+  var s3 = document.getElementById('step3');
+  var hasCart = cartCount() > 0 || brownieQty > 0;
+  if(hasCart && selectedSlot){
+    s1.className = 'step done'; s2.className = 'step done'; s3.className = 'step active';
+  } else if(hasCart){
+    s1.className = 'step done'; s2.className = 'step active'; s3.className = 'step';
+  } else {
+    s1.className = 'step active'; s2.className = 'step'; s3.className = 'step';
+  }
+}
+
+// ══════════════════════════════════════
+// SUMMARY
+// ══════════════════════════════════════
+function updateSummary(){
+  var items = Object.keys(cart);
+  var el = document.getElementById('summary-content');
+  var hasItems = items.length > 0 || brownieQty > 0;
+  var needed = cartCount();
+  var alloc = selectedSlot ? allocateSlots(selectedSlotIdx, needed) : null;
+
+  if(!hasItems && !selectedSlot){
+    el.innerHTML = '<p class="summary-empty">SELECT PIZZAS AND A TIME SLOT ABOVE</p>';
+    document.getElementById('submit-btn').disabled = true;
+    return;
+  }
+
+  var html = '';
+  items.forEach(function(id){
+    var p = PIZZAS.filter(function(x){ return x.id === id; })[0];
+    html += '<div class="summary-row"><span>' + p.name + ' x' + cart[id] + '</span><span>$' + (p.price * cart[id]) + '</span></div>';
+  });
+
+  if(brownieQty > 0){
+    if(freeBrownie){
+      html += '<div class="summary-row"><span>DUBAI BROWNIE x1</span><span style="color:var(--green);font-weight:700">FREE</span></div>';
+      if(brownieQty > 1){
+        var ex = brownieQty - 1;
+        html += '<div class="summary-row"><span>DUBAI BROWNIE x' + ex + ' (extra)</span><span>$' + (ex*5) + '</span></div>';
+      }
+    } else {
+      html += '<div class="summary-row"><span>DUBAI BROWNIE x' + brownieQty + '</span><span>$' + (brownieQty*5) + '</span></div>';
+    }
+  }
+
+  if(selectedSlot && alloc){
+    if(alloc.length === 1){
+      html += '<div class="summary-row highlight"><span>PICKUP</span><span>' + alloc[0].slot + '</span></div>';
+    } else {
+      var parts = alloc.map(function(a){ return a.slot + ' (' + a.qty + ')'; }).join(' + ');
+      html += '<div class="summary-row highlight"><span>SPLIT PICKUP</span><span style="font-size:.8em;text-align:right">' + parts + '</span></div>';
+    }
+  } else if(selectedSlot && !alloc){
+    html += '<div class="summary-row highlight" style="color:#e55"><span>SLOT ISSUE</span><span>pick another</span></div>';
+  }
+
+  var savings = '';
+  if(hasItems) html += '<div class="summary-row total"><span>TOTAL — DUE AT PICKUP</span><span>$' + calcTotal() + '</span></div>';
+
+  el.innerHTML = html;
+
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var validSlot = selectedSlot && alloc !== null;
+  document.getElementById('submit-btn').disabled = !(hasItems && validSlot && fname && lname && phone);
+}
+
+// ══════════════════════════════════════
+// SUBMIT ORDER
+// ══════════════════════════════════════
+function submitOrder(){
+  var fnameEl = document.getElementById('fname');
+  var lnameEl = document.getElementById('lname');
+  var phoneEl = document.getElementById('phone');
+  var notesEl = document.getElementById('notes');
+  var fname = fnameEl ? fnameEl.value.trim() : '';
+  var lname = lnameEl ? lnameEl.value.trim() : '';
+  var phone = phoneEl ? phoneEl.value.trim() : '';
+  var notes = notesEl ? notesEl.value.trim() : '';
+  console.log('Submitting order:', fname, lname, phone, 'slot:', selectedSlot, 'cart:', JSON.stringify(cart));
+  if(!fname || !lname || !phone){ alert('Please fill in your name and phone number.'); return; }
+
+  if(isTotalCapReached()){
+    alert('Sorry — we\'ve hit our pizza limit for this drop! Check back next week.');
+    return;
+  }
+
+  var needed = cartCount();
+  var alloc = allocateSlots(selectedSlotIdx, needed);
+
+  if(!alloc){
+    var errEl = document.getElementById('slot-error');
+    errEl.textContent = 'One or more slots just filled up — please pick a new start time.';
+    errEl.classList.add('visible');
+    renderSlots(); selectedSlot = null; selectedSlotIdx = null; updateSummary();
+    errEl.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  document.getElementById('slot-error').classList.remove('visible');
+
+  var pizzaItems = Object.keys(cart).map(function(id){
+    var p = PIZZAS.filter(function(x){ return x.id === id; })[0];
+    return {id:id, name:p.name, qty:cart[id], price:p.price};
+  });
+
+  var primarySlot = alloc[0].slot;
+  var slotDisplay = alloc.length === 1 ? primarySlot : alloc.map(function(a){ return a.slot + '(' + a.qty + ')'; }).join('+');
+
+  var orders = loadOrders();
+  var order = {
+    id: null, orderNum: null, // assigned by the server (Apps Script) once the order is confirmed — see below
+    fname:fname, lname:lname, phone:phone, notes:notes,
+    slot: primarySlot, slots: alloc, slotDisplay: slotDisplay,
+    pizzas: pizzaItems, brownie: brownieQty, freeBrownie: freeBrownie,
+    pizzaCount: needed, total: calcTotal(),
+    paid: false, ts: new Date().toISOString()
+  };
+
+  // Disable the submit button while we confirm with the server, so the
+  // customer can't double-submit while we're waiting.
+  var submitBtn = document.getElementById('submit-btn');
+  if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'CONFIRMING…'; }
+
+  // Send to Google Sheets FIRST, and wait for a real answer before treating
+  // this as a confirmed order. The Apps Script re-checks slot capacity
+  // server-side, so two near-simultaneous orders can't both overfill a slot,
+  // and it assigns the real orderNum itself (not sent from here) so two
+  // near-simultaneous orders can't collide on the same number either.
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'}, // avoids CORS preflight (Apps Script doesn't reply to preflight requests)
+    body: JSON.stringify({
+      type: 'order',
+      fname: order.fname,
+      lname: order.lname,
+      phone: order.phone,
+      slot: order.slot,
+      slotDisplay: order.slotDisplay,
+      slots: order.slots, // [{slot, qty}, ...] real per-slot breakdown, used for accurate capacity checks
+      pizzas: order.pizzas,
+      pizzaCount: order.pizzaCount,
+      brownie: order.brownie,
+      freeBrownie: order.freeBrownie,
+      total: order.total,
+      notes: order.notes,
+      ts: order.ts
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(result){
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'PLACE ORDER'; }
+
+    if(!result.success){
+      // Someone else just filled this slot in the time it took to submit.
+      // Refresh live data and ask them to pick a new slot.
+      fetchLiveOrders().then(function(){
+        renderSlots();
+        var errEl = document.getElementById('slot-error');
+        errEl.textContent = 'Sorry — that time slot just filled up. Please pick a new time.';
+        errEl.classList.add('visible');
+        selectedSlot = null; selectedSlotIdx = null; updateSummary();
+        errEl.scrollIntoView({behavior:'smooth', block:'center'});
+      });
+      return;
+    }
+
+    // Confirmed! The server just told us the real, unique order number —
+    // use that instead of anything we guessed locally.
+    order.orderNum = result.orderNum;
+    order.id = result.orderNum;
+
+    // Update local cache and show the success screen.
+    liveOrdersCache = orders.concat([order]);
+    showOrderConfirmation(order, pizzaItems, alloc, primarySlot);
+
+    // The Apps Script already added this phone number to the Sign Ups
+    // sheet (see addToSignups() server-side), so just refresh our local
+    // cache from the real source instead of guessing at it here.
+    fetchLiveSubscribers();
+
+    // Send confirmation SMS via Netlify function
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        fname: order.fname,
+        phone: order.phone,
+        pizzas: order.pizzas,
+        brownie: order.brownie,
+        freeBrownie: order.freeBrownie,
+        total: order.total,
+        slot: order.slot,
+        slotDisplay: order.slotDisplay
+      })
+    }).catch(function(e){ console.log('SMS error:', e); });
+  })
+  .catch(function(e){
+    console.log('Sheet sync error:', e);
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'PLACE ORDER'; }
+    alert('Something went wrong submitting your order. Please try again, or text Michael @ 905-401-7804.');
+  });
+  return;
+}
+
+function showOrderConfirmation(order, pizzaItems, alloc, primarySlot){
+  var brownieQty = order.brownie, freeBrownie = order.freeBrownie;
+  var fname = order.fname, lname = order.lname, phone = order.phone, notes = order.notes;
+
+  var pLines = pizzaItems.map(function(p){ return '<div class="detail-row">' + p.name + ' <span>x' + p.qty + ' — $' + (p.price*p.qty) + '</span></div>'; }).join('');
+  var bLine = brownieQty > 0 ? '<div class="detail-row">DUBAI BROWNIE <span>x' + brownieQty + ' — ' + (freeBrownie && brownieQty===1 ? 'FREE' : '$'+calcBrownieTotal()) + '</span></div>' : '';
+  var slotLine = alloc.length === 1
+    ? '<div class="detail-row">PICKUP <span>' + primarySlot + '</span></div>'
+    : '<div class="detail-row">SPLIT PICKUP <span>' + alloc.map(function(a){ return a.slot + ' (' + a.qty + ' pie' + (a.qty>1?'s':'') + ')'; }).join(' + ') + '</span></div>';
+
+  document.getElementById('success-details').innerHTML =
+    '<h3>ORDER #' + order.orderNum + '</h3>' +
+    '<div class="detail-row">NAME <span>' + fname + ' ' + lname + '</span></div>' +
+    '<div class="detail-row">PHONE <span>' + phone + '</span></div>' +
+    slotLine + pLines + bLine +
+    '<div class="detail-row" style="margin-top:.5rem;font-weight:700">TOTAL DUE AT PICKUP <span>$' + order.total + '</span></div>' +
+    (notes ? '<div class="detail-row">NOTES <span>' + notes + '</span></div>' : '');
+
+  document.getElementById('order-form').style.display = 'none';
+  document.getElementById('success-screen').classList.add('visible');
+  document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
+  if(allSlotsFull()) document.getElementById('soldout-banner').classList.add('visible');
+}
+
+function restartOrder(){
+  cart = {}; brownieQty = 0; freeBrownie = false; brownieAutoAdded = false;
+  selectedSlot = null; selectedSlotIdx = null;
+  document.getElementById('order-form').style.display = 'block';
+  document.getElementById('success-screen').classList.remove('visible');
+  ['fname','lname','phone','notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+  renderPizzas(); renderSlots(); updateSummary(); updateSteps();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+
+// ══════════════════════════════════════
+// TABS
+// ══════════════════════════════════════
+function switchTab(tabId){
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var panel = document.getElementById('tab-' + tabId);
+  var btn = document.querySelector('[data-tab="' + tabId + '"]');
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+// ══════════════════════════════════════
+// DOUGH TRACKER
+// ══════════════════════════════════════
+var DOUGH_COUNT = parseInt(localStorage.getItem('brocato_dough_count') || '105', 10);
+
+function saveDoughCount(){
+  var el = document.getElementById('admin-dough-count');
+  if(!el) return;
+  var val = parseInt(el.value, 10);
+  if(isNaN(val) || val < 1) return;
+  DOUGH_COUNT = val;
+  localStorage.setItem('brocato_dough_count', String(val));
+  renderDoughTracker();
+}
+
+function renderDoughTracker(){
+  var sold = totalPizzasSold();
+  var total = DOUGH_COUNT;
+  var pct = total > 0 ? Math.min(100, Math.round((sold / total) * 100)) : 0;
+  var statusText, statusClass;
+  if(pct >= 90){ statusText = '&#128293; Almost Gone — Order Now'; statusClass = 'urgent'; }
+  else if(pct >= 70){ statusText = '&#9889; Going Fast — Limited Spots'; statusClass = 'warning'; }
+  else if(pct >= 40){ statusText = 'Filling Up — Reserve Your Pies'; statusClass = 'warning'; }
+  else { statusText = 'Spots Available'; statusClass = 'ok'; }
+  var tracker = document.getElementById('dough-tracker');
+  if(tracker){
+    var show = isOrdersOpen() && !isSoldOut();
+    tracker.style.display = show ? 'block' : 'none';
+    if(show){
+      document.getElementById('dough-bar-fill').style.width = pct + '%';
+      document.getElementById('dough-booked').textContent = sold;
+      document.getElementById('dough-total').textContent = total;
+      var statusEl = document.getElementById('dough-status');
+      if(statusEl){ statusEl.innerHTML = statusText; statusEl.className = 'dough-status ' + statusClass; }
+    }
+  }
+  var livePill = document.getElementById('live-pill');
+  if(livePill) livePill.style.display = isOrdersOpen() && !isSoldOut() ? 'inline-flex' : 'none';
+  var strip = document.getElementById('order-dough-strip');
+  if(strip){
+    strip.style.display = 'flex';
+    document.getElementById('order-dough-fill').style.width = pct + '%';
+    document.getElementById('order-dough-pct').textContent = pct + '% booked';
+  }
+  var doughEl = document.getElementById('admin-dough-count');
+  if(doughEl) doughEl.value = DOUGH_COUNT;
+}
+
+function openDoughInfo(){ document.getElementById('dough-info-modal').classList.add('open'); }
+function closeDoughInfo(){ document.getElementById('dough-info-modal').classList.remove('open'); }
+
+// ══════════════════════════════════════
+// ROUTING
+// ══════════════════════════════════════
+function resetSignupForm(){
+  document.getElementById('success-state').classList.remove('visible');
+  document.getElementById('form-state').style.display = 'block';
+  document.getElementById('n-fname').value = '';
+  document.getElementById('n-lname').value = '';
+  document.getElementById('n-phone').value = '';
+  document.getElementById('consent').checked = false;
+  updateNotifyBtn();
+}
+
+function goHome(){
+  document.getElementById('order-page').classList.remove('visible');
+  document.getElementById('splash-page').classList.remove('hidden');
+  document.body.style.background = 'var(--charcoal)';
+  document.body.style.color = 'white';
+  document.body.style.display = 'flex';
+  document.body.style.alignItems = 'center';
+  document.body.style.justifyContent = 'flex-start';
+  document.body.style.padding = '3rem 1.5rem';
+  document.body.style.textAlign = 'center';
+  window.scrollTo(0,0);
+}
+function enterOrdering(){
+  if(isSoldOut()) return;
+  document.getElementById('splash-page').classList.add('hidden');
+  document.getElementById('order-page').classList.add('visible');
+  document.body.style.overflow = 'visible';
+  document.body.style.display = 'block';
+  document.body.style.background = 'var(--cream)';
+  document.body.style.color = 'var(--charcoal)';
+  document.body.style.minHeight = '100vh';
+  document.body.style.alignItems = 'unset';
+  document.body.style.justifyContent = 'unset';
+  document.body.style.padding = '0';
+  document.body.style.textAlign = 'left';
+  window.scrollTo(0,0);
+
+  // Show a lightweight loading state while we fetch live slot data, so we
+  // don't render (possibly stale/empty) slots before we know real availability.
+  var slotsEl = document.getElementById('slot-grid');
+  if(slotsEl) slotsEl.innerHTML = '<div style="padding:2rem;text-align:center;color:#999;font-family:\'Barlow Condensed\',sans-serif;letter-spacing:.05em;">Checking live availability…</div>';
+
+  fetchLiveOrders().then(function(){
+    renderPizzas(); renderSlots(); updateSummary(); updateSteps();
+    checkOrdersLocked();
+    renderDoughTracker();
+    if(allSlotsFull()) document.getElementById('soldout-banner').classList.add('visible');
+  });
+}
+
+function checkRoute(){
+  if(window.location.search.includes('admin')){
+    document.getElementById('splash-page').classList.add('hidden');
+    document.getElementById('admin-view').style.display = 'block';
+    document.body.style.background = 'var(--cream)';
+    document.body.style.alignItems = 'unset';
+    document.body.style.justifyContent = 'unset';
+    document.body.style.padding = '0';
+    document.body.style.textAlign = 'left';
+  } else if(window.location.search.includes('order') && !isSoldOut()){
+    secretCodeUnlocked = true; // ?order link bypasses the Tuesday 7PM lock intentionally
+    enterOrdering();
+  }
+}
+
+// ══════════════════════════════════════
+// ADMIN
+// ══════════════════════════════════════
+function adminLogin(){
+  if(document.getElementById('admin-pw').value === ADMIN_PASSWORD){
+    document.getElementById('admin-login-screen').style.display = 'none';
+    document.getElementById('admin-dashboard').style.display = 'block';
+    Promise.all([fetchLiveOrders(), fetchLiveSubscribers()]).then(renderAdmin);
+  } else {
+    document.getElementById('admin-err').style.display = 'block';
+  }
+}
+
+function refreshAdmin(){
+  Promise.all([fetchLiveOrders(), fetchLiveSubscribers()]).then(renderAdmin);
+}
+
+function renderAdmin(){
+  var orders = loadOrders();
+  console.log('Orders in storage:', JSON.stringify(orders));
+  var subs = loadSubscribers();
+  var totalPizzas = orders.reduce(function(s,o){ return s + (o.pizzaCount||0); }, 0);
+  var totalRev = orders.reduce(function(s,o){ return s + (o.total||0); }, 0);
+  var paid = orders.filter(function(o){ return o.paid; }).length;
+
+  var statsHtml = '<div class="admin-stats">' +
+    '<div class="stat-card"><div class="stat-label">Orders</div><div class="stat-value">' + orders.length + '</div><div class="stat-sub">total</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Pizzas</div><div class="stat-value">' + totalPizzas + '</div><div class="stat-sub">of ' + TOTAL_CAP + ' cap</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Revenue</div><div class="stat-value">$' + totalRev + '</div><div class="stat-sub">total</div></div>' +
+    '<div class="stat-card"><div class="stat-label">Notify List</div><div class="stat-value">' + subs.length + '</div><div class="stat-sub">subscribers</div></div>' +
+    '</div>';
+
+  // Slots grid
+  var slotsHtml = '<div class="admin-section-title">SLOTS</div><div class="slot-grid-admin">';
+  SLOT_LABELS.forEach(function(label){
+    var sold = pizzasSoldInSlot(label);
+    var pct = Math.min(100, (sold/SLOT_PIZZA_CAP)*100);
+    var full = isSlotFull(label);
+    slotsHtml += '<div class="slot-admin-card' + (full?' full':'') + '">';
+    slotsHtml += '<div class="slot-admin-time">' + label + '</div>';
+    slotsHtml += '<div class="slot-admin-bar"><div class="slot-admin-fill" style="width:' + pct + '%"></div></div>';
+    slotsHtml += '<div class="slot-admin-info">' + sold + '/' + SLOT_PIZZA_CAP + (full?' · FULL':'') + '</div>';
+    slotsHtml += '</div>';
+  });
+  slotsHtml += '</div>';
+
+  // Orders table
+  var tableHtml = '<div class="admin-section-title">ORDERS</div>';
+  if(!orders.length){
+    tableHtml += '<div class="no-orders">No orders yet</div>';
+  } else {
+    tableHtml += '<div class="tbl-wrap"><table class="orders-table"><thead><tr>' +
+      '<th>#</th><th>Name</th><th>Phone</th><th>Slot</th><th>Pizzas</th><th>Brownie</th><th>Total</th><th>Notes</th><th></th></tr></thead><tbody>';
+    orders.slice().reverse().forEach(function(o){
+      var pz = (o.pizzas||[]).map(function(p){ return p.name + ' x' + p.qty; }).join(', ');
+      tableHtml += '<tr>' +
+        '<td><span class="ord-num">#' + o.orderNum + '</span></td>' +
+        '<td>' + o.fname + ' ' + o.lname + '</td>' +
+        '<td>' + o.phone + '</td>' +
+        '<td style="white-space:nowrap;font-weight:600">' + (o.slotDisplay||o.slot) + '</td>' +
+        '<td>' + pz + '</td>' +
+        '<td>' + (o.brownie||0) + (o.freeBrownie?' (1 free)':'') + '</td>' +
+        '<td>$' + o.total + '</td>' +
+        '<td>' + (o.notes||'-') + '</td>' +
+        '<td><span class="cancel-btn" onclick="cancelOrder(' + o.id + ')">CANCEL</span></td>' +
+        '</tr>';
+    });
+    tableHtml += '</tbody></table></div>';
+  }
+
+  // Subscribers table
+  var subsHtml = '<div class="admin-section-title">DROP LIST</div>';
+  if(!subs.length){
+    subsHtml += '<div class="no-orders">No subscribers yet</div>';
+  } else {
+    subsHtml += '<div class="tbl-wrap"><table class="subs-table"><thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Signed Up</th><th></th></tr></thead><tbody>';
+    subs.forEach(function(s, i){
+      subsHtml += '<tr><td>' + (i+1) + '</td><td>' + s.fname + ' ' + s.lname + '</td><td>' + s.phone + '</td><td>' + new Date(s.ts).toLocaleDateString() + '</td><td><span class="cancel-btn" onclick="removeSubscriber(\'' + s.phone + '\')">REMOVE</span></td></tr>';
+    });
+    subsHtml += '</tbody></table></div>';
+  }
+
+  document.getElementById('admin-body').innerHTML = statsHtml + slotsHtml + subsHtml + tableHtml;
+  updateOrdersToggleBtn();
+  var doughEl = document.getElementById('admin-dough-count');
+  if(doughEl) doughEl.value = DOUGH_COUNT;
+}
+
+function togglePaid(id){
+  var orders = loadOrders();
+  orders = orders.map(function(o){ if(o.id===id){ o.paid = !o.paid; } return o; });
+  saveOrders(orders);
+  renderAdmin();
+}
+
+function removeSubscriber(phone){
+  if(!confirm('Remove this subscriber from the Drop List?')) return;
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({ type: 'remove_subscriber', phone: phone })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(result){
+    if(!result.success){
+      alert('Could not remove that subscriber (they may have already been removed). Refreshing the list.');
+    }
+    return fetchLiveSubscribers();
+  })
+  .then(renderAdmin)
+  .catch(function(e){
+    console.log('removeSubscriber error:', e);
+    alert('Something went wrong removing that subscriber. Please try again.');
+  });
+}
+
+function cancelOrder(id){
+  if(!confirm('Cancel this order? This cannot be undone.')) return;
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({ type: 'cancel_order', orderNum: id })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(result){
+    if(!result.success){
+      alert('Could not cancel that order (it may have already been removed). Refreshing the list.');
+    }
+    return fetchLiveOrders();
+  })
+  .then(renderAdmin)
+  .catch(function(e){
+    console.log('Cancel order error:', e);
+    alert('Something went wrong canceling this order. Please try again.');
+  });
+}
+
+function clearOrders(){
+  if(!confirm('Delete ALL orders? This cannot be undone.')) return;
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({ type: 'clear_orders' })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(){ return fetchLiveOrders(); })
+  .then(renderAdmin)
+  .catch(function(e){
+    console.log('Clear orders error:', e);
+    alert('Something went wrong clearing orders. Please try again.');
+  });
+}
+
+function exportCSV(){
+  var orders = loadOrders();
+  if(!orders.length){ alert('No orders to export.'); return; }
+  var rows = [['#','First','Last','Phone','Slot','Pizzas','Brownie','Total','Paid','Notes','Timestamp']];
+  orders.forEach(function(o){
+    var ps = (o.pizzas||[]).map(function(p){ return p.name+'x'+p.qty; }).join(' | ');
+    rows.push([o.orderNum,o.fname,o.lname,o.phone,o.slotDisplay||o.slot,ps,o.brownie||0,'$'+o.total,o.paid?'Yes':'No',o.notes||'',o.ts]);
+  });
+  var csv = rows.map(function(r){ return r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'brocato-orders.csv'; a.click();
+}
+
+function exportSubscribers(){
+  var subs = loadSubscribers();
+  if(!subs.length){ alert('No subscribers yet.'); return; }
+  var rows = [['First','Last','Phone','Signed Up']];
+  subs.forEach(function(s){ rows.push([s.fname,s.lname,s.phone,s.ts]); });
+  var csv = rows.map(function(r){ return r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'brocato-notify-list.csv'; a.click();
+}
+
+// ══════════════════════════════════════
+// ORDERS OPEN / CLOSED
+// ══════════════════════════════════════
+function isSoldOut(){ return localStorage.getItem('brocato_sold_out') === 'true' || isTotalCapReached() || SLOT_LABELS.every(function(l){ return isSlotFull(l); }); }
+function isOrdersOpen(){ return new Date() >= ORDERS_OPEN_DATE; }
+
+function toggleSoldOut(){
+  var soldOut = !isSoldOut();
+  localStorage.setItem('brocato_sold_out', soldOut ? 'true' : 'false');
+  updateSoldOutState();
+  alert(soldOut ? 'SOLD OUT is now ON — Reserve button is hidden on splash.' : 'SOLD OUT is now OFF — Reserve button is back.');
+}
+
+function updateSoldOutState(){
+  var btn = document.getElementById('reserve-btn');
+  var soldoutEl = document.getElementById('soldout-splash');
+  var toggleBtn = document.getElementById('soldout-toggle-btn');
+  var menuEl = document.querySelector('.menu-preview');
+  var currentDropInfo = document.getElementById('current-drop-info');
+
+  updatePreorderPill();
+
+  if(isSoldOut()){
+    if(btn) btn.style.display = 'none';
+    if(soldoutEl) soldoutEl.classList.add('visible');
+    if(menuEl) menuEl.style.display = 'none';
+    if(currentDropInfo) currentDropInfo.style.display = 'none';
+    if(currentDropInfo) { currentDropInfo.style.display = 'block'; currentDropInfo.style.textDecoration = 'line-through'; currentDropInfo.style.opacity = '.35'; }
+    if(toggleBtn){ toggleBtn.classList.add('sold-out-active'); toggleBtn.textContent = 'SOLD OUT: ON'; }
+  } else {
+    if(btn) btn.style.display = 'block';
+    if(soldoutEl) soldoutEl.classList.remove('visible');
+    if(menuEl) menuEl.style.display = '';
+    if(currentDropInfo) { currentDropInfo.style.display = 'block'; currentDropInfo.style.textDecoration = ''; currentDropInfo.style.opacity = ''; }
+    if(toggleBtn){ toggleBtn.classList.remove('sold-out-active'); toggleBtn.textContent = 'SOLD OUT'; }
+  }
+}
+
+function toggleOrders(){
+  alert('Orders open automatically on Tuesday July 28th @ 7:00 PM. No action needed.');
+}
+
+function updateOrdersToggleBtn(){
+  var btn = document.getElementById('orders-toggle-btn');
+  if(!btn) return;
+  if(isOrdersOpen()){
+    btn.textContent = 'CLOSE ORDERS';
+    btn.classList.remove('green');
+    btn.classList.add('danger');
+  } else {
+    btn.textContent = 'OPEN ORDERS';
+    btn.classList.add('green');
+    btn.classList.remove('danger');
+  }
+}
+
+function checkOrdersLocked(){
+  var locked = document.getElementById('orders-locked');
+  var form = document.getElementById('order-form');
+  var steps = document.querySelector('.steps');
+  if(!locked || !form) return;
+  if(isSoldOut()){
+    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday August 2nd<br>Pre-Orders Open: Tuesday July 28th @ 7PM<br>Menu Drops: Sunday August 2nd @ 11AM</div>';
+    locked.style.display = 'block';
+    form.style.display = 'none';
+    if(steps) steps.style.display = 'none';
+  } else if(!isOrdersOpen() && !secretCodeUnlocked){
+    locked.innerHTML = '<div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div><div class="orders-locked-sub">Orders open Tuesday, July 28th @ 7:00 PM<br>Next Pop Up: Sunday, August 2nd</div>';
+    locked.style.display = 'block';
+    form.style.display = 'none';
+    if(steps) steps.style.display = 'none';
+  } else {
+    locked.style.display = 'none';
+    form.style.display = 'block';
+    if(steps) steps.style.display = 'flex';
+  }
+}
+
+// ══════════════════════════════════════
+// MESSAGE THE DROP LIST (custom message)
+// ══════════════════════════════════════
+function updateDropCharCount(){
+  var box = document.getElementById('drop-message');
+  var out = document.getElementById('drop-char-count');
+  if(!box || !out) return;
+  var len = box.value.length;
+  // Standard SMS segment sizes: 160 chars for GSM-7, 70 for messages
+  // containing emoji/unicode. This is just a heads-up, not a hard limit.
+  var hasUnicode = /[^\x00-\x7F]/.test(box.value);
+  var segSize = hasUnicode ? 70 : 160;
+  var segments = len === 0 ? 1 : Math.ceil(len / segSize);
+  out.textContent = len + ' characters \u00B7 ' + segments + ' SMS segment' + (segments > 1 ? 's' : '');
+}
+
+function sendCustomDropMessage(){
+  var box = document.getElementById('drop-message');
+  var message = box.value.trim();
+  if(!message){ alert('Type a message first.'); return; }
+
+  var btn = document.getElementById('drop-send-btn');
+  btn.disabled = true;
+  btn.textContent = 'LOADING LIST...';
+
+  // Pull the real, current Drop List from the Sheet right before sending —
+  // never trust whatever was last cached, since that could be stale or (on
+  // a fresh page load before the admin dashboard fetched anything) empty.
+  fetchLiveSubscribers().then(function(subs){
+    if(!subs.length){
+      alert('No subscribers on the Drop List yet.');
+      btn.disabled = false;
+      btn.textContent = 'SEND TO DROP LIST';
+      return;
+    }
+    if(!confirm('Send this message to ' + subs.length + ' Drop List subscribers?\n\n"' + message + '"')){
+      btn.disabled = false;
+      btn.textContent = 'SEND TO DROP LIST';
+      return;
+    }
+
+    btn.textContent = 'SENDING...';
+    sendCustomDropMessageTo(subs, message, box, btn);
+  });
+}
+
+function sendCustomDropMessageTo(subs, message, box, btn){
+  fetch('/.netlify/functions/send-bulk', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'custom',
+      message: message,
+      recipients: subs.map(function(s){ return { fname: s.fname, phone: s.phone }; })
+    })
+  }).then(function(r){ return r.json(); })
+  .then(function(data){
+    var sent = data.results.filter(function(r){ return r.status === 'sent'; }).length;
+    alert('Done! ' + sent + ' of ' + subs.length + ' texts sent.');
+    box.value = '';
+    updateDropCharCount();
+    btn.disabled = false;
+    btn.textContent = 'SEND TO DROP LIST';
+  }).catch(function(e){
+    alert('Error sending. Check console.');
+    btn.disabled = false;
+    btn.textContent = 'SEND TO DROP LIST';
+  });
+}
+
+// ══════════════════════════════════════
+// SEND REMINDERS
+// ══════════════════════════════════════
+// Builds a short readable summary of what was ordered, e.g.
+// "MARGHERITA x1, CALABRIAN HEAT x2, Dubai Brownie x1" — used to include
+// each customer's actual order in their day-before pickup reminder.
+function reminderOrderSummary(o){
+  var parts = (o.pizzas || []).filter(function(p){ return p.qty > 0; }).map(function(p){
+    var def = PIZZAS.filter(function(x){ return x.id === p.id; })[0];
+    return (def ? def.name : p.id) + ' x' + p.qty;
+  });
+  if(o.brownie > 0){ parts.push('Dubai Brownie x' + o.brownie); }
+  return parts.join(', ');
+}
+
+function sendReminders(){
+  var orders = loadOrders();
+  if(!orders.length){ alert('No orders yet.'); return; }
+  if(!confirm('Send PICKUP REMINDER to ' + orders.length + ' customers?')) return;
+
+  var btn = event.target;
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+
+  fetch('/.netlify/functions/send-bulk', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      type: 'reminder',
+      recipients: orders.map(function(o){
+        return {
+          fname: o.fname,
+          phone: o.phone,
+          slot: o.slotDisplay || o.slot,
+          order: reminderOrderSummary(o),
+          total: o.total
+        };
+      })
+    })
+  }).then(function(r){ return r.json(); })
+  .then(function(data){
+    var sent = data.results.filter(function(r){ return r.status === 'sent'; }).length;
+    alert('Done! ' + sent + ' of ' + orders.length + ' reminders sent.');
+    btn.disabled = false;
+    btn.textContent = 'SEND REMINDERS';
+  }).catch(function(e){
+    alert('Error sending. Check console.');
+    btn.disabled = false;
+    btn.textContent = 'SEND REMINDERS';
+  });
+}
+function handleReserveClick(){
+  if(isSoldOut()) return;
+  if(isOrdersOpen()){
+    enterOrdering();
+  } else {
+    var el = document.getElementById('locked-overlay');
+    el.style.display = 'flex';
+  }
+}
+
+var secretCodeUnlocked = false;
+
+function checkSecretCode(){
+  var code = document.getElementById('secret-code-input').value.trim().toUpperCase();
+  if(code === 'CLOSED.NEXT.WEEK'){
+    secretCodeUnlocked = true;
+    closeLocked();
+    enterOrdering();
+  } else {
+    document.getElementById('secret-code-err').style.display = 'block';
+    document.getElementById('secret-code-input').value = '';
+  }
+}
+
+function closeLocked(){
+  var el = document.getElementById('locked-overlay');
+  el.style.display = 'none';
+}
+
+// Shows the "pre-orders open [date]" pill on the splash hero only while it's
+// actually useful info — hidden once orders are open (redundant with the
+// Reserve button working) or once sold out (the sold-out panel covers it).
+function updatePreorderPill(){
+  var pill = document.getElementById('preorder-pill');
+  if(!pill) return;
+  var show = !isOrdersOpen() && !secretCodeUnlocked && !isSoldOut();
+  pill.style.display = show ? 'flex' : 'none';
+}
+
+function updateReserveBtn(){
+  var btn = document.getElementById('reserve-btn');
+  if(!btn) return;
+  if(isOrdersOpen()){
+    btn.classList.remove('locked');
+  } else {
+    btn.classList.add('locked');
+  }
+}
+
+// ══════════════════════════════════════
+// NOTIFY SIGNUP
+// ══════════════════════════════════════
+function handleSignup(){
+  var valid = true;
+  var fname = document.getElementById('n-fname').value.trim();
+  var lname = document.getElementById('n-lname').value.trim();
+  var phone = document.getElementById('n-phone').value.trim();
+  var consent = document.getElementById('consent').checked;
+  ['fname','lname','phone','consent'].forEach(function(id){ document.getElementById('err-'+id).classList.remove('visible'); });
+  if(!fname){ document.getElementById('err-fname').classList.add('visible'); valid=false; }
+  if(!lname){ document.getElementById('err-lname').classList.add('visible'); valid=false; }
+  if(!phone || phone.replace(/\D/g,'').length < 10){ document.getElementById('err-phone').classList.add('visible'); valid=false; }
+  if(!consent){ document.getElementById('err-consent').classList.add('visible'); valid=false; }
+  if(!valid) return;
+
+  var btn = document.getElementById('notify-btn');
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+
+  fetch('https://script.google.com/macros/s/AKfycbw0zOhy00BAgU5Rz1IpzPXlm_ZeZevaPEOJ3GTbal2IlvmQl16Xh3JPHAaLqG0i9BoXow/exec', {
+    method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({fname:fname, lname:lname, phone:phone})
+  }).then(function(){
+    document.getElementById('form-state').style.display='none';
+    document.getElementById('success-state').classList.add('visible');
+    // Send signup confirmation text
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'signup', phone: phone, fname: fname })
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
+  }).catch(function(){
+    document.getElementById('form-state').style.display='none';
+    document.getElementById('success-state').classList.add('visible');
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'signup', phone: phone })
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
+  });
+
+  // Refresh the live cache from the sheet instead of guessing locally.
+  fetchLiveSubscribers();
+}
+
+function handlePopupSignup(){
+  var valid = true;
+  var fname = document.getElementById('lp-fname').value.trim();
+  var lname = document.getElementById('lp-lname').value.trim();
+  var phone = document.getElementById('lp-phone').value.trim();
+  var consent = document.getElementById('lp-consent').checked;
+  ['fname','lname','phone','consent'].forEach(function(id){ document.getElementById('lp-err-'+id).style.display='none'; });
+  if(!fname){ document.getElementById('lp-err-fname').style.display='inline'; valid=false; }
+  if(!lname){ document.getElementById('lp-err-lname').style.display='inline'; valid=false; }
+  if(!phone || phone.replace(/\D/g,'').length < 10){ document.getElementById('lp-err-phone').style.display='inline'; valid=false; }
+  if(!consent){ document.getElementById('lp-err-consent').style.display='inline'; valid=false; }
+  if(!valid) return;
+
+  var btn = document.getElementById('lp-notify-btn');
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+
+  fetch('https://script.google.com/macros/s/AKfycbw0zOhy00BAgU5Rz1IpzPXlm_ZeZevaPEOJ3GTbal2IlvmQl16Xh3JPHAaLqG0i9BoXow/exec', {
+    method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({fname:fname, lname:lname, phone:phone})
+  }).then(function(){
+    document.getElementById('lp-form').style.display='none';
+    document.getElementById('lp-success').style.display='block';
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'signup', phone: phone, fname: fname })
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
+  }).catch(function(){
+    document.getElementById('lp-form').style.display='none';
+    document.getElementById('lp-success').style.display='block';
+    fetch('/.netlify/functions/send-sms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'signup', phone: phone })
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
+  });
+
+  // Refresh the live cache from the sheet instead of guessing locally.
+  fetchLiveSubscribers();
+}
+
+// ══════════════════════════════════════
+// DOUGH TRACKER
+// ══════════════════════════════════════
+var DOUGH_COUNT = parseInt(localStorage.getItem('brocato_dough_count') || '105', 10);
+
+function saveDoughCount(){
+  var el = document.getElementById('admin-dough-count');
+  if(!el) return;
+  var val = parseInt(el.value, 10);
+  if(isNaN(val) || val < 1) return;
+  DOUGH_COUNT = val;
+  localStorage.setItem('brocato_dough_count', String(val));
+  renderDoughTracker();
+}
+
+function renderDoughTracker(){
+  var sold = totalPizzasSold();
+  var total = DOUGH_COUNT;
+  var pct = total > 0 ? Math.min(100, Math.round((sold / total) * 100)) : 0;
+
+  // Status text + class based on fill level
+  var statusText, statusClass;
+  if(pct >= 90){ statusText = '🔥 Almost Gone — Order Now'; statusClass = 'urgent'; }
+  else if(pct >= 70){ statusText = '⚡ Going Fast — Limited Spots'; statusClass = 'warning'; }
+  else if(pct >= 40){ statusText = 'Filling Up — Reserve Your Pies'; statusClass = 'warning'; }
+  else { statusText = 'Spots Available'; statusClass = 'ok'; }
+
+  // Splash tracker — show when orders open, hide when sold out
+  var tracker = document.getElementById('dough-tracker');
+  if(tracker){
+    var show = isOrdersOpen() && !isSoldOut();
+    tracker.style.display = show ? 'block' : 'none';
+    if(show){
+      document.getElementById('dough-bar-fill').style.width = pct + '%';
+      document.getElementById('dough-booked').textContent = sold;
+      document.getElementById('dough-total').textContent = total;
+      var statusEl = document.getElementById('dough-status');
+      if(statusEl){ statusEl.textContent = statusText; statusEl.className = 'dough-status ' + statusClass; }
+    }
+  }
+
+  // Order page strip
+  var strip = document.getElementById('order-dough-strip');
+  if(strip){
+    strip.style.display = 'flex';
+    document.getElementById('order-dough-fill').style.width = pct + '%';
+    document.getElementById('order-dough-pct').textContent = pct + '% booked';
+  }
+}
+
+function openDoughInfo(){
+  document.getElementById('dough-info-modal').classList.add('open');
+}
+function closeDoughInfo(){
+  document.getElementById('dough-info-modal').classList.remove('open');
+}
+
+// ══════════════════════════════════════
+// COUNTDOWN
+// ══════════════════════════════════════
+function updateCountdown(){
+  var daysEl = document.getElementById('cd-days');
+  if(!daysEl) return;
+  var diff = DROP_DATE - new Date();
+  var pad = function(n){ return String(Math.floor(n)).padStart(2,'0'); };
+  if(diff <= 0){
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(function(id){ document.getElementById(id).textContent='00'; });
+    return;
+  }
+  document.getElementById('cd-days').textContent  = pad(diff/86400000);
+  document.getElementById('cd-hours').textContent = pad((diff%86400000)/3600000);
+  document.getElementById('cd-mins').textContent  = pad((diff%3600000)/60000);
+  document.getElementById('cd-secs').textContent  = pad((diff%60000)/1000);
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+// floating bg pizzas
+var bg = document.getElementById('bg-pizza');
+for(var i=0; i<14; i++){
+  var s = document.createElement('span');
+  s.textContent = '🍕';
+  s.style.left = Math.random()*100+'%';
+  s.style.animationDuration = (18+Math.random()*20)+'s';
+  s.style.animationDelay = '-'+(Math.random()*30)+'s';
+  s.style.fontSize = (1.2+Math.random()*2)+'rem';
+  bg.appendChild(s);
+}
+
+// input listeners for order form
+['fname','lname','phone'].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el) el.addEventListener('input', updateSummary);
+});
+
+// notify button color change when ready
+function updateNotifyBtn(){
+  var fname = document.getElementById('n-fname').value.trim();
+  var lname = document.getElementById('n-lname').value.trim();
+  var phone = document.getElementById('n-phone').value.trim();
+  var consent = document.getElementById('consent').checked;
+  var btn = document.getElementById('notify-btn');
+  if(fname && lname && phone && consent){
+    btn.style.background = 'var(--red)';
+    btn.style.color = 'white';
+    btn.style.borderColor = 'var(--red)';
+  } else {
+    btn.style.background = 'rgba(255,255,255,.08)';
+    btn.style.color = 'rgba(255,255,255,.7)';
+    btn.style.borderColor = 'rgba(255,255,255,.15)';
+  }
+}
+['n-fname','n-lname','n-phone'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', updateNotifyBtn);
+});
+document.getElementById('consent').addEventListener('change', updateNotifyBtn);
+
+checkRoute();
+updateCountdown();
+setInterval(updateCountdown, 1000);
+fetchLiveOrders().then(renderDoughTracker);
+updateReserveBtn();
+updateSoldOutState();
+updatePreorderPill();
+// Auto-check sold out every 30 seconds in case orders fill up
+setInterval(updateSoldOutState, 30000);
+// Fetch live orders for dough tracker on splash
+fetchLiveOrders().then(renderDoughTracker);
+</script>
+</body>
+</html>
