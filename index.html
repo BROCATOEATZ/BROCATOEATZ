@@ -798,7 +798,8 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   <div style="background:#111;border:1.5px solid rgba(212,169,122,.4);padding:1.75rem 1.5rem;max-width:320px;width:90%;text-align:center;position:relative" onclick="event.stopPropagation()">
     <button onclick="closeDroplistPopup()" style="position:absolute;top:.6rem;right:.7rem;background:none;border:none;color:rgba(255,255,255,.3);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;cursor:pointer;line-height:1;padding:.2rem .4rem">&times;</button>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:5px;color:var(--tan);margin-bottom:.2rem">JOIN THE<br>DROP LIST</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.06em;line-height:1.5;margin-bottom:1.25rem">Get a text the moment pre-orders go live — never miss a drop.</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.06em;line-height:1.5;margin-bottom:.6rem">Get a text the moment pre-orders go live — never miss a drop.</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan);background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.25);padding:.4rem .75rem;margin-bottom:1.1rem;display:inline-block">&#9889; Members get an early access code 15 min before orders open</div>
     <div id="dlp-form">
       <div style="display:flex;gap:.4rem;margin-bottom:.5rem">
         <input type="text" id="dlp-fname" placeholder="First name" autocomplete="given-name" style="flex:1;min-width:0;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.55rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none">
@@ -2273,9 +2274,9 @@ updateReserveBtn();
 updateSoldOutState();
 updatePreorderPill();
 // Auto-check sold out every 30 seconds in case orders fill up
-setInterval(updateSoldOutState, 30000);
+setInterval(function(){ fetchLiveOrders().then(function(){ updateSoldOutState(); renderDoughTracker(); }); }, 5000);
 // Fetch live orders for dough tracker on splash
-fetchLiveOrders().then(renderDoughTracker);
+fetchLiveOrders().then(function(){ renderDoughTracker(); updateSoldOutState(); });
 // Auto-show drop list popup after 2s
 setTimeout(showDroplistPopup, 2000);
 </script>
