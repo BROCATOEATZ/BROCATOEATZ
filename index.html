@@ -423,7 +423,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div style="margin-top:1.25rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.45);text-align:center;margin-bottom:.6rem;line-height:1.5">Pre-orders open the <strong style="color:rgba(255,255,255,.75)">Tuesday before</strong> each drop @ <strong style="color:rgba(255,255,255,.75)">7:00 PM</strong></div>
       <div class="soldout-splash" id="soldout-splash">
         <div class="soldout-splash-title">SOLD OUT</div>
-        <div class="soldout-splash-sub" style="margin-bottom:1rem">See you at the next pop up &#127829;</div>
+        <div class="soldout-splash-sub" style="margin-bottom:1.5rem">Thanks for the love — see you at the next one &#127829;</div>
+        <div style="background:rgba(212,169,122,.07);border:1px solid rgba(212,169,122,.25);padding:1.25rem 1.5rem;text-align:center">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:4px;color:var(--tan);margin-bottom:.35rem">NEVER MISS A DROP</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.45);margin-bottom:1rem;line-height:1.5">Get a text the moment pre-orders go live.</div>
+          <button onclick="switchTab('list')" style="background:var(--red);border:none;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:white;padding:.75rem 2rem;cursor:pointer;width:100%">JOIN THE DROP LIST</button>
+        </div>
       </div>
     </div>
 
@@ -785,6 +790,33 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       </div>
       <div id="secret-code-err" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:#e55;margin-top:.3rem;letter-spacing:.05em">Invalid code.</div>
     </div>
+  </div>
+</div>
+
+<!-- DROP LIST POPUP -->
+<div id="droplist-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99998;align-items:center;justify-content:center;padding:1.5rem" onclick="closeDroplistPopup()">
+  <div style="background:#111;border:1.5px solid rgba(212,169,122,.4);padding:1.75rem 1.5rem;max-width:320px;width:90%;text-align:center;position:relative" onclick="event.stopPropagation()">
+    <button onclick="closeDroplistPopup()" style="position:absolute;top:.6rem;right:.7rem;background:none;border:none;color:rgba(255,255,255,.3);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;cursor:pointer;line-height:1;padding:.2rem .4rem">&times;</button>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:5px;color:var(--tan);margin-bottom:.2rem">JOIN THE<br>DROP LIST</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.06em;line-height:1.5;margin-bottom:1.25rem">Get a text the moment pre-orders go live — never miss a drop.</div>
+    <div id="dlp-form">
+      <div style="display:flex;gap:.4rem;margin-bottom:.5rem">
+        <input type="text" id="dlp-fname" placeholder="First name" autocomplete="given-name" style="flex:1;min-width:0;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.55rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none">
+        <input type="text" id="dlp-lname" placeholder="Last name" autocomplete="family-name" style="flex:1;min-width:0;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.55rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none">
+      </div>
+      <input type="tel" id="dlp-phone" placeholder="Phone number" autocomplete="tel" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.55rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none;margin-bottom:.5rem">
+      <span id="dlp-err" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:#e55;display:block;margin-bottom:.4rem;text-align:left"></span>
+      <label style="display:flex;gap:.4rem;align-items:flex-start;margin-bottom:.7rem;cursor:pointer;text-align:left">
+        <input type="checkbox" id="dlp-consent" style="margin-top:.25rem;flex-shrink:0">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.4">I agree to receive <strong style="color:rgba(255,255,255,.65)">text updates</strong> about BrocatoEatz drops. Reply STOP to opt out.</span>
+      </label>
+      <button onclick="handleDroplistPopupSignup()" style="width:100%;background:var(--red);border:none;color:white;padding:.7rem;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:3px;cursor:pointer">JOIN THE LIST</button>
+    </div>
+    <div id="dlp-success" style="display:none;padding:.5rem 0">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--tan);margin-bottom:.35rem">YOU'RE IN! &#127829;</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.06em">We'll text you the moment orders open.</div>
+    </div>
+    <button onclick="closeDroplistPopup()" style="background:none;border:none;color:rgba(255,255,255,.2);font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.08em;cursor:pointer;margin-top:1rem;text-decoration:underline">No thanks</button>
   </div>
 </div>
 
@@ -1492,6 +1524,44 @@ function renderDoughTracker(){
 
 function openDoughInfo(){ document.getElementById('dough-info-modal').classList.add('open'); }
 function closeDoughInfo(){ document.getElementById('dough-info-modal').classList.remove('open'); }
+
+// ══════════════════════════════════════
+// DROP LIST POPUP
+// ══════════════════════════════════════
+function showDroplistPopup(){
+  if(localStorage.getItem('brocato_joined_list')) return;
+  var el = document.getElementById('droplist-popup');
+  if(el){ el.style.display = 'flex'; }
+}
+function closeDroplistPopup(){
+  var el = document.getElementById('droplist-popup');
+  if(el){ el.style.display = 'none'; }
+}
+function handleDroplistPopupSignup(){
+  var fname = (document.getElementById('dlp-fname').value || '').trim();
+  var lname = (document.getElementById('dlp-lname').value || '').trim();
+  var phone = (document.getElementById('dlp-phone').value || '').replace(/\D/g,'');
+  var consent = document.getElementById('dlp-consent').checked;
+  var errEl = document.getElementById('dlp-err');
+  errEl.style.display = 'none';
+  if(!fname || !lname){ errEl.textContent = 'Please enter your name.'; errEl.style.display = 'block'; return; }
+  if(phone.length < 10){ errEl.textContent = 'Enter a valid phone number.'; errEl.style.display = 'block'; return; }
+  if(!consent){ errEl.textContent = 'Please check the box to opt in.'; errEl.style.display = 'block'; return; }
+  var btn = document.querySelector('#dlp-form button');
+  if(btn){ btn.textContent = 'ADDING YOU...'; btn.disabled = true; }
+  fetch(APPS_SCRIPT_URL, {
+    method:'POST',
+    body: JSON.stringify({action:'signup', firstName:fname, lastName:lname, phone:phone})
+  }).then(function(r){ return r.json(); }).then(function(data){
+    localStorage.setItem('brocato_joined_list','1');
+    document.getElementById('dlp-form').style.display = 'none';
+    document.getElementById('dlp-success').style.display = 'block';
+    setTimeout(closeDroplistPopup, 2500);
+  }).catch(function(){
+    if(btn){ btn.textContent = 'JOIN THE LIST'; btn.disabled = false; }
+    errEl.textContent = 'Something went wrong. Try again.'; errEl.style.display = 'block';
+  });
+}
 
 // ══════════════════════════════════════
 // ROUTING
@@ -2206,6 +2276,8 @@ updatePreorderPill();
 setInterval(updateSoldOutState, 30000);
 // Fetch live orders for dough tracker on splash
 fetchLiveOrders().then(renderDoughTracker);
+// Auto-show drop list popup after 2s
+setTimeout(showDroplistPopup, 2000);
 </script>
 </body>
 </html>
