@@ -1496,18 +1496,23 @@ function handleDroplistPopupSignup(){
   var consent = document.getElementById('dlp-consent').checked;
   var errEl = document.getElementById('dlp-err');
   errEl.style.display = 'none';
-  if(!fname || !lname){ errEl.textContent = 'Please enter your name.'; errEl.style.display = 'block'; return; }
+  if(!fname || !lname){ errEl.textContent = 'Please enter your first and last name.'; errEl.style.display = 'block'; return; }
   if(phone.length < 10){ errEl.textContent = 'Enter a valid phone number.'; errEl.style.display = 'block'; return; }
   if(!consent){ errEl.textContent = 'Please check the box to opt in.'; errEl.style.display = 'block'; return; }
   var btn = document.querySelector('#dlp-form button');
   if(btn){ btn.textContent = 'ADDING YOU...'; btn.disabled = true; }
   fetch(APPS_SCRIPT_URL, {
     method:'POST',
-    body: JSON.stringify({action:'signup', firstName:fname, lastName:lname, phone:phone})
-  }).then(function(r){ return r.json(); }).then(function(data){
+    headers:{'Content-Type':'text/plain'},
+    body: JSON.stringify({fname:fname, lname:lname, phone:phone})
+  }).then(function(){
     localStorage.setItem('brocato_joined_list','1');
     document.getElementById('dlp-form').style.display = 'none';
     document.getElementById('dlp-success').style.display = 'block';
+    fetch('/.netlify/functions/send-sms', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({type:'signup', phone:phone, fname:fname})
+    }).catch(function(e){ console.log('Signup SMS error:', e); });
     setTimeout(closeDroplistPopup, 2500);
   }).catch(function(){
     if(btn){ btn.textContent = 'JOIN THE LIST'; btn.disabled = false; }
