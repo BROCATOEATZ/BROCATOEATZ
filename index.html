@@ -53,7 +53,7 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .consent-text strong{color:rgba(255,255,255,.7)}
 .reserve-btn{width:100%;padding:1rem;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-bottom:1rem}
 .reserve-btn:hover:not(.locked){background:var(--red-light);transform:translateY(-1px);box-shadow:0 4px 20px #8B1A0E55}
-.reserve-btn.locked{opacity:.55;background:#555;cursor:not-allowed;box-shadow:none;transform:none}
+.reserve-btn.locked{opacity:1;background:var(--red);cursor:pointer;box-shadow:none;transform:none}
 .notify-submit{width:100%;padding:1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.15);font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:4px;cursor:pointer;transition:all .2s;margin-top:.25rem}
 .notify-submit:hover:not(:disabled){background:rgba(255,255,255,.12);color:white}
 .notify-submit:disabled{opacity:.35;cursor:not-allowed}
@@ -378,7 +378,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 <div class="splash-page" id="splash-page">
 <div class="splash-inner">
   <div id="form-state">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.5);margin-bottom:.3rem">DROP &nbsp;&middot;&nbsp; 10 &nbsp;&middot;&nbsp; AUG 16</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.5);margin-bottom:.3rem">DROP &nbsp;&middot;&nbsp; 11 &nbsp;&middot;&nbsp; AUG 23</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:5px;color:var(--tan);margin-bottom:.2rem">BROCATOEATZ</div>
     <h1><em>SUNDAY</em><br><em class="line2" style="color:var(--tan)">PIZZA DROP</em></h1>
 
@@ -392,7 +392,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <!-- TAB: DROP -->
     <div class="tab-panel active" id="tab-drop">
       <div id="current-drop-info">
-        <div id="admin-drop-date-display" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,5vw,1.8rem);letter-spacing:4px;color:white;margin-bottom:.2rem;margin-top:.25rem">SUNDAY, AUGUST 16TH</div>
+        <div id="admin-drop-date-display" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,5vw,1.8rem);letter-spacing:4px;color:white;margin-bottom:.2rem;margin-top:.25rem">SUNDAY, AUGUST 23RD</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:.2rem">11:20 AM &ndash; 7:00 PM</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.08em;color:var(--tan);margin-bottom:.4rem">King&rsquo;s Court Estate Winery &nbsp;&middot;&nbsp; St. Catharines</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red-light);margin-bottom:1.25rem">Pre-Order Only &mdash; No Walk-Ups</div>
@@ -406,9 +406,9 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         </div>
       </div>
       <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
-      <div id="reserve-locked-msg" style="display:none;text-align:center;margin-bottom:.75rem">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:white;margin-bottom:.25rem">ORDERS OPEN TODAY @ 7PM</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan)">&#9889; Drop List members get access @ 6PM</div>
+      <div id="reserve-locked-msg" style="display:none;text-align:center;margin-bottom:.75rem;border:1px solid rgba(212,169,122,.25);padding:.75rem 1rem">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.3rem">Orders open the Tuesday before each drop @ 7:00 PM</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tan)">&#9889; Drop List Members Get Access @ 6:00 PM</div>
       </div>
       <div class="dough-tracker-wrap" id="dough-tracker" style="display:none">
         <div class="dough-tracker-header">
@@ -424,7 +424,6 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         <div class="dough-bar-wrap"><div class="dough-bar-fill" id="dough-bar-fill" style="width:0%"></div></div>
         <div class="dough-status ok" id="dough-status">Spots Available</div>
       </div>
-      <div style="margin-top:1.25rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.06em;color:rgba(255,255,255,.45);text-align:center;margin-bottom:.6rem;line-height:1.5">Pre-orders open the <strong style="color:rgba(255,255,255,.75)">Tuesday before</strong> each drop @ <strong style="color:rgba(255,255,255,.75)">7:00 PM</strong></div>
       <div class="soldout-splash" id="soldout-splash">
         <div class="soldout-splash-title">SOLD OUT</div>
         <div class="soldout-splash-sub" style="margin-bottom:1.5rem">Thanks for the love — see you at the next one &#127829;</div>
@@ -438,7 +437,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 
     <!-- TAB: MENU -->
     <div class="tab-panel" id="tab-menu">
-      <div class="tab-section-title" id="admin-menu-tab-title">AUGUST 16TH MENU</div>
+      <div class="tab-section-title" id="admin-menu-tab-title">AUGUST 23RD MENU</div>
       <div class="tab-section-sub">Premium ingredients sourced from around the world</div>
       <div class="menu-tab-card">
         <div class="menu-tab-header">
@@ -464,12 +463,12 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div class="menu-tab-card feature">
         <div class="menu-tab-header">
           <div>
-            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.2rem"><span style="font-size:1.3rem;line-height:1">&#127829;</span><span class="menu-tab-name" id="admin-feature-name">4 CHEESE</span></div>
-            <span id="admin-feature-label" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.5rem;letter-spacing:.1em;color:#111;background:var(--tan);padding:.12rem .35rem;vertical-align:middle">DROP 10 FEATURE</span>
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.2rem"><span style="font-size:1.3rem;line-height:1">&#127829;</span><span class="menu-tab-name" id="admin-feature-name">PEACH</span></div>
+            <span id="admin-feature-label" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.5rem;letter-spacing:.1em;color:#111;background:var(--tan);padding:.12rem .35rem;vertical-align:middle">DROP 11 FEATURE</span>
           </div>
           <span class="menu-tab-price">$25</span>
         </div>
-        <div class="menu-tab-desc" id="admin-feature-desc">Garlic EVOO, Fior Di Latte, Grass-Fed Mozzarella Mix, Gorgonzola, 30-Month Aged Parmigiano Reggiano, EVOO, Fresh Basil, Oregano</div>
+        <div class="menu-tab-desc" id="admin-feature-desc">Bechamel, Goat's Cheese, Fior Di Latte, Local Grilled Peaches, Prosciutto, Balsamic Reduction, Brown Butter Honey Glaze on Crust</div>
       </div>
       <div class="menu-tab-card" style="border-color:rgba(212,169,122,.15);background:rgba(212,169,122,.03)">
         <div class="menu-tab-header">
@@ -499,7 +498,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
           </div>
           <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(212,169,122,.07);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
             <div style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;line-height:1;gap:.05rem"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,122,.6)">Drop</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--tan)">10</span></div>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:white">SUNDAY, AUGUST 16TH</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:white">SUNDAY, AUGUST 23RD</span>
             <div style="position:absolute;right:.7rem;top:50%;transform:translateY(-50%);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;background:var(--tan);color:#111;padding:.2rem .5rem">NEXT</div>
           </div>
           <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:.55rem 2.5rem;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);text-align:center">
@@ -589,7 +588,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
   </div>
   <div class="orders-locked" id="orders-locked" style="display:none">
     <div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div>
-    <div class="orders-locked-sub">Orders open Tuesday, August 12th @ 7:00 PM<br>Next Pop Up: Sunday, August 16th</div>
+    <div class="orders-locked-sub">Orders open Tuesday, August 19th @ 7:00 PM<br>Next Pop Up: Sunday, August 23rd</div>
   </div>
 
   <div class="order-header">
@@ -598,11 +597,11 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div class="order-brand-side">BROCATOEATZ</div>
     </div>
     <div class="order-meta-row">
-      <span class="order-meta-item">Sunday, August 16th</span>
+      <span class="order-meta-item">Sunday, August 23rd</span>
       <span class="order-meta-sep">|</span>
       <span class="order-meta-item">11:20 AM – 7:00 PM</span>
     </div>
-    <div class="order-meta-city">St. Catharines, ON</div>
+    <div class="order-meta-city">Currently @ King's Court Estate Winery &amp; Vineyard<br>St. Catharines, ON</div>
   </div>
 
   <nav class="steps">
@@ -686,7 +685,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div class="success-screen" id="success-screen">
       <div style="font-size:3.5rem;margin-bottom:1rem">🍕</div>
       <h2>ORDER PLACED!</h2>
-      <p style="font-family:'Barlow Condensed',sans-serif;color:#666;margin-bottom:1.5rem">See you August 16th at the Pizza Drop!</p>
+      <p style="font-family:'Barlow Condensed',sans-serif;color:#666;margin-bottom:1.5rem">See you August 23rd at the Pizza Drop!</p>
       <div class="success-details" id="success-details"></div>
       <button class="restart-btn" onclick="restartOrder()">PLACE ANOTHER ORDER</button>
     </div>
@@ -722,7 +721,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
       <div style="margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed rgba(139,26,14,.3)">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--red);margin-bottom:.6rem">DROP DATE</div>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
-          <input type="text" id="admin-drop-date-input" placeholder="SUNDAY, AUGUST 16TH" style="flex:1;min-width:160px;padding:.4rem .6rem;border:2px solid #e0d8cc;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;outline:none;text-transform:uppercase">
+          <input type="text" id="admin-drop-date-input" placeholder="SUNDAY, AUGUST 23RD" style="flex:1;min-width:160px;padding:.4rem .6rem;border:2px solid #e0d8cc;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;outline:none;text-transform:uppercase">
           <button onclick="saveDropDate()" style="background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;padding:.45rem 1rem;cursor:pointer">SAVE</button>
         </div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.75rem;color:#999;margin-top:.35rem">Updates the date shown on the splash page and menu header.</div>
@@ -773,7 +772,8 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:4px;color:#D4A97A;margin-bottom:.5rem">NOT OPEN YET</div>
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:.35rem">Pre-orders open</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:white;margin-bottom:1.25rem;white-space:nowrap">TUESDAY, AUGUST 12TH @ 7:00 PM</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5;margin-bottom:.9rem">Sign up for the Drop List below to get notified when orders open! ↓</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em;line-height:1.5;margin-bottom:.5rem">Sign up for the Drop List below to get notified when orders open! ↓</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan);background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.25);padding:.4rem .75rem;margin-bottom:.9rem;display:inline-block">&#9889; Drop List members get 1 hour early access</div>
 
     <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:1rem">
       <div id="lp-form" style="text-align:left">
@@ -868,14 +868,14 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
 // ══════════════════════════════════════
 var ADMIN_PASSWORD = 'pizza6';
 var DROP_DATE = new Date('2026-08-16T11:00:00');
-var ORDERS_OPEN_DATE = new Date('2026-08-11T00:00:00'); // Unlocked — August 16th drop
+var ORDERS_OPEN_DATE = new Date('2026-08-19T19:00:00'); // 7PM Tuesday Aug 19 — Drop 11
 var TOTAL_CAP = 150; // max pizzas regardless of slot availability
 
 var PIZZAS = [
   {id:'margherita',  name:'MARGHERITA',     price:20, img:'margherita.png', desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, FIOR DI LATTE, FRESH BASIL, EVOO, 30-MONTH AGED PARMIGIANO REGGIANO'},
   {id:'cupchar',     name:'CUP & CHAR',     price:25, img:null, desc:'ORGANIC BIANCO DINAPOLI TOMATO SAUCE, GRASS-FED MOZZARELLA MIX, EZZO CUP & CRISP PEPS, FINISHED WITH MY HOT HONEY'},
   {id:'funguy',      name:'FUNGUY',         price:25, img:null, desc:'WHITE TRUFFLE OIL, FIOR DI LATTE, GRASS-FED MOZZARELLA MIX, ROASTED MUSHROOMS, HOUSE CHIMICHURRI, 30-MONTH AGED PARMIGIANO REGGIANO'},
-  {id:'calabrian',   name:'4 CHEESE',  price:25, img:null, feature:'DROP 10 FEATURE', desc:'GARLIC EVOO, FIOR DI LATTE, GRASS-FED MOZZARELLA MIX, GORGONZOLA, 30-MONTH AGED PARMIGIANO REGGIANO, EVOO, FRESH BASIL, OREGANO'}
+  {id:'calabrian',   name:'PEACH',  price:25, img:null, feature:'DROP 11 FEATURE', desc:'BECHAMEL, GOAT\'S CHEESE, FIOR DI LATTE, LOCAL GRILLED PEACHES, PROSCIUTTO, BALSAMIC REDUCTION, BROWN BUTTER HONEY GLAZE ON CRUST'}
 ];
 
 var SLOT_PIZZA_CAP = 6;
@@ -1531,8 +1531,13 @@ function closeDoughInfo(){ document.getElementById('dough-info-modal').classList
 // DROP LIST POPUP
 // ══════════════════════════════════════
 function showDroplistPopup(){
-  var el = document.getElementById('droplist-popup');
-  if(el){ el.style.display = 'flex'; }
+  if(localStorage.getItem('brocato_joined_list')) return;
+  var visits = parseInt(localStorage.getItem('brocato_popup_visits') || '0', 10) + 1;
+  localStorage.setItem('brocato_popup_visits', String(visits));
+  if(visits % 2 === 1){ // show on visits 1, 3, 5...
+    var el = document.getElementById('droplist-popup');
+    if(el){ el.style.display = 'flex'; }
+  }
 }
 function closeDroplistPopup(){
   var el = document.getElementById('droplist-popup');
@@ -1932,7 +1937,7 @@ function updateSoldOutState(){
 }
 
 function toggleOrders(){
-  alert('Orders open automatically on Tuesday August 12th @ 7:00 PM. No action needed.');
+  alert('Orders open automatically on Tuesday August 19th @ 7:00 PM. No action needed.');
 }
 
 function updateOrdersToggleBtn(){
@@ -1955,12 +1960,12 @@ function checkOrdersLocked(){
   var steps = document.querySelector('.steps');
   if(!locked || !form) return;
   if(isSoldOut()){
-    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday August 16th<br>Pre-Orders Open: Tuesday August 12th @ 7PM<br>Menu Drops: Sunday August 16th @ 11AM</div>';
+    locked.innerHTML = '<div class="orders-locked-title">SOLD OUT</div><div class="orders-locked-sub">Next Pop Up: Sunday August 23rd<br>Pre-Orders Open: Tuesday August 19th @ 7PM<br>Menu Drops: Sunday August 23rd @ 11AM</div>';
     locked.style.display = 'block';
     form.style.display = 'none';
     if(steps) steps.style.display = 'none';
   } else if(!isOrdersOpen() && !secretCodeUnlocked){
-    locked.innerHTML = '<div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div><div class="orders-locked-sub">Orders open Tuesday, August 12th @ 7:00 PM<br>Next Pop Up: Sunday, August 16th</div>';
+    locked.innerHTML = '<div class="orders-locked-title">PRE-ORDERS NOT OPEN YET</div><div class="orders-locked-sub">Orders open Tuesday, August 19th @ 7:00 PM<br>Next Pop Up: Sunday, August 23rd</div>';
     locked.style.display = 'block';
     form.style.display = 'none';
     if(steps) steps.style.display = 'none';
@@ -2106,7 +2111,7 @@ var secretCodeUnlocked = false;
 
 function checkSecretCode(){
   var code = document.getElementById('secret-code-input').value.trim().toUpperCase();
-  if(code === 'CLOSED.NEXT.WEEK'){
+  if(code === 'PEACH'){
     secretCodeUnlocked = true;
     closeLocked();
     enterOrdering();
