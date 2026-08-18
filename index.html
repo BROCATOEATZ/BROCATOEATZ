@@ -406,6 +406,10 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
         </div>
       </div>
       <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
+      <div id="reserve-locked-msg" style="display:none;text-align:center;margin-bottom:.75rem">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:white;margin-bottom:.25rem">ORDERS OPEN TODAY @ 7PM</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan)">&#9889; Drop List members get access @ 6PM</div>
+      </div>
       <div class="dough-tracker-wrap" id="dough-tracker" style="display:none">
         <div class="dough-tracker-header">
           <span class="dough-tracker-title">&#127829; Dough Tracker</span>
@@ -814,7 +818,7 @@ display:inline-block;padding:.15rem .5rem;font-family:'Barlow Condensed',sans-se
     <button onclick="closeDroplistPopup()" style="position:absolute;top:.6rem;right:.7rem;background:none;border:none;color:rgba(255,255,255,.3);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;cursor:pointer;line-height:1;padding:.2rem .4rem">&times;</button>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:5px;color:var(--tan);margin-bottom:.2rem">JOIN THE<br>DROP LIST</div>
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.06em;line-height:1.5;margin-bottom:.6rem">Get a text the moment pre-orders go live — never miss a drop.</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan);background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.25);padding:.4rem .75rem;margin-bottom:1.1rem;display:inline-block">&#9889; Members get an early access code 15 min before orders open</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan);background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.25);padding:.4rem .75rem;margin-bottom:1.1rem;display:inline-block">&#9889; Drop List members get early access 1 hour before orders open</div>
     <div id="dlp-form">
       <div style="display:flex;gap:.4rem;margin-bottom:.5rem">
         <input type="text" id="dlp-fname" placeholder="First name" autocomplete="given-name" style="flex:1;min-width:0;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;padding:.55rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;outline:none">
@@ -1487,8 +1491,9 @@ function renderDoughTracker(){
   var tracker = document.getElementById('dough-tracker');
   if(tracker){
     var doughSet = localStorage.getItem('brocato_dough_count') !== null;
-    tracker.style.display = (doughSet && !isSoldOut()) ? 'block' : 'none';
-    if(doughSet && !isSoldOut()){
+    var doughHidden = localStorage.getItem('brocato_hide_dough_tracker') === 'true';
+    tracker.style.display = (doughSet && !doughHidden && !isSoldOut()) ? 'block' : 'none';
+    if(doughSet && !doughHidden && !isSoldOut()){
       document.getElementById('dough-bar-fill').style.width = pct + '%';
       document.getElementById('dough-booked').textContent = sold;
       document.getElementById('dough-total').textContent = total;
@@ -2129,10 +2134,13 @@ function updatePreorderPill(){
 function updateReserveBtn(){
   var btn = document.getElementById('reserve-btn');
   if(!btn) return;
+  var msg = document.getElementById('reserve-locked-msg');
   if(isOrdersOpen()){
     btn.classList.remove('locked');
+    if(msg) msg.style.display = 'none';
   } else {
     btn.classList.add('locked');
+    if(msg) msg.style.display = 'block';
   }
 }
 
@@ -2255,8 +2263,9 @@ function renderDoughTracker(){
   var tracker = document.getElementById('dough-tracker');
   if(tracker){
     var doughSet = localStorage.getItem('brocato_dough_count') !== null;
-    tracker.style.display = (doughSet && !isSoldOut()) ? 'block' : 'none';
-    if(doughSet && !isSoldOut()){
+    var doughHidden = localStorage.getItem('brocato_hide_dough_tracker') === 'true';
+    tracker.style.display = (doughSet && !doughHidden && !isSoldOut()) ? 'block' : 'none';
+    if(doughSet && !doughHidden && !isSoldOut()){
       document.getElementById('dough-bar-fill').style.width = pct + '%';
       document.getElementById('dough-booked').textContent = sold;
       document.getElementById('dough-total').textContent = total;
