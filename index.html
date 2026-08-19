@@ -1064,6 +1064,208 @@ body{font-size:17px}
   .step{font-size:.8rem}
 }
 
+/* Front-page focus pass: photo-led hero with one unmistakable primary action */
+.bg-pizza{display:none}
+.splash-brand-panel{
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  min-height:300px;
+  overflow:hidden;
+  padding:2rem 1.6rem;
+  border-radius:18px;
+  text-align:left;
+}
+.splash-brand-panel::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:url('pizza-drop-hero.jpg') center 46% / cover no-repeat;
+  filter:saturate(.88) contrast(1.05);
+  transform:scale(1.01);
+}
+.splash-brand-panel::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:auto;
+  height:auto;
+  background:linear-gradient(180deg,rgba(10,8,6,.06) 12%,rgba(10,8,6,.32) 54%,rgba(10,8,6,.91) 100%);
+  opacity:1;
+}
+.splash-brand-panel>*{position:relative;z-index:1}
+.splash-wordmark{
+  display:inline-grid;
+  width:max-content;
+  line-height:1;
+}
+.splash-wordmark span{grid-area:1/1}
+.splash-wordmark-outline{
+  z-index:0;
+  color:#050403;
+  -webkit-text-stroke:5px #050403;
+  text-shadow:
+    -4px -4px 0 #050403,
+     0   -4px 0 #050403,
+     4px -4px 0 #050403,
+    -4px  0   0 #050403,
+     4px  0   0 #050403,
+    -4px  4px 0 #050403,
+     0    4px 0 #050403,
+     4px  4px 0 #050403,
+     0 6px 20px rgba(0,0,0,.9);
+}
+.splash-wordmark-fill{position:relative;z-index:1;color:var(--tan)}
+.splash-brand-copy{
+  display:block;
+  max-width:31rem;
+  margin-bottom:1rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.5;
+  color:rgba(255,255,255,.72);
+}
+.splash-brand-details{display:flex;flex-wrap:wrap;gap:.45rem}
+.splash-brand-details span{
+  display:inline-flex;
+  padding:.3rem .62rem;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;
+  background:rgba(15,11,8,.42);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.75);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+.reservation-cta{
+  margin:.7rem 0 .8rem;
+  padding:1rem;
+  border:1px solid rgba(215,170,112,.38);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(215,170,112,.13),rgba(152,38,25,.13));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  text-align:center;
+}
+.reservation-kicker{
+  margin-bottom:.48rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+}
+.reservation-cta .reserve-btn{
+  width:100%;
+  margin:0;
+  padding:1.18rem 1rem 1.1rem;
+  border:2px solid rgba(255,255,255,.18);
+  border-radius:13px;
+  background:linear-gradient(135deg,#D8442E,#982619);
+  box-shadow:0 16px 38px rgba(152,38,25,.48),inset 0 1px 0 rgba(255,255,255,.2);
+  font-size:clamp(1.65rem,4vw,2rem);
+  line-height:1;
+  letter-spacing:4.5px;
+}
+.reservation-cta .reserve-btn:hover{
+  background:linear-gradient(135deg,#E4523A,#AD2D1E);
+  transform:translateY(-2px);
+  box-shadow:0 20px 44px rgba(152,38,25,.56),inset 0 1px 0 rgba(255,255,255,.22);
+}
+.reservation-note{
+  margin-top:.5rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.48);
+}
+.reservation-cta #reserve-locked-msg{margin:.8rem 0 0!important;border-radius:10px}
+.drop-feature-teaser,.drop-feature-video{min-height:8.6rem}
+.drop-feature-teaser{grid-template-columns:6.8rem minmax(0,1fr)}
+.drop-how{padding:.72rem .85rem}
+.drop-how-title{margin-bottom:.48rem}
+
+@media(min-width:1000px){
+  body{padding:2rem 1.5rem}
+  .splash-page:not(.hidden){min-height:calc(100vh - 4rem)}
+  .splash-inner{max-width:1120px}
+  .splash-desktop-grid{
+    grid-template-columns:minmax(390px,.9fr) minmax(520px,1.1fr);
+    min-height:610px;
+  }
+  .splash-brand-panel{
+    min-height:610px;
+    padding:2.75rem 2.9rem;
+    border:0;
+    border-radius:0;
+  }
+  .splash-brand-panel h1{
+    margin:.8rem 0 1rem;
+    font-size:clamp(4.8rem,7.2vw,7.4rem);
+  }
+  .splash-brand-panel h1 .line2{font-size:clamp(2.65rem,4.6vw,4.45rem)}
+  .splash-brand-copy{margin-bottom:1rem}
+  .splash-content-panel{padding:1.35rem 2rem 1.25rem}
+  .splash-content-panel .tab-panel{padding-top:.75rem}
+  .splash-content-panel #tab-drop{padding-top:.85rem}
+  .splash-content-panel #current-drop-info{padding:0}
+  .splash-content-panel #admin-drop-date-display{font-size:1.8rem!important;letter-spacing:4px!important}
+  .drop-overview-card{margin-bottom:.6rem;padding:.8rem}
+  .drop-overview-date{margin-bottom:.58rem}
+  .drop-fact{padding:.48rem .58rem}
+  .drop-fact strong{font-size:.88rem}
+  .drop-fact small{font-size:.75rem}
+  .reservation-cta{margin:.6rem 0;padding:.82rem}
+  .reservation-kicker{margin-bottom:.4rem}
+  .reservation-cta .reserve-btn{max-width:none;padding:1.12rem 1rem 1.04rem}
+  .drop-feature-teaser{margin-bottom:.58rem;min-height:7.7rem;grid-template-columns:6.2rem minmax(0,1fr)}
+  .drop-feature-video{min-height:7.7rem}
+  .drop-feature-copy{padding:.65rem 0}
+  .drop-feature-desc{line-height:1.35}
+  .drop-how{margin-bottom:.55rem;padding:.58rem .75rem}
+  .drop-how-title{margin-bottom:.42rem}
+  .drop-how-step{padding-top:1.35rem;font-size:.76rem;line-height:1.25}
+  .drop-how-step b{font-size:.86rem}
+  .splash-content-panel>.divider{margin-bottom:.65rem}
+}
+
+@media(max-width:999px){
+  .splash-inner{max-width:680px;padding:0;overflow:hidden}
+  .splash-brand-panel{min-height:clamp(280px,44vh,370px);border-radius:0}
+  .splash-brand-panel h1{margin:.55rem 0 .85rem;font-size:clamp(3.8rem,12vw,6rem);line-height:.84}
+  .splash-brand-panel h1 .line2{font-size:clamp(2.2rem,8vw,3.8rem)}
+  .splash-content-panel{padding:1rem clamp(1rem,4vw,1.6rem) 1.35rem}
+  .splash-content-panel .tab-panel{padding-top:.8rem}
+}
+
+@media(max-width:520px){
+  .splash-brand-panel{min-height:270px;padding:1.35rem 1.15rem}
+  .splash-brand-panel::before{background-position:center 44%}
+  .splash-brand-panel h1{font-size:3.4rem}
+  .splash-brand-panel h1 .line2{font-size:2.05rem}
+  .splash-brand-copy{display:none}
+  .splash-brand-details span:last-child{display:none}
+  .drop-overview-card{padding:.78rem}
+  .drop-fact{padding:.5rem}
+  .reservation-cta{padding:.82rem .72rem}
+  .reservation-kicker{font-size:.69rem;letter-spacing:.11em}
+  .reservation-cta .reserve-btn{padding:1.05rem .7rem .98rem;font-size:1.55rem;letter-spacing:3.5px}
+  .reservation-note{font-size:.68rem;letter-spacing:.055em}
+  .drop-feature-teaser{grid-template-columns:5.6rem minmax(0,1fr);min-height:8rem}
+  .drop-feature-video{min-height:8rem}
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
@@ -1084,7 +1286,7 @@ body{font-size:17px}
     <div class="splash-desktop-grid">
     <section class="splash-brand-panel">
     <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,169,122,.5);margin-bottom:.3rem">DROP &nbsp;&middot;&nbsp; 11 &nbsp;&middot;&nbsp; AUG 23</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:5px;color:var(--tan);margin-bottom:.2rem">BROCATOEATZ</div>
+    <div class="splash-wordmark" aria-label="BROCATOEATZ" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:5px;color:var(--tan);margin-bottom:.2rem"><span class="splash-wordmark-outline" aria-hidden="true">BROCATOEATZ</span><span class="splash-wordmark-fill" aria-hidden="true">BROCATOEATZ</span></div>
     <h1><em>SUNDAY</em><br><em class="line2" style="color:var(--tan)">PIZZA DROP</em></h1>
     <p class="splash-brand-copy">One Sunday. One small batch. Hand-stretched, fired hot, and gone when the dough runs out.</p>
     <div class="splash-brand-details">
@@ -1115,6 +1317,24 @@ body{font-size:17px}
             <div class="drop-fact"><span class="drop-fact-label">Service</span><strong>Pre-order only</strong><small>No walk-ups</small></div>
           </div>
         </div>
+        <div class="reservation-cta">
+          <div id="preorder-pill" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.3);padding:.85rem 1.4rem;margin:0 auto .9rem;max-width:fit-content">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)">Pre-orders open</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--tan)">TUESDAY BEFORE EACH DROP @ 7PM</span>
+          </div>
+          <div class="live-pill" id="live-pill" style="display:none">
+            <span class="live-dot"></span>
+            <span class="live-text">Pre-Orders Are Live</span>
+          </div>
+          <div class="reservation-kicker">Limited batch &middot; secure your pickup time</div>
+          <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
+          <div class="reservation-note">Choose your pies &middot; reserve a window &middot; pay at pickup</div>
+          <div id="reserve-locked-msg" style="display:none;text-align:center;margin-bottom:.75rem;border:1px solid rgba(212,169,122,.25);padding:.75rem 1rem">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.3rem">Orders open the Tuesday before each drop @ 7:00 PM</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tan)">&#9889; Drop List Members Get Access @ 6:00 PM</div>
+            <button class="early-code-btn" onclick="openEarlyAccessCode()">I have an early-access code</button>
+          </div>
+        </div>
         <div class="drop-feature-teaser">
           <div class="drop-feature-video-wrap">
             <video class="drop-feature-video" muted loop playsinline preload="metadata" aria-label="Peach feature pizza video" onplay="this.parentElement.classList.add('is-playing');this.nextElementSibling.setAttribute('aria-label','Pause Peach pizza video')" onpause="this.parentElement.classList.remove('is-playing');this.nextElementSibling.setAttribute('aria-label','Play Peach pizza video')">
@@ -1138,14 +1358,6 @@ body{font-size:17px}
             <span class="drop-feature-limited">Drop 11 only</span>
           </div>
         </div>
-        <div id="preorder-pill" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;background:rgba(212,169,122,.1);border:1px solid rgba(212,169,122,.3);padding:.85rem 1.4rem;margin:0 auto .9rem;max-width:fit-content">
-          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)">Pre-orders open</span>
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--tan)">TUESDAY BEFORE EACH DROP @ 7PM</span>
-        </div>
-        <div class="live-pill" id="live-pill" style="display:none">
-          <span class="live-dot"></span>
-          <span class="live-text">Pre-Orders Are Live</span>
-        </div>
         <div class="drop-how">
           <div class="drop-how-title">HOW IT WORKS</div>
           <div class="drop-how-steps">
@@ -1154,12 +1366,6 @@ body{font-size:17px}
             <div class="drop-how-step"><span class="drop-how-num">3</span><b>Check in &amp; enjoy</b>Fresh from the oven in about 15&ndash;30 minutes.</div>
           </div>
         </div>
-      </div>
-      <button class="reserve-btn" id="reserve-btn" onclick="handleReserveClick()">RESERVE MY PIZZA</button>
-      <div id="reserve-locked-msg" style="display:none;text-align:center;margin-bottom:.75rem;border:1px solid rgba(212,169,122,.25);padding:.75rem 1rem">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.3rem">Orders open the Tuesday before each drop @ 7:00 PM</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tan)">&#9889; Drop List Members Get Access @ 6:00 PM</div>
-        <button class="early-code-btn" onclick="openEarlyAccessCode()">I have an early-access code</button>
       </div>
       <div class="dough-tracker-wrap" id="dough-tracker" style="display:none">
         <div class="dough-tracker-header">
