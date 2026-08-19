@@ -344,12 +344,14 @@ body::before{content:'';position:absolute;inset:0;background:radial-gradient(ell
 .order-dough-fill{height:100%;background:var(--red);border-radius:3px;transition:width .6s}
 .order-dough-pct{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--tan);white-space:nowrap}
 /* TABS */
-.tab-nav{display:flex;border-bottom:1px solid rgba(255,255,255,.12);margin:.6rem 0 0;gap:0}
-.tab-btn{flex:1;padding:.65rem .15rem;font-family:'Bebas Neue',sans-serif;font-size:.82rem;letter-spacing:2px;color:rgba(255,255,255,.28);background:none;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:-1px}
+.tab-nav{position:relative;z-index:10;isolation:isolate;display:flex;border-bottom:1px solid rgba(255,255,255,.12);margin:.6rem 0 0;gap:0}
+.tab-btn{position:relative;z-index:1;flex:1;padding:.65rem .15rem;font-family:'Bebas Neue',sans-serif;font-size:.82rem;letter-spacing:2px;color:rgba(255,255,255,.28);background:none;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:-1px;touch-action:manipulation}
 .tab-btn.active{color:var(--tan);border-bottom-color:var(--tan)}
 .tab-btn:hover:not(.active){color:rgba(255,255,255,.55)}
+.tab-btn:focus-visible{outline:2px solid var(--tan);outline-offset:2px}
 .tab-panel{display:none;padding-top:1.25rem}
 .tab-panel.active{display:block;animation:tabIn .2s ease}
+.tab-panel[hidden]{display:none!important}
 @keyframes tabIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .tab-section-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:4px;color:rgba(255,255,255,.18);margin-bottom:.5rem;text-align:center}
 .tab-section-sub{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:.06em;text-align:center;margin-bottom:1.1rem;font-style:italic}
@@ -1107,17 +1109,17 @@ body{font-size:17px}
 .splash-wordmark-outline{
   z-index:0;
   color:#050403;
-  -webkit-text-stroke:5px #050403;
+  -webkit-text-stroke:2px #050403;
   text-shadow:
-    -4px -4px 0 #050403,
-     0   -4px 0 #050403,
-     4px -4px 0 #050403,
-    -4px  0   0 #050403,
-     4px  0   0 #050403,
-    -4px  4px 0 #050403,
-     0    4px 0 #050403,
-     4px  4px 0 #050403,
-     0 6px 20px rgba(0,0,0,.9);
+    -2px -2px 0 #050403,
+     0   -2px 0 #050403,
+     2px -2px 0 #050403,
+    -2px  0   0 #050403,
+     2px  0   0 #050403,
+    -2px  2px 0 #050403,
+     0    2px 0 #050403,
+     2px  2px 0 #050403,
+     0 4px 14px rgba(0,0,0,.82);
 }
 .splash-wordmark-fill{position:relative;z-index:1;color:var(--tan)}
 .splash-brand-copy{
@@ -1198,7 +1200,11 @@ body{font-size:17px}
 
 @media(min-width:1000px){
   body{padding:2rem 1.5rem}
-  .splash-page:not(.hidden){min-height:calc(100vh - 4rem)}
+  .splash-page:not(.hidden){
+    min-height:calc(100vh - 4rem);
+    align-items:flex-start;
+    align-items:safe center;
+  }
   .splash-inner{max-width:1120px}
   .splash-desktop-grid{
     grid-template-columns:minmax(390px,.9fr) minmax(520px,1.1fr);
@@ -1216,8 +1222,38 @@ body{font-size:17px}
   }
   .splash-brand-panel h1 .line2{font-size:clamp(2.65rem,4.6vw,4.45rem)}
   .splash-brand-copy{margin-bottom:1rem}
-  .splash-content-panel{padding:1.35rem 2rem 1.25rem}
-  .splash-content-panel .tab-panel{padding-top:.75rem}
+  .splash-content-panel{position:relative;align-self:start;width:100%;min-height:610px;padding:1.35rem 2rem 1.25rem}
+  .splash-content-panel .tab-nav{
+    position:relative;
+    z-index:20;
+    flex:0 0 auto;
+    min-height:52px;
+    padding:.35rem;
+    overflow:visible;
+    border:1px solid rgba(212,169,122,.38);
+    background:#171411;
+    box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .splash-content-panel .tab-btn{
+    display:block!important;
+    min-height:42px;
+    opacity:1!important;
+    visibility:visible!important;
+    color:#F5EBDD!important;
+    -webkit-text-fill-color:#F5EBDD;
+    background:transparent!important;
+    font-size:1.05rem;
+    font-weight:700;
+    line-height:1;
+  }
+  .splash-content-panel .tab-btn:hover:not(.active){background:rgba(255,255,255,.08)!important}
+  .splash-content-panel .tab-btn.active{
+    color:#171411!important;
+    -webkit-text-fill-color:#171411;
+    background:var(--tan)!important;
+    box-shadow:0 5px 14px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.32);
+  }
+  .splash-content-panel .tab-panel{position:relative;z-index:1;padding-top:.75rem}
   .splash-content-panel #tab-drop{padding-top:.85rem}
   .splash-content-panel #current-drop-info{padding:0}
   .splash-content-panel #admin-drop-date-display{font-size:1.8rem!important;letter-spacing:4px!important}
@@ -1266,6 +1302,32 @@ body{font-size:17px}
   .drop-feature-video{min-height:8rem}
 }
 
+/* Make the key pickup detail easier to spot at a glance */
+.drop-fact-hours{
+  border-color:rgba(212,169,122,.34);
+  background:linear-gradient(135deg,rgba(212,169,122,.14),rgba(212,169,122,.045));
+  box-shadow:inset 3px 0 0 rgba(212,169,122,.72),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.drop-fact-hours .drop-fact-label{
+  margin-bottom:.18rem;
+  font-size:.76rem;
+  letter-spacing:.14em;
+  color:var(--tan);
+}
+.drop-fact-hours strong{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.28rem;
+  font-weight:400;
+  line-height:1.08;
+  letter-spacing:1.4px;
+  color:#fff;
+}
+
+@media(min-width:1000px){
+  .drop-fact-hours .drop-fact-label{font-size:.67rem}
+  .drop-fact-hours strong{font-size:1.18rem}
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
@@ -1298,20 +1360,20 @@ body{font-size:17px}
 
     <section class="splash-content-panel">
 
-    <nav class="tab-nav">
-      <button class="tab-btn active" data-tab="drop" onclick="switchTab('drop')">DROP</button>
-      <button class="tab-btn" data-tab="dates" onclick="switchTab('dates')">DATES</button>
-      <button class="tab-btn" data-tab="list" onclick="switchTab('list')">LIST</button>
+    <nav class="tab-nav" role="tablist" aria-label="Drop information">
+      <button type="button" class="tab-btn active" id="tab-button-drop" role="tab" aria-controls="tab-drop" aria-selected="true" tabindex="0" data-tab="drop" onclick="switchTab('drop')">DROP</button>
+      <button type="button" class="tab-btn" id="tab-button-dates" role="tab" aria-controls="tab-dates" aria-selected="false" tabindex="-1" data-tab="dates" onclick="switchTab('dates')">DATES</button>
+      <button type="button" class="tab-btn" id="tab-button-list" role="tab" aria-controls="tab-list" aria-selected="false" tabindex="-1" data-tab="list" onclick="switchTab('list')">LIST</button>
     </nav>
 
     <!-- TAB: DROP -->
-    <div class="tab-panel active" id="tab-drop">
+    <div class="tab-panel active" id="tab-drop" role="tabpanel" aria-labelledby="tab-button-drop">
       <div id="current-drop-info">
         <div class="drop-overview-card">
           <div class="drop-overview-kicker">This week&rsquo;s drop</div>
           <div class="drop-overview-date" id="admin-drop-date-display">SUNDAY, AUGUST 23RD</div>
           <div class="drop-facts">
-            <div class="drop-fact"><span class="drop-fact-label">Pickup hours</span><strong>11:20 AM&ndash;7:00 PM</strong></div>
+            <div class="drop-fact drop-fact-hours"><span class="drop-fact-label">Pickup hours</span><strong>11:20 AM&ndash;7:00 PM</strong></div>
             <div class="drop-fact"><span class="drop-fact-label">Location</span><strong>King&rsquo;s Court Estate Winery</strong><small>St. Catharines, Ontario</small></div>
             <div class="drop-fact"><span class="drop-fact-label">Payment</span><strong>Cash preferred</strong><small>Pay at pickup</small></div>
             <div class="drop-fact"><span class="drop-fact-label">Service</span><strong>Pre-order only</strong><small>No walk-ups</small></div>
@@ -1393,7 +1455,7 @@ body{font-size:17px}
     </div>
 
     <!-- TAB: MENU -->
-    <div class="tab-panel" id="tab-menu">
+    <div class="tab-panel" id="tab-menu" hidden>
       <div class="tab-section-title" id="admin-menu-tab-title">AUGUST 23RD MENU</div>
       <div class="tab-section-sub">Premium ingredients sourced from around the world</div>
       <div class="menu-tab-card">
@@ -1439,7 +1501,7 @@ body{font-size:17px}
     </div>
 
     <!-- TAB: DATES -->
-    <div class="tab-panel" id="tab-dates">
+    <div class="tab-panel" id="tab-dates" role="tabpanel" aria-labelledby="tab-button-dates" hidden>
       <div class="tab-section-title">UPCOMING DROPS</div>
       <div class="drop-schedule-note">Pre-orders open the <strong>Tuesday before</strong> each drop at <strong>7:00 PM</strong>.</div>
       <div class="drop-schedule">
@@ -1477,7 +1539,7 @@ body{font-size:17px}
     </div>
 
     <!-- TAB: LIST -->
-    <div class="tab-panel" id="tab-list">
+    <div class="tab-panel" id="tab-list" role="tabpanel" aria-labelledby="tab-button-list" hidden>
       <div class="tab-section-title">JOIN THE DROP LIST</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.06em;margin-bottom:1.25rem;line-height:1.5;text-align:center">Be the first to know when the next drop goes live &mdash; get a text the moment pre-orders open.</div>
       <div class="signup-form">
@@ -1585,7 +1647,7 @@ body{font-size:17px}
             <button onclick="event.stopPropagation();document.getElementById('brownie-why').style.display=document.getElementById('brownie-why').style.display==='block'?'none':'block'" style="background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.1em;padding:.15rem .45rem;cursor:pointer;text-transform:uppercase;flex-shrink:0">WHY LIMITED?</button>
           </div>
           <div id="brownie-max-label" style="font-family:'Bebas Neue',sans-serif;font-size:.68rem;letter-spacing:1.2px;color:var(--tan);margin-top:.3rem">SMALL BATCH &mdash; MAX 1 BROWNIE PER PIZZA</div>
-          <div id="brownie-why" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;color:rgba(255,255,255,.55);line-height:1.5;margin-top:.35rem;letter-spacing:.02em">Small-batch drop item. Brownies are limited to 1 per pizza so more people get a chance to grab one. Once they&rsquo;re gone, they&rsquo;re gone.</div>
+          <div id="brownie-why" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;color:rgba(255,255,255,.55);line-height:1.5;margin-top:.35rem;letter-spacing:.02em">Turns out the brownies are a little too good&mdash;some of you were ordering 15+ at a time! Thank you, but it&rsquo;s just me back here, and I&rsquo;ve got pizzas to make. So for now, brownies are limited to one per pizza.</div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:#999;margin-top:.25rem">3 Layers. Brownie, Crunchy Pistachio Kataifi, Dark Chocolate Ganache</div>
         </div>
         <div class="brownie-right">
@@ -2532,13 +2594,51 @@ function restartOrder(){
 // TABS
 // ══════════════════════════════════════
 function switchTab(tabId){
-  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  var panel = document.getElementById('tab-' + tabId);
-  var btn = document.querySelector('[data-tab="' + tabId + '"]');
-  if(panel) panel.classList.add('active');
-  if(btn) btn.classList.add('active');
+  var tabGroup = document.querySelector('.splash-content-panel');
+  if(!tabGroup) return;
+
+  var panel = tabGroup.querySelector('#tab-' + tabId);
+  var btn = tabGroup.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+  if(!panel || !btn) return;
+
+  tabGroup.querySelectorAll('.tab-panel').forEach(function(p){
+    p.classList.remove('active');
+    p.hidden = true;
+  });
+  tabGroup.querySelectorAll('.tab-btn').forEach(function(b){
+    b.classList.remove('active');
+    b.setAttribute('aria-selected','false');
+    b.setAttribute('tabindex','-1');
+  });
+
+  panel.hidden = false;
+  panel.classList.add('active');
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  btn.setAttribute('tabindex','0');
+
+  if(window.innerWidth >= 1000){
+    window.requestAnimationFrame(function(){
+      var nav = tabGroup.querySelector('.tab-nav');
+      var navBox = nav.getBoundingClientRect();
+      if(navBox.top < 16){
+        window.scrollBy({top:navBox.top - 16,behavior:'smooth'});
+      }
+    });
+  }
 }
+
+document.querySelectorAll('.splash-content-panel .tab-btn').forEach(function(btn){
+  btn.addEventListener('keydown',function(event){
+    if(event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    var tabs = Array.from(document.querySelectorAll('.splash-content-panel .tab-btn'));
+    var direction = event.key === 'ArrowRight' ? 1 : -1;
+    var next = tabs[(tabs.indexOf(btn) + direction + tabs.length) % tabs.length];
+    event.preventDefault();
+    switchTab(next.dataset.tab);
+    next.focus();
+  });
+});
 
 // ══════════════════════════════════════
 // DOUGH TRACKER
