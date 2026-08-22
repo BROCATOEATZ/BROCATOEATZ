@@ -24,7 +24,7 @@ exports.handler = async function (event) {
       const fname = r.fname || 'Hey';
       const slotLine = r.slot || 'TBD';
       const totalLine = (r.total !== undefined && r.total !== null) ? `\nTotal: $${r.total}` : '';
-      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, August 16th @ ${slotLine}.${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\n🍷 We've set up tables inside the winery's processing room as its calling for rain again.\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
+      return `Hey ${fname}! Friendly reminder — your pizza pickup is tomorrow, August 23rd @ ${slotLine}.${totalLine}\n\n📍 King's Court Estate Winery & Vineyard\n2083 Seventh Street Louth, St. Catharines, ON L2R 6P9\n\n🍷 We've set up tables inside the winery's processing room as its calling for rain again.\n\nSee you soon! Text Michael @ 905-401-7804 with any questions.`;
     }
     return `Hey ${r.fname || 'there'}! This is a message from BrocatoEatz.`;
   }
