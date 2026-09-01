@@ -3867,5 +3867,466 @@ setInterval(function(){
 // Fetch live orders for dough tracker on splash
 fetchLiveOrders().then(function(){ renderDoughTracker(); updateSoldOutState(); });
 </script>
+  <!-- START FESTIVAL PAGE ADDITION -->
+
+<!-- Netlify uses this hidden form to register the fields. -->
+<form
+  name="festival-connections"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  id="festival-registration"
+  hidden
+>
+  <input name="form-name" value="festival-connections">
+  <input name="city">
+  <input name="region">
+  <input name="country">
+  <input name="discovery">
+  <input name="event-or-place">
+  <input name="card-campaign">
+  <input name="bot-field">
+</form>
+
+<template id="festival-page-template">
+  <style>
+    :host {
+      all: initial;
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      overflow: auto;
+      display: block;
+      background: #fffaf0;
+      color: #231c17;
+      font: 16px Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    .page {
+      max-width: 540px;
+      margin: auto;
+      padding: 30px 22px 45px;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .brand span, h1 span { color: #891e13; }
+
+    .tag {
+      margin-top: 28px;
+      color: #891e13;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin: 17px 0;
+    }
+
+    h2 { font-size: 24px; margin: 0 0 10px; }
+
+    p {
+      line-height: 1.6;
+      color: #70665b;
+      font-size: 14px;
+    }
+
+    .pizza {
+      display: block;
+      width: 175px;
+      height: 175px;
+      object-fit: contain;
+      margin: 22px auto;
+    }
+
+    a { color: inherit; }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #c37634;
+      outline-offset: 3px;
+    }
+
+    .button {
+      display: block;
+      text-align: center;
+      background: #891e13;
+      color: white;
+      border-radius: 9px;
+      padding: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 10px 0;
+      line-height: 1.4;
+    }
+
+    .personal {
+      background: transparent;
+      color: #891e13;
+      border: 1px solid #891e13;
+    }
+
+    .card {
+      margin-top: 25px;
+      background: #fffdf9;
+      padding: 22px;
+      border: 1px solid #e4dacb;
+      border-radius: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 19px 0 7px;
+    }
+
+    input, select, button {
+      font: inherit;
+      font-size: 16px;
+      width: 100%;
+      min-width: 0;
+      padding: 13px;
+      border-radius: 6px;
+      border: 1px solid #d7ccbc;
+      background: white;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #231c17;
+      color: white;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+      min-height: 48px;
+    }
+
+    button:disabled { opacity: .6; cursor: wait; }
+    .small { font-size: 12px; }
+    .status { color: #891e13; }
+
+    .skip {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    .links { margin-top: 25px; }
+
+    .link {
+      display: block;
+      padding: 16px 0;
+      border-bottom: 1px solid #e4dacb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .link small {
+      display: block;
+      color: #70665b;
+      font-size: 12px;
+      font-weight: normal;
+      margin-top: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 11px;
+      color: #70665b;
+    }
+  </style>
+
+  <div class="page">
+    <div class="brand">BROCATO<span>EATZ</span></div>
+    <div class="tag">Pizza & good company</div>
+
+    <h1>Pizza brought<br>us <span>together.</span></h1>
+
+    <p>
+      Hey, I’m Michael — your festival pizza guy.
+      If we crossed paths somewhere loud, let’s stay connected.
+    </p>
+
+    <img
+      id="festival-pizza"
+      class="pizza"
+      alt="BROCATOEATZ pepperoni pizza"
+      hidden
+    >
+
+    <a
+      class="button"
+      href="https://www.instagram.com/brocatoeatz/"
+      target="_blank"
+      rel="noopener"
+    >Follow @brocatoeatz ↗</a>
+
+    <a
+      class="button personal"
+      href="https://www.instagram.com/michaelbrocato/"
+      target="_blank"
+      rel="noopener"
+    >My personal Instagram · @michaelbrocato ↗</a>
+
+    <a class="skip" href="#festival-links" id="festival-skip">
+      Skip to the links ↓
+    </a>
+
+    <section class="card">
+      <h2>Where did we cross paths?</h2>
+      <p>
+        Two quick questions. I’d love to know where the pizza took you.
+      </p>
+
+      <p id="festival-preview" class="small status" hidden>
+        Preview only — responses aren’t connected yet.
+      </p>
+
+      <form id="festival-response-form" method="POST">
+        <input
+          type="hidden"
+          name="form-name"
+          value="festival-connections"
+        >
+
+        <input
+          type="hidden"
+          name="card-campaign"
+          id="festival-campaign"
+          value="general"
+        >
+
+        <div hidden>
+          <label>
+            Leave blank
+            <input name="bot-field" tabindex="-1">
+          </label>
+        </div>
+
+        <label for="festival-city">
+          Where are you from? — City / town
+        </label>
+        <input
+          id="festival-city"
+          name="city"
+          autocomplete="address-level2"
+          placeholder="Your hometown"
+          maxlength="100"
+          required
+        >
+
+        <label for="festival-region">
+          Province / state (optional)
+        </label>
+        <input
+          id="festival-region"
+          name="region"
+          autocomplete="address-level1"
+          maxlength="100"
+        >
+
+        <label for="festival-country">Country</label>
+        <input
+          id="festival-country"
+          name="country"
+          autocomplete="country-name"
+          maxlength="100"
+          required
+        >
+
+        <label for="festival-discovery">How did you find me?</label>
+        <select id="festival-discovery" name="discovery" required>
+          <option value="">Choose one…</option>
+          <option value="Met at a festival">Met you at a festival</option>
+          <option value="Through a friend">Through a friend</option>
+          <option value="Instagram or social media">
+            Instagram / social media
+          </option>
+          <option value="Pizza pop-up or catering">
+            Pizza pop-up / catering
+          </option>
+          <option value="Somewhere else">Somewhere else</option>
+        </select>
+
+        <label for="festival-event">
+          Which festival, event or place? (optional)
+        </label>
+        <input
+          id="festival-event"
+          name="event-or-place"
+          maxlength="160"
+          placeholder="Lost Lands, a campsite, an afterparty…"
+        >
+
+        <button type="submit" id="festival-send">
+          Send a little hello ↗
+        </button>
+
+        <p class="small">
+          Your answers go to BROCATOEATZ to help me understand
+          where people find my pizza.
+          This won’t sign you up for messages.
+        </p>
+      </form>
+
+      <p
+        id="festival-status"
+        class="status"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></p>
+    </section>
+
+    <nav
+      class="links"
+      id="festival-links"
+      aria-label="More BROCATOEATZ links"
+    >
+      <a class="link" href="./">
+        Find your next pizza fix ↗
+        <small>Niagara pizza drops, menus & the Drop List</small>
+      </a>
+
+      <a class="link" href="tel:+19054017804">
+        Bring BROCATOEATZ to your event ↗
+        <small>Call Michael to talk catering</small>
+      </a>
+    </nav>
+
+    <footer>Rooted in Niagara. Connected by pizza.</footer>
+  </div>
+</template>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  if (
+    !params.has('festival') ||
+    document.getElementById('festival-overlay')
+  ) return;
+
+  const host = document.createElement('div');
+  host.id = 'festival-overlay';
+
+  const root = host.attachShadow({ mode: 'open' });
+  const template = document.getElementById('festival-page-template');
+
+  root.appendChild(template.content.cloneNode(true));
+
+  Array.from(document.body.children).forEach(function (element) {
+    element.setAttribute('inert', '');
+    element.setAttribute('aria-hidden', 'true');
+  });
+
+  document.body.appendChild(host);
+  document.body.style.overflow = 'hidden';
+  document.title = 'Pizza brought us together | BROCATOEATZ';
+
+  if (typeof IMG_CUPCHAR !== 'undefined') {
+    const pizza = root.getElementById('festival-pizza');
+    pizza.src = IMG_CUPCHAR;
+    pizza.hidden = false;
+  }
+
+  const form = root.getElementById('festival-response-form');
+  const status = root.getElementById('festival-status');
+  const button = root.getElementById('festival-send');
+
+  const preview =
+    location.protocol === 'file:' ||
+    document.getElementById('festival-registration')
+      .hasAttribute('data-netlify');
+
+  root.getElementById('festival-preview').hidden = !preview;
+
+  const campaign = params.get('event');
+
+  if (campaign) {
+    root.getElementById('festival-campaign').value =
+      campaign.slice(0, 160);
+
+    root.getElementById('festival-event').value =
+      campaign.slice(0, 160);
+  }
+
+  root.getElementById('festival-skip')
+    .addEventListener('click', function (event) {
+      event.preventDefault();
+
+      root.getElementById('festival-links').scrollIntoView();
+
+      root.querySelector('#festival-links a')
+        .focus({ preventScroll: true });
+    });
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    status.hidden = false;
+
+    if (preview) {
+      status.textContent =
+        'Not sent: publish this file with Netlify Forms enabled first.';
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    status.textContent = '';
+
+    const controller = new AbortController();
+
+    const timeout = setTimeout(function () {
+      controller.abort();
+    }, 15000);
+
+    try {
+      const response = await fetch(location.pathname, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams(new FormData(form)).toString(),
+        signal: controller.signal
+      });
+
+      if (!response.ok) throw new Error('Submission failed');
+
+      form.hidden = true;
+      status.textContent =
+        'Thanks for the hello! Glad we crossed paths. ' +
+        'Stay connected using the links below.';
+    } catch (error) {
+      status.textContent =
+        'Your hello couldn’t be confirmed. Please try again, ' +
+        'or use the links to stay connected.';
+    } finally {
+      clearTimeout(timeout);
+      button.disabled = false;
+      button.textContent = 'Send a little hello ↗';
+    }
+  });
+})();
+</script>
+
+<!-- END FESTIVAL PAGE ADDITION -->
 </body>
 </html>
