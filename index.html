@@ -3896,8 +3896,9 @@ fetchLiveOrders().then(function(){ renderDoughTracker(); updateSoldOutState(); }
       display: block;
       overflow: auto;
       background:
-        radial-gradient(circle at 50% -10%, rgba(212,169,122,.3), transparent 34rem),
-        #111;
+        radial-gradient(circle at 18% 12%, rgba(123,255,97,.18), transparent 18rem),
+        radial-gradient(circle at 86% 88%, rgba(255,101,46,.2), transparent 20rem),
+        linear-gradient(145deg, #101616, #080a0b 64%, #160b08);
       color: #fff;
       font-family: 'Barlow', Arial, sans-serif;
     }
@@ -3906,66 +3907,125 @@ fetchLiveOrders().then(function(){ renderDoughTracker(); updateSoldOutState(); }
     [hidden] { display: none !important; }
 
     .page {
+      position: relative;
       min-height: 100vh;
       min-height: 100dvh;
       display: grid;
       place-items: center;
+      overflow: hidden;
       padding: 28px 20px;
     }
 
+    .page::before,
+    .page::after {
+      position: absolute;
+      z-index: 0;
+      opacity: .08;
+      font-size: clamp(8rem, 36vw, 18rem);
+      line-height: 1;
+      pointer-events: none;
+      filter: grayscale(1);
+    }
+
+    .page::before {
+      content: '\1F996';
+      top: -2.5rem;
+      left: -3.5rem;
+      transform: rotate(-14deg);
+    }
+
+    .page::after {
+      content: '\1F995';
+      right: -4.5rem;
+      bottom: -3.5rem;
+      transform: rotate(12deg);
+    }
+
     .content {
-      width: min(100%, 440px);
+      position: relative;
+      z-index: 1;
+      width: min(100%, 460px);
+      padding: 1.7rem 1.35rem 1.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(126,255,94,.24);
+      border-radius: 22px;
+      background: rgba(8,12,12,.8);
+      box-shadow: 0 24px 70px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.045);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       text-align: center;
+    }
+
+    .content::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, #7eff5e, #f0c64e, #ff652e);
     }
 
     .brand {
       font-family: 'Bebas Neue', Impact, sans-serif;
       font-size: 1.4rem;
       letter-spacing: .28em;
-      color: #D4A97A;
+      color: #8cff68;
     }
 
-    .kicker {
-      margin-top: .45rem;
+    .festival-badge {
+      display: inline-block;
+      margin-top: .7rem;
+      padding: .34rem .75rem;
+      border: 1px solid rgba(255,112,49,.5);
+      border-radius: 999px;
+      background: rgba(255,101,46,.1);
       font-family: 'Barlow Condensed', Arial, sans-serif;
-      font-size: .7rem;
+      font-size: .68rem;
       font-weight: 700;
-      letter-spacing: .2em;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.4);
+      color: #ff8a55;
+    }
+
+    .dino-row {
+      margin-top: .9rem;
+      font-size: 1rem;
+      letter-spacing: .42em;
+      color: rgba(255,255,255,.55);
     }
 
     .pizza {
       display: block;
-      width: 132px;
-      height: 132px;
+      width: 122px;
+      height: 122px;
       object-fit: contain;
-      margin: 1.35rem auto 1rem;
-      filter: drop-shadow(0 14px 24px rgba(0,0,0,.42));
+      margin: .55rem auto .45rem;
+      filter: drop-shadow(0 14px 24px rgba(0,0,0,.5));
+      animation: festival-float 3.6s ease-in-out infinite;
     }
 
     h1 {
-      margin: .6rem 0 .9rem;
+      margin: .55rem 0 .8rem;
       font-family: 'Bebas Neue', Impact, sans-serif;
-      font-size: clamp(3rem, 12vw, 4.6rem);
-      line-height: .88;
-      letter-spacing: .025em;
+      font-size: clamp(2.85rem, 11vw, 4.35rem);
+      line-height: .9;
+      letter-spacing: .035em;
       font-weight: 400;
+      text-shadow: 0 5px 24px rgba(0,0,0,.5);
     }
 
-    h1 span { color: #D4A97A; }
+    h1 span { color: #f0c64e; }
 
     .lead {
-      max-width: 390px;
+      max-width: 400px;
       margin: 0 auto 1.5rem;
       font-family: 'Barlow Condensed', Arial, sans-serif;
-      font-size: 1.08rem;
+      font-size: 1.04rem;
       font-weight: 500;
       line-height: 1.5;
-      color: rgba(255,255,255,.68);
+      color: rgba(255,255,255,.7);
     }
 
-    .lead strong { color: #fff; }
+    .lead strong { color: #8cff68; }
 
     .button {
       display: flex;
@@ -3982,87 +4042,103 @@ fetchLiveOrders().then(function(){ renderDoughTracker(); updateSoldOutState(); }
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
 
-    .button:hover { transform: translateY(-2px); }
-    .button:focus-visible { outline: 3px solid #D4A97A; outline-offset: 3px; }
+    .button:hover { transform: translateY(-2px) rotate(-.35deg); }
+    .button:focus-visible { outline: 3px solid #f0c64e; outline-offset: 3px; }
 
     .primary {
-      background: #982619;
-      color: #fff;
-      box-shadow: 0 12px 30px rgba(152,38,25,.28);
+      background: #7cfa5d;
+      color: #101510;
+      box-shadow: 0 12px 30px rgba(126,255,94,.16);
     }
 
-    .primary:hover { background: #B52A1A; }
+    .primary:hover {
+      background: #98ff7e;
+      box-shadow: 0 14px 34px rgba(126,255,94,.24);
+    }
 
     .personal-label {
-      margin: 1.4rem 0 .55rem;
+      margin: 1.25rem 0 .5rem;
       font-family: 'Barlow Condensed', Arial, sans-serif;
       font-size: .72rem;
       font-weight: 600;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.36);
+      color: rgba(255,255,255,.38);
     }
 
     .secondary {
       min-height: 50px;
-      border-color: rgba(212,169,122,.36);
+      border-color: rgba(240,198,78,.35);
       background: rgba(255,255,255,.035);
-      color: #D4A97A;
+      color: #f0c64e;
       font-size: .86rem;
     }
 
     .secondary:hover {
-      border-color: #D4A97A;
-      background: rgba(212,169,122,.08);
+      border-color: #f0c64e;
+      background: rgba(240,198,78,.08);
     }
 
     .thanks {
-      margin-top: 1.6rem;
+      margin-top: 1.35rem;
       font-family: 'Barlow Condensed', Arial, sans-serif;
       font-size: .88rem;
       line-height: 1.5;
-      color: rgba(255,255,255,.36);
+      color: rgba(255,255,255,.48);
+    }
+
+    @keyframes festival-float {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-7px) rotate(2deg); }
     }
 
     @media (max-height: 680px) {
       .page { padding-top: 20px; padding-bottom: 20px; }
-      .pizza { width: 100px; height: 100px; margin: .8rem auto .5rem; }
-      h1 { font-size: 3rem; }
+      .content { padding-top: 1.25rem; padding-bottom: 1.15rem; }
+      .dino-row { margin-top: .55rem; }
+      .pizza { width: 92px; height: 92px; margin: .35rem auto .2rem; }
+      h1 { font-size: 2.8rem; }
       .lead { margin-bottom: 1rem; }
       .personal-label { margin-top: 1rem; }
       .thanks { margin-top: 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pizza { animation: none; }
+      .button { transition: none; }
     }
   </style>
 
   <main class="page">
     <section class="content" aria-labelledby="festival-title">
       <div class="brand">BROCATOEATZ</div>
-      <div class="kicker">Pizza, process &amp; good people</div>
+      <div class="festival-badge">Happy Lost Lands!</div>
+      <div class="dino-row" aria-hidden="true">&#129430; &middot; &#127829; &middot; &#129429;</div>
 
       <img id="festival-pizza" class="pizza" alt="BROCATOEATZ pizza" hidden>
 
-      <h1 id="festival-title">HELP ME GROW<br><span>THE PIZZA PAGE.</span></h1>
+      <h1 id="festival-title">PIZZA, BASS<br><span>&amp; DINOSAURS.</span></h1>
 
       <p class="lead">
-        I&rsquo;m trying to grow <strong>@brocatoeatz</strong>, and a follow would mean a lot!
-        Even if you&rsquo;re not local, follow along for the pizza, behind-the-scenes moments,
-        and everything I&rsquo;m cooking up.
+        Hey, I&rsquo;m Michael. If we crossed paths at Lost Lands, I&rsquo;m glad we did.
+        I make a lot of pizza and share the delicious chaos on <strong>@brocatoeatz</strong>.
+        No big pitch&mdash;a follow would just mean a lot.
       </p>
 
       <a class="button primary" href="https://www.instagram.com/brocatoeatz/" target="_blank" rel="noopener">
-        Follow @brocatoeatz &nbsp;&nearr;
+        Hang out @brocatoeatz &nbsp;&nearr;
       </a>
 
-      <div class="personal-label">You can also find me here</div>
+      <div class="personal-label">For everything outside the kitchen</div>
 
       <a class="button secondary" href="https://www.instagram.com/michaelbrocato/" target="_blank" rel="noopener">
-        @michaelbrocato &middot; Personal Instagram &nbsp;&nearr;
+        Personal IG &middot; @michaelbrocato &nbsp;&nearr;
       </a>
 
-      <p class="thanks">Thanks for the support &#127829;<br>&mdash; Michael</p>
+      <p class="thanks">Happy Lost Lands! Stay loud, stay weird, eat pizza. &#129430;&#127829;</p>
     </section>
   </main>
 </template>
@@ -4087,7 +4163,7 @@ fetchLiveOrders().then(function(){ renderDoughTracker(); updateSoldOutState(); }
 
   document.body.appendChild(host);
   document.body.style.overflow = 'hidden';
-  document.title = 'Follow BROCATOEATZ on Instagram';
+  document.title = 'Happy Lost Lands! | BROCATOEATZ';
 
   if (typeof IMG_CUPCHAR !== 'undefined') {
     const pizza = root.getElementById('festival-pizza');
